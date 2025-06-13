@@ -74,8 +74,10 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
+            // 'search_path' => 'public',
+            // 'sslmode' => 'prefer',
+            'schema' => env('DB_SCHEMA', 'public'),
+            'sslmode' => env('DB_SSLMODE', 'prefer'),
         ],
 
         'sqlsrv' => [

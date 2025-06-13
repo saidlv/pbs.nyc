@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9630b496d274181fbb8de7f4d7d06efa",
+    "content-hash": "88d82796d7ad8218da83fd9f824f1341",
     "packages": [
         {
             "name": "allejo/php-soda",
@@ -10818,8 +10818,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2",
-        "ext-pdo": "*",
         "ext-mbstring": "*",
+        "ext-pdo": "*",
         "ext-xml": "*",
         "ext-zip": "*"
     },
