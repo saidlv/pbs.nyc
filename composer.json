@@ -4,24 +4,7 @@
   "description": "The skeleton application for the Laravel framework.",
   "keywords": ["laravel", "framework"],
   "license": "MIT",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/hgasoft/PhpSoda"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/hgasoft/ticketit"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/hgasoft/postgresql-distinct-on"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/hgasoft/Laravel-FCM"
-    }
-  ],
+ 
   "require": {
     "php": "^8.1",
     "allejo/php-soda": "dev-master",

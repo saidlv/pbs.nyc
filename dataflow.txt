@@ -12,6 +12,23 @@ SESSION_SECURE_COOKIE=false
 
 
 
-
+ "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/hgasoft/PhpSoda"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/hgasoft/ticketit"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/hgasoft/postgresql-distinct-on"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/hgasoft/Laravel-FCM"
+    }
+  ],
 
 
