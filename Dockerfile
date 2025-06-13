@@ -33,3 +33,6 @@ EXPOSE 9000
 
 # 8. Start PHP-FPM
 CMD ["php-fpm"]
+
+# 9. Install PostgreSQL PHP extension
+RUN apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
