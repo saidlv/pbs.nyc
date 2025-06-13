@@ -18,7 +18,6 @@
 .env.production
 .phpunit.result.cache
 .phpstorm.meta.php
-composer.lock
 package-lock.json
 yarn.lock
 *.sql
@@ -34,4 +33,3 @@ _ide_helper.php
 .DS_Store
 Thumbs.db
 pbspostgr-202502122312.sql
-auth.json

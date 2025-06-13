@@ -6,7 +6,7 @@
         "providers": ["php"],
         "phases": {
           "setup": {
-            "nixPkgs": ["php81", "php81Packages.composer", "nodejs-18_x"],
+            "nixPkgs": ["php82", "php82Packages.composer", "nodejs-18_x"],
             "aptPkgs": ["libxml2-dev", "libzip-dev", "unzip"]
           },
           "install": {
