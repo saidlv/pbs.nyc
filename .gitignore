@@ -34,3 +34,4 @@ _ide_helper.php
 .DS_Store
 Thumbs.db
 pbspostgr-202502122312.sql
+auth.json
