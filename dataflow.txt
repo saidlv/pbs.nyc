@@ -1,0 +1,17 @@
+   Client Request → API Routes (routes/api.php) 
+   → Controllers (ApiController.php) 
+   → Models (User, Properties, etc.) 
+   → Database 
+   → Response
+
+
+//env changes: 
+SESSION_DRIVER=cookie
+SESSION_LIFETIME=120
+SESSION_SECURE_COOKIE=false
+
+
+
+
+
+
