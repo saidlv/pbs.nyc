@@ -31,5 +31,5 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev --no-script
 # 7. Expose application port
 EXPOSE 8000
 
-# 8. Serve application: generate key, cache config, then start server
-CMD ["sh", "-c", "php artisan key:generate --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8000"]
+# 8. Serve application: start server
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
