@@ -23,8 +23,8 @@ WORKDIR /var/www/html
 # 5. Copy application files
 COPY . /var/www/html
 
-# 6. Install PHP dependencies, build assets
-RUN composer install --no-interaction --optimize-autoloader --no-dev && \
+# 6. Install PHP dependencies and build assets (skip scripts to avoid DB connection)
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts && \
     npm install && npm run build && \
     php artisan key:generate --force && \
     php artisan config:cache && \
