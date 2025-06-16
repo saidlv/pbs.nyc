@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     nodejs npm && \
-    docker-php-ext-install pdo pdo_pgsql zip bcmath && \
+    docker-php-ext-install pdo pdo_mysql pdo_pgsql zip bcmath && \
     rm -rf /var/lib/apt/lists/*
 
 # 3. Copy Composer binary from Composer official image
