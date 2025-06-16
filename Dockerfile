@@ -20,14 +20,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # 4. Set working directory
 WORKDIR /var/www/html
 
-# 5. Copy application files and env example
+# 5. Copy application files
 COPY . /var/www/html
-# Copy environment file (ensure .env has PostgreSQL settings)
-COPY .env.example .env
-# 5. Ensure correct host for PostgreSQL when running in Docker
-RUN if grep -q '^DB_HOST=' .env; then \
-    sed -i 's/^DB_HOST=.*/DB_HOST=host.docker.internal/' .env; \
-  fi
 
 # 6. Install PHP dependencies and build assets (skip scripts)
 RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts && \
