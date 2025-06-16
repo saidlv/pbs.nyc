@@ -26,12 +26,10 @@ COPY . /var/www/html
 # 6. Install PHP dependencies and build assets (skip scripts)
 RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts && \
     npm install && npm run build && \
-    php artisan key:generate --force && \
-    php artisan config:cache && \
     chmod -R 775 storage bootstrap/cache
 
-# 8. Expose application port
+# 7. Expose application port
 EXPOSE 8000
 
-# 9. Serve application via Artisan (development)
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# 8. Serve application: generate key, cache config, then start server
+CMD ["sh", "-c", "php artisan key:generate --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8000"]
