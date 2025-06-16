@@ -25,7 +25,7 @@ COPY . /var/www/html
 
 # 6. Install PHP dependencies, build assets
 RUN composer install --no-interaction --optimize-autoloader --no-dev && \
-    npm install && npm run prod && \
+    npm install && npm run build && \
     php artisan key:generate --force && \
     php artisan config:cache && \
     chmod -R 775 storage bootstrap/cache
