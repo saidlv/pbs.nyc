@@ -51,7 +51,7 @@ class LoginController extends Controller
         // New redirection logic
         $user = Auth::user();
         if ($user && $user->level() >= 4) { // Assuming level 4 and above can access portal
-            return 'http://localhost:3000/portal/dashboard';
+            return '/portal/dashboard';
         }
         return '/portal'; // This will trigger CheckPayment middleware which may redirect to /portal/subscribe
     }
