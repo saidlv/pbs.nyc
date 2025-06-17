@@ -11,6 +11,11 @@
 |
 */
 
+// Simple test route to verify routes are loading
+Route::get('/test', function () {
+    return 'Routes are working!';
+});
+
 Route::get('/', function () {
     return view('frontend.index');
 })->name('home');

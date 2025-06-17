@@ -35,6 +35,12 @@ echo "Starting PBS NYC application..."\n\
 # Wait for environment variables to be available\n\
 sleep 3\n\
 \n\
+# Clear Laravel caches\n\
+echo "Clearing Laravel caches..."\n\
+php artisan route:clear || echo "Route clear failed"\n\
+php artisan config:clear || echo "Config clear failed"\n\
+php artisan cache:clear || echo "Cache clear failed"\n\
+\n\
 # Check if migrations table exists, if not run migrations\n\
 echo "Checking database schema..."\n\
 php artisan migrate:status || echo "Database not ready, skipping migrations"\n\
