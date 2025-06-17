@@ -125,3 +125,33 @@ Route::get('/test-email', function () {
         return 'Error sending email: ' . $e->getMessage();
     }
 });
+
+// Temporary debug route for Railway deployment
+Route::get('/debug-db', function () {
+    echo "<h2>Database Connection Debug</h2>";
+    echo "<pre>";
+    echo "DB_CONNECTION: " . (env('DB_CONNECTION') ?: 'NOT SET') . "\n";
+    echo "DB_HOST: " . (env('DB_HOST') ?: 'NOT SET') . "\n";
+    echo "DB_PORT: " . (env('DB_PORT') ?: 'NOT SET') . "\n";
+    echo "DB_DATABASE: " . (env('DB_DATABASE') ?: 'NOT SET') . "\n";
+    echo "DB_USERNAME: " . (env('DB_USERNAME') ?: 'NOT SET') . "\n";
+    echo "DATABASE_URL: " . (env('DATABASE_URL') ?: 'NOT SET') . "\n";
+    
+    try {
+        $host = env('DB_HOST') ?: '127.0.0.1';
+        $port = env('DB_PORT') ?: '5432';
+        $database = env('DB_DATABASE') ?: 'forge';
+        $username = env('DB_USERNAME') ?: 'forge';
+        $password = env('DB_PASSWORD') ?: '';
+        
+        echo "\nAttempting connection to: $host:$port\n";
+        
+        $dsn = "pgsql:host=$host;port=$port;dbname=$database";
+        $pdo = new PDO($dsn, $username, $password);
+        echo "✅ Database connection successful!\n";
+        
+    } catch (PDOException $e) {
+        echo "❌ Database connection failed: " . $e->getMessage() . "\n";
+    }
+    echo "</pre>";
+});
