@@ -35,7 +35,7 @@ echo "Starting PBS NYC application..."\n\
 # Wait for environment variables to be available\n\
 sleep 3\n\
 \n\
-# Clear Laravel caches\n\
+# Clear Laravel caches at runtime (when env vars are available)\n\
 echo "Clearing Laravel caches..."\n\
 php artisan route:clear || echo "Route clear failed"\n\
 php artisan config:clear || echo "Config clear failed"\n\
@@ -46,11 +46,11 @@ echo "Checking database schema..."\n\
 php artisan migrate:status || echo "Database not ready, skipping migrations"\n\
 \n\
 # Start the application on Railway\'s assigned port\n\
-echo "Starting web server on port $PORT..."\n\
-php artisan serve --host=0.0.0.0 --port=${PORT:-8080}' > /start.sh && chmod +x /start.sh
+echo "Starting web server on port 8000..."\n\
+php artisan serve --host=0.0.0.0 --port=8000' > /start.sh && chmod +x /start.sh
 
 # 8. Expose port (Railway will set $PORT)
-EXPOSE 8080
+EXPOSE 8000
 
 # 9. Start application
 CMD ["/start.sh"]
