@@ -16,7 +16,11 @@ class Cors
         }
 
         $origin = $request->header('Origin');
-        $allowedOrigins = ['http://localhost:3000', $request->getSchemeAndHttpHost()];
+        $allowedOrigins = [
+            'http://localhost:3000',
+            'https://pbs-compliance-solutions-txdp.vercel.app',
+            $request->getSchemeAndHttpHost()
+        ];
 
         if (in_array($origin, $allowedOrigins)) {
             return $response
