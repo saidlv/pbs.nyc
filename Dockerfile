@@ -47,7 +47,7 @@ php artisan migrate:status || echo "Database not ready, skipping migrations"\n\
 \n\
 # Start the application on Railway\'s assigned port\n\
 echo "Starting web server on port $PORT..."\n\
-php artisan serve --host=0.0.0.0 --port=$PORT' > /start.sh && chmod +x /start.sh
+php artisan serve --host=0.0.0.0 --port=${PORT:-8080}' > /start.sh && chmod +x /start.sh
 
 # 8. Expose port (Railway will set $PORT)
 EXPOSE 8080
