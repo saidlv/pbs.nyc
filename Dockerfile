@@ -26,7 +26,7 @@ COPY . /var/www/html
 # 6. Install dependencies and build assets
 RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts && \
     npm install && npm run build && \
-    chmod -R 775 storage bootstrap/cache
+    chmod -R 775 storage bootstrap/cache 
 
 # 7. Create startup script that handles database connection gracefully
 RUN echo '#!/bin/bash\n\
