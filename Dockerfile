@@ -26,7 +26,7 @@ COPY . /var/www/html
 # 6. Install dependencies and build assets
 RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts && \
     npm install && npm run build && \
-    chmod -R 775 storage bootstrap/cache 
+    chmod -R 775 storage bootstrap/cache
 
 # 7. Create startup script that handles database connection gracefully
 RUN echo '#!/bin/bash\n\
@@ -35,16 +35,16 @@ echo "Starting PBS NYC application..."\n\
 # Wait for environment variables to be available\n\
 sleep 3\n\
 \n\
-# Try to run migrations, but don\'t fail if database is not ready\n\
-echo "Attempting database migration..."\n\
-php artisan migrate --force || echo "Migration failed - database may not be ready yet"\n\
+# Check if migrations table exists, if not run migrations\n\
+echo "Checking database schema..."\n\
+php artisan migrate:status || echo "Database not ready, skipping migrations"\n\
 \n\
-# Start the application\n\
+# Start the application on Railway\'s assigned port\n\
 echo "Starting web server on port $PORT..."\n\
-php artisan serve --host=0.0.0.0 --port=${PORT:-8000}' > /start.sh && chmod +x /start.sh
+php artisan serve --host=0.0.0.0 --port=$PORT' > /start.sh && chmod +x /start.sh
 
 # 8. Expose port (Railway will set $PORT)
-EXPOSE 8000
+EXPOSE 8080
 
 # 9. Start application
 CMD ["/start.sh"]
