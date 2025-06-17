@@ -1171,6 +1171,5 @@ return [
     |
     */
     'asset_url' => env('ASSET_URL', null),
-    //'force_https' => env('APP_ENV') === 'production',
-    'force_https' => false,
+    'force_https' => env('APP_ENV') === 'production',
 ];
