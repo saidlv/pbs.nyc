@@ -81,4 +81,111 @@ class PropertySearchController extends Controller
         return response()->json($result);
     }
 
+    /**
+     * Search in user's properties table (for already added properties)
+     */
+    public function searchUserProperties(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $search = Str::upper($request->get('term', ''));
+        $borough = $request->get('borough');
+        $house = $request->get('house');
+
+        $query = $user->properties()->with([
+            'documents',
+            'notes', 
+            'summary',
+            'dobViolations',
+            'dobComplaints',
+            'oathHearings.ecbViolation',
+            'hpdViolations',
+            'hpdComplaints',
+            'hpdRepairVacateOrders'
+        ]);
+
+        // Search by street name
+        if ($search) {
+            $query->where('stname', 'LIKE', '%' . str_replace(' ', '%', $search) . '%');
+        }
+
+        // Filter by borough
+        if ($borough) {
+            $query->where('boro', $borough);
+        }
+
+        // Filter by house number
+        if ($house) {
+            $query->where('house_number', $house);
+        }
+
+        $result = $query->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $result
+        ]);
+    }
+
+    /**
+     * Search user's properties by BIN
+     */
+    public function searchUserPropertiesByBin(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $bin = $request->input('bin');
+        
+        $result = $user->properties()->with([
+            'documents',
+            'notes', 
+            'summary',
+            'dobViolations',
+            'dobComplaints',
+            'oathHearings.ecbViolation',
+            'hpdViolations',
+            'hpdComplaints',
+            'hpdRepairVacateOrders'
+        ])->where('bin', $bin)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $result
+        ]);
+    }
+
+    /**
+     * Public search in properties table by house number, borough, street name, or BIN
+     */
+    public function publicSearchProperties(Request $request)
+    {
+        $query = \App\Models\Property::query();
+
+        if ($request->filled('house_number')) {
+            $query->where('house_number', $request->input('house_number'));
+        }
+        if ($request->filled('boro')) {
+            $query->where('boro', $request->input('boro'));
+        }
+        if ($request->filled('stname')) {
+            $query->where('stname', 'ILIKE', '%' . $request->input('stname') . '%');
+        }
+        if ($request->filled('bin')) {
+            $query->where('bin', $request->input('bin'));
+        }
+
+        $results = $query->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $results
+        ]);
+    }
+
 }

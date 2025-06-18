@@ -39,14 +39,21 @@ Route::post('user/update', 'UserController@update');
 Route::get('user/logout', 'UserController@logout');
 Route::middleware('auth:api')->get('user/properties', 'ApiController@getProperties');
 
-// JWT-protected endpoints to add properties by BIN or by address
-Route::middleware('auth:api')->post('user/add-properties/bin', 'PropertyListController@add');
-Route::middleware('auth:api')->post('user/add-properties/address', 'PropertyListController@addByAddress');
+// Property search endpoints (matching portal logic)
+Route::post('search-property', 'PropertySearchController@search');
+Route::post('search-property-by-bin', 'PropertySearchController@searchByBin');
 
-// JWT-protected delete endpoint to remove a property by BIN
+// User property search endpoints (search in user's properties table)
+Route::middleware('auth:api')->post('search-user-properties', 'PropertySearchController@searchUserProperties');
+Route::middleware('auth:api')->post('search-user-properties-by-bin', 'PropertySearchController@searchUserPropertiesByBin');
+
+// Property management endpoints (matching portal logic)
+Route::middleware('auth:api')->post('add-property-to-user', 'FrontendController@apiAddPropertyToUser');
+Route::middleware('auth:api')->post('delete-property-from-user', 'FrontendController@apiDeletePropertyFromUser');
+Route::middleware('auth:api')->post('delete-single-property-from-user', 'FrontendController@apiDeleteSinglePropertyFromUser');
+
+// Legacy endpoints for deleting properties (original, working version)
 Route::middleware('auth:api')->delete('user/properties/{bin}', 'PropertyListController@removeByBin');
-
-// JWT-protected delete endpoint to remove a property by primary id
 Route::middleware('auth:api')->delete('user/properties/id/{id}', 'PropertyListController@removeById');
 
 Route::post('user/DOBliveViolations', 'ApiController@getDOBviols');
@@ -107,7 +114,7 @@ Route::post('user/reminder-settings', 'SettingsController@updateReminderSettings
 
 Route::post('contact', 'Api\ContactController@submit');
 
-// Allow both GET and POST on /user/me for current user so clients won’t hit a MethodNotAllowed error
+// Allow both GET and POST on /user/me for current user so clients won't hit a MethodNotAllowed error
 Route::middleware('auth:api')->match(['get','post'], 'user/me', 'UserController@getCurrentUser');
 
 // Alias /user/profile to get profile data
@@ -115,6 +122,20 @@ Route::middleware('auth:api')->match(['get','post'], 'user/profile', 'UserContro
 
 // Update authenticated user's profile
 Route::middleware('auth:api')->post('user/profile/update', 'UserController@updateProfile');
+
+// Public search in properties table (not protected)
+Route::post('public-search-properties', 'PropertySearchController@publicSearchProperties');
+
+// New Property API endpoints
+Route::post('property/search-by-address', 'PropertyApiController@searchByAddress');
+Route::post('property/search-by-bin', 'PropertyApiController@searchByBin');
+Route::middleware('auth:api')->post('property/add', 'PropertyApiController@addProperty');
+
+// Add an existing property to user (by id)
+Route::middleware('auth:api')->post('add-existing-property-to-user', 'FrontendController@apiAddExistingPropertyToUser');
+
+// Optionally, comment out the new get-properties-of-user route if you want to avoid confusion
+// Route::middleware('auth:api')->get('get-properties-of-user', 'FrontendController@apiGetPropertyList');
 
 
 

@@ -27,7 +27,6 @@ class OathHearings extends ODataModel
     protected $dataSocrataKey = "bbl";
     protected $primaryKey = 'ticket_number';
     protected $table = 'oath_hearings';
-    protected $with = ['ecbViolation'];
     protected $keyType = 'string';
 
     protected $notifiables = [

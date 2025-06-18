@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class Property extends Model
 {
 
-    protected $fillable = ['bin', 'bbl', 'boro', 'block', 'lot', 'house_number', 'stname', 'lat', 'lng', 'zipcode', 'sync_at', 'contact_name', 'contact_address', 'contact_number', 'photo', 'alerted_at'];
+    protected $fillable = ['user_id', 'bin', 'bbl', 'boro', 'block', 'lot', 'house_number', 'stname', 'lat', 'lng', 'zipcode', 'sync_at', 'contact_name', 'contact_address', 'contact_number', 'photo', 'alerted_at'];
 
     protected $casts = [
         'sync_at' => 'datetime',

@@ -12,86 +12,276 @@ All authenticated routes require a JWT token in the Authorization header.
 | GET | `/api/user` | Get current user details |
 | POST | `/api/user/update` | Update user profile |
 | GET | `/api/user/properties` | Get user's properties |
-| POST | `/api/user/add-properties/bin` | Add a property by BIN and BBL |
-| POST | `/api/user/add-properties/address` | Add a property by address components (street, house, borough) |
-| DELETE | `/api/user/properties/{bin}` | Remove a property by BIN |
 
-### Authentication Examples
+## Property Search Endpoints (No Authentication Required)
 
-#### Register User
+### Search Property by Address
+**POST** `/api/search-property`
+
+Search for properties by borough, house number, and street name.
+
+**Request Body:**
 ```json
-POST /api/user/register
-Request:
 {
-    "name": "User Name",
-    "email": "user@example.com",
-    "password": "password",
-    "password_confirmation": "password"
+    "borough": 1,
+    "house": "123",
+    "term": "MAIN STREET"
 }
+```
 
-Response:
-{
-    "success": true,
-    "token": "jwt_token_here",
-    "user": {
-        "id": 1,
-        "name": "User Name",
-        "email": "user@example.com",
-        ...
+**Response:**
+```json
+[
+    {
+        "stname": "MAIN STREET",
+        "boro": 1,
+        "bbl": "1000010001",
+        "bin": "1000001",
+        "zipcode": "10001",
+        "lhnd": "123",
+        "hhnd": "125"
     }
+]
+```
+
+### Search Property by BIN
+**POST** `/api/search-property-by-bin`
+
+Search for properties by Building Identification Number (BIN).
+
+**Request Body:**
+```json
+{
+    "bin": "1000001"
 }
 ```
 
-#### Login
+**Response:**
 ```json
-POST /api/user/login
-Request:
-{
-    "email": "user@example.com",
-    "password": "password",
-    "fcm_token": "optional_fcm_token_for_notifications"
-}
-
-Response:
-{
-    "success": true,
-    "token": "jwt_token_here",
-    "user": {
-        "id": 1,
-        "name": "User Name",
-        "email": "user@example.com",
-        ...
+[
+    {
+        "stname": "MAIN STREET",
+        "boro": 1,
+        "bbl": "1000010001",
+        "bin": "1000001",
+        "zipcode": "10001",
+        "lhnd": "123",
+        "hhnd": "125",
+        "lhn_first": 123,
+        "lhn_second": 0,
+        "hhn_first": 125,
+        "hhn_second": 0
     }
-}
+]
 ```
 
-#### Update Profile
+## Property Management Endpoints (Authentication Required)
+
+### Get User Properties
+**GET** `/api/get-properties-of-user`
+
+**Headers:**
+```
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+```
+
+**Response:**
 ```json
-POST /api/user/update
-Request:
 {
-    "email": "new_email@example.com",
-    "password": "new_password",        // Optional
-    "photo": "profile_image_file",     // Optional
-    "contact_number": "phone_number",   // Optional
-    "address": "user_address",         // Optional
-    "company": "company_name"          // Optional
-}
-
-Response:
-{
-    "success": true,
-    "message": "Information has been updated successfully!",
-    "user": {
-        "id": 1,
-        "name": "User Name",
-        ...
-    },
-    "token": "jwt_token"
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "user_id": 109,
+      "bin": "1000001",
+      "bbl": "1000010001",
+      "boro": 1,
+      "block": 1,
+      "lot": 1,
+      "house_number": "123",
+      "stname": "MAIN STREET",
+      "lat": 40.7128,
+      "lng": -74.0060,
+      "zipcode": "10001",
+      "summary": {
+        "dob_violations_count": 5,
+        "dob_complaints_count": 2,
+        "ecb_hearings_count": 3,
+        "ecb_penalties_count": 1,
+        "hpd_violations_count": 8,
+        "hpd_complaints_count": 4,
+        "hpd_repairs_count": 2
+      },
+      "dob_violations": [...],
+      "dob_complaints": [...],
+      "oath_hearings": [...],
+      "hpd_violations": [...],
+      "hpd_complaints": [...],
+      "hpd_repair_vacate_orders": [...],
+      "documents": [...],
+      "notes": [...]
+    }
+  ]
 }
 ```
 
-### Department of Buildings (DOB)
+### Add Property to User
+**POST** `/api/add-property-to-user`
+
+**Headers:**
+```
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+  "properties": [
+    {
+      "id": "1000001",
+      "house": "123",
+      "street": "MAIN STREET",
+      "zipcode": "10001"
+    }
+  ]
+}
+```
+
+**Response:** Returns the same comprehensive property data as above, including all summary information.
+
+### Delete Property from User
+**POST** `/api/delete-property-from-user`
+
+**Headers:**
+```
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+  "properties": [1, 2, 3]
+}
+```
+
+**Response:** Returns the same comprehensive property data as above, including all summary information.
+
+### Delete Single Property from User
+**POST** `/api/delete-single-property-from-user`
+
+**Headers:**
+```
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+  "id": 1
+}
+```
+
+**Response:** Returns the same comprehensive property data as above, including all summary information.
+
+## Borough Codes
+- 1: Manhattan
+- 2: Bronx
+- 3: Brooklyn
+- 4: Queens
+- 5: Staten Island
+
+## Usage Examples
+
+### Complete Flow: Add Property by Address
+
+1. **Search for property:**
+```bash
+curl -X POST http://your-domain.com/api/search-property \
+  -H "Content-Type: application/json" \
+  -d '{
+    "borough": 1,
+    "house": "123",
+    "term": "MAIN STREET"
+  }'
+```
+
+2. **Add property to user:**
+```bash
+curl -X POST http://your-domain.com/api/add-property-to-user \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "properties": [
+      {
+        "id": "1000001",
+        "house": "123",
+        "street": "MAIN STREET",
+        "zipcode": "10001"
+      }
+    ]
+  }'
+```
+
+### Complete Flow: Add Property by BIN
+
+1. **Search for property by BIN:**
+```bash
+curl -X POST http://your-domain.com/api/search-property-by-bin \
+  -H "Content-Type: application/json" \
+  -d '{
+    "bin": "1000001"
+  }'
+```
+
+2. **Add property to user (same as above):**
+```bash
+curl -X POST http://your-domain.com/api/add-property-to-user \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "properties": [
+      {
+        "id": "1000001",
+        "house": "123",
+        "street": "MAIN STREET",
+        "zipcode": "10001"
+      }
+    ]
+  }'
+```
+
+## Error Responses
+
+All endpoints return consistent error responses:
+
+```json
+{
+    "success": false,
+    "message": "Error description"
+}
+```
+
+Common HTTP status codes:
+- 200: Success
+- 400: Bad Request
+- 401: Unauthorized (invalid or missing JWT token)
+- 404: Not Found
+- 500: Internal Server Error
+
+## Legacy Endpoints (Deprecated)
+
+The following endpoints are kept for backward compatibility but should not be used for new implementations:
+
+- `POST /api/user/add-properties/bin`
+- `POST /api/user/add-properties/address`
+- `DELETE /api/user/properties/{bin}`
+- `DELETE /api/user/properties/id/{id}`
+
+## Department of Buildings (DOB)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/user/DOBliveViolations` | Get active DOB violations |
@@ -101,7 +291,7 @@ Response:
 | POST | `/api/user/DobNowJobFilings` | Get DOB NOW job filings |
 | POST | `/api/user/BsaApplicationStatus` | Get BSA application status |
 
-### Environmental Control Board (ECB)
+## Environmental Control Board (ECB)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/user/ECBliveHearings` | Get active ECB hearings |
@@ -113,7 +303,7 @@ Response:
 | POST | `/api/user/ECBcomplaints` | Get complaints |
 | POST | `/api/user/ECBviolations` | Get violations |
 
-### Fire Department (FDNY)
+## Fire Department (FDNY)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/user/FDNYliveHearings` | Get active FDNY hearings |
@@ -122,7 +312,7 @@ Response:
 | POST | `/api/user/FDNYactiveViolOrders` | Get active violation orders |
 | POST | `/api/user/FDNYcomplaints` | Get complaints |
 
-### Housing Preservation & Development (HPD)
+## Housing Preservation & Development (HPD)
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/user/HPDliveViolations` | Get active HPD violations |
@@ -131,7 +321,7 @@ Response:
 | POST | `/api/user/HPDlitigations` | Get litigations |
 | POST | `/api/user/HPDregistrations` | Get registrations |
 
-### Inspections
+## Inspections
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/user/InspectionsDOBboiler` | Get DOB boiler inspections |
@@ -139,7 +329,7 @@ Response:
 | POST | `/api/user/InspectionsFacade` | Get facade inspections |
 | POST | `/api/user/InspectionsOthers` | Get other inspections |
 
-### Permits
+## Permits
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/user/PermitsDOBpermits` | Get DOB permits |
@@ -149,7 +339,7 @@ Response:
 | POST | `/api/user/PermitsFDNYAccount` | Get FDNY account permits |
 | POST | `/api/user/PermitsElevator` | Get elevator permits |
 
-### Other Features
+## Other Features
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/user/articles` | Get latest articles |
@@ -442,3 +632,313 @@ In addition to standard HTTP status codes, the API may return:
 - 401: Unauthorized (invalid or expired token)
 - 403: Forbidden (insufficient role/permissions)
 - 422: Unprocessable Entity (validation failed)
+
+# PBS.NYC Property Search API Documentation
+
+## Overview
+
+This API provides endpoints for searching properties and managing user property portfolios. The system uses two main tables:
+- `property_addresses` - Public property lookup table (for portal search and add operations)
+- `properties` - User-specific property portfolios (for storing user's properties and public search)
+
+## Property Search Endpoints
+
+### 1. Public Property Search
+**Endpoint:** `POST /api/public-search-properties`
+
+**Description:** Search for properties in the properties table (user portfolios). This searches across all user property portfolios.
+
+**Authentication:** Not required (public endpoint)
+
+**Request Parameters:**
+```json
+{
+    "bin": "string",           // Optional: Search by BIN (Building Identification Number)
+    "house_number": "string",  // Optional: House number
+    "boro": "integer",         // Optional: Borough (1=Manhattan, 2=Bronx, 3=Brooklyn, 4=Queens, 5=Staten Island)
+    "stname": "string"         // Optional: Street name (minimum 3 characters)
+}
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": 123,
+            "user_id": 456,
+            "bin": "1000001",
+            "bbl": "1000010001",
+            "boro": 1,
+            "block": "1",
+            "lot": "1",
+            "house_number": "123",
+            "stname": "BROADWAY",
+            "lat": 40.7128,
+            "lng": -74.0060,
+            "zipcode": "10001",
+            "created_at": "2024-01-01T00:00:00.000000Z",
+            "updated_at": "2024-01-01T00:00:00.000000Z"
+        }
+    ],
+    "count": 1
+}
+```
+
+**Notes:**
+- If `bin` is provided, it takes priority and other parameters are ignored
+- All parameters are optional - you can search with any combination
+- Results are limited to 50 properties to prevent overwhelming responses
+- This searches across all user property portfolios in the properties table
+
+### 2. Add Property from Search Results
+**Endpoint:** `POST /api/add-property-from-search`
+
+**Description:** Add a property found through public search to the authenticated user's portfolio.
+
+**Authentication:** Required (JWT token)
+
+**Request Parameters:**
+```json
+{
+    "bin": "string",  // Required: Building Identification Number
+    "bbl": "string"   // Required: Borough-Block-Lot number
+}
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "message": "Property added successfully",
+    "data": {
+        "id": 123,
+        "user_id": 456,
+        "bin": "1000001",
+        "bbl": "1000010001",
+        "boro": 1,
+        "block": "1",
+        "lot": "1",
+        "house_number": "123",
+        "stname": "BROADWAY",
+        "lat": 40.7128,
+        "lng": -74.0060,
+        "zipcode": "10001",
+        "documents": [],
+        "notes": [],
+        "summary": null,
+        "dobViolations": [],
+        "dobComplaints": [],
+        "oathHearings": [],
+        "hpdViolations": [],
+        "hpdComplaints": [],
+        "hpdRepairVacateOrders": []
+    }
+}
+```
+
+**Error Responses:**
+- `401 Unauthorized` - Invalid or missing authentication token
+- `404 Not Found` - Property not found in property_addresses table
+- `409 Conflict` - Property already exists in user's portfolio
+- `500 Internal Server Error` - Database error
+
+## User Property Management Endpoints
+
+### 3. Search User's Properties
+**Endpoint:** `POST /api/search-user-properties`
+
+**Description:** Search within the authenticated user's property portfolio.
+
+**Authentication:** Required (JWT token)
+
+**Request Parameters:**
+```json
+{
+    "term": "string",      // Optional: Search term for street name
+    "borough": "integer",  // Optional: Filter by borough
+    "house": "string"      // Optional: Filter by house number
+}
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "data": [
+        {
+            "id": 123,
+            "user_id": 456,
+            "bin": "1000001",
+            "bbl": "1000010001",
+            "boro": 1,
+            "block": "1",
+            "lot": "1",
+            "house_number": "123",
+            "stname": "BROADWAY",
+            "lat": 40.7128,
+            "lng": -74.0060,
+            "zipcode": "10001",
+            "documents": [],
+            "notes": [],
+            "summary": null,
+            "dobViolations": [],
+            "dobComplaints": [],
+            "oathHearings": [],
+            "hpdViolations": [],
+            "hpdComplaints": [],
+            "hpdRepairVacateOrders": []
+        }
+    ]
+}
+```
+
+### 4. Search User's Properties by BIN
+**Endpoint:** `POST /api/search-user-properties-by-bin`
+
+**Description:** Find a specific property in the user's portfolio by BIN.
+
+**Authentication:** Required (JWT token)
+
+**Request Parameters:**
+```json
+{
+    "bin": "string"  // Required: Building Identification Number
+}
+```
+
+**Response:** Same format as search-user-properties
+
+### 5. Get All User Properties
+**Endpoint:** `GET /api/user/properties`
+
+**Description:** Get all properties in the authenticated user's portfolio.
+
+**Authentication:** Required (JWT token)
+
+**Response:** Same format as search-user-properties
+
+### 6. Delete Property from User
+**Endpoint:** `POST /api/delete-property-from-user`
+
+**Description:** Remove properties from the user's portfolio.
+
+**Authentication:** Required (JWT token)
+
+**Request Parameters:**
+```json
+{
+    "properties": ["array of property IDs"]
+}
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "message": "Properties deleted successfully",
+    "data": [/* updated property list */]
+}
+```
+
+### 7. Delete Single Property
+**Endpoint:** `POST /api/delete-single-property-from-user`
+
+**Description:** Remove a single property from the user's portfolio.
+
+**Authentication:** Required (JWT token)
+
+**Request Parameters:**
+```json
+{
+    "id": "integer"  // Property ID
+}
+```
+
+**Response:**
+```json
+{
+    "success": true,
+    "message": "Property deleted successfully",
+    "data": [/* updated property list */]
+}
+```
+
+## Legacy Endpoints (Portal Compatibility)
+
+### 8. Portal Property Search
+**Endpoint:** `POST /api/search-property`
+
+**Description:** Original portal search endpoint (same logic as public-search-properties).
+
+**Authentication:** Not required
+
+**Request Parameters:**
+```json
+{
+    "borough": "integer",  // Required: Borough number
+    "house": "string",     // Required: House number
+    "term": "string"       // Required: Street name search term
+}
+```
+
+### 9. Portal Property Search by BIN
+**Endpoint:** `POST /api/search-property-by-bin`
+
+**Description:** Search by BIN (original portal endpoint).
+
+**Authentication:** Not required
+
+**Request Parameters:**
+```json
+{
+    "bin": "string"  // Required: Building Identification Number
+}
+```
+
+## Data Flow Logic
+
+### Search Flow:
+1. **Public Search** → Searches `properties` table (all user portfolios)
+2. **User Search** → Searches `properties` table (user's portfolio only)
+
+### Add Flow:
+1. **Find Property** → Look up in `property_addresses` table
+2. **Check Template** → Look for existing property with same BIN in `properties` table
+3. **Create Entry** → Add new record to `properties` table with `user_id`
+
+### Key Features:
+- **Public Search**: Searches across all user property portfolios in the `properties` table
+- **User Search**: Searches only within the authenticated user's property portfolio
+- **Template Reuse**: If a property with the same BIN already exists, its data is reused
+- **User Isolation**: Each user has their own property portfolio
+- **Comprehensive Data**: All properties include related violations, complaints, etc.
+- **Error Handling**: Proper validation and error responses
+- **Rate Limiting**: Built-in protection against abuse
+
+## Authentication
+
+Most endpoints require JWT authentication. Include the token in the Authorization header:
+```
+Authorization: Bearer <your-jwt-token>
+```
+
+## Error Handling
+
+All endpoints return consistent error responses:
+```json
+{
+    "success": false,
+    "message": "Error description",
+    "data": null
+}
+```
+
+Common HTTP status codes:
+- `200` - Success
+- `400` - Bad Request (validation errors)
+- `401` - Unauthorized (missing/invalid token)
+- `404` - Not Found
+- `409` - Conflict (duplicate entry)
+- `500` - Internal Server Error
