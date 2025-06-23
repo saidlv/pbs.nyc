@@ -40,50 +40,47 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="row">
+                <div class="card-body">                    <div class="row">
                         <div class="col-6 col-md-3 text-center">
                             <input type="text" class="knob" value="{{auth()->user()->properties()->count()}}" data-width="90" data-height="90"
-                                   data-fgColor="#3c8dbc">
+                                   data-fgColor="#38403e">
 
                             <div class="knob-label">DOB Complaints</div>
                         </div>
                         <!-- ./col -->
                         <div class="col-6 col-md-3 text-center">
                             <input type="text" class="knob" value="70" data-width="90" data-height="90"
-                                   data-fgColor="#f56954">
+                                   data-fgColor="#a55c5c">
 
                             <div class="knob-label">DOB Violations</div>
                         </div>
                         <!-- ./col -->
                         <div class="col-6 col-md-3 text-center">
                             <input type="text" class="knob" value="-80" data-min="-150" data-max="150" data-width="90"
-                                   data-height="90" data-fgColor="#00a65a">
+                                   data-height="90" data-fgColor="#5d8a5f">
 
                             <div class="knob-label">Server Load</div>
                         </div>
                         <!-- ./col -->
                         <div class="col-6 col-md-3 text-center">
                             <input type="text" class="knob" value="40" data-width="90" data-height="90"
-                                   data-fgColor="#00c0ef">
+                                   data-fgColor="#6c8a93">
 
                             <div class="knob-label">Disk Space</div>
                         </div>
                         <!-- ./col -->
                     </div>
-                    <!-- /.row -->
-
-                    <div class="row">
+                    <!-- /.row -->                    <div class="row">
                         <div class="col-6 text-center">
                             <input type="text" class="knob" value="90" data-width="90" data-height="90"
-                                   data-fgColor="#932ab6">
+                                   data-fgColor="#616c66">
 
                             <div class="knob-label">Bandwidth</div>
                         </div>
                         <!-- ./col -->
                         <div class="col-6 text-center">
                             <input type="text" class="knob" value="50" data-width="90" data-height="90"
-                                   data-fgColor="#39CCCC">
+                                   data-fgColor="#8e999f">
 
                             <div class="knob-label">CPU</div>
                         </div>

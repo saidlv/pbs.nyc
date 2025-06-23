@@ -129,11 +129,9 @@ return [
     | For detailed instructions you can look the user menu section here:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
-    */
-
-    'usermenu_enabled' => true,
+    */    'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-gray-dark',
+    'usermenu_header_class' => 'bg-pbs-primary',
     'usermenu_image' => true,
     'usermenu_desc' => true,
     'usermenu_profile_url' => false,
@@ -167,14 +165,12 @@ return [
     | For detailed instructions you can look the auth classes section here:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
-    */
-
-    'classes_auth_card' => 'card-outline card-primary',
+    */    'classes_auth_card' => 'card-outline card-pbs-primary',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_btn' => 'btn-flat btn-pbs-primary',
 
     /*
     |--------------------------------------------------------------------------
@@ -186,17 +182,15 @@ return [
     | For more detailed instructions you can look here:
     | https://github.com/jeroennoten/Laravel-AdminLTE/#66-classes
     |
-    */
-
-    'classes_body' => 'text-sm',
+    */    'classes_body' => 'text-sm',
     'classes_brand' => '',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => 'container-fluid',
     'classes_content' => 'container-fluid',
-    'classes_sidebar' => 'elevation-4 sidebar-dark-navy',
+    'classes_sidebar' => 'elevation-4 sidebar-dark-primary',
     'classes_sidebar_nav' => 'nav-child-indent nav-compact',
-    'classes_topnav' => 'navbar-gray-dark navbar-dark',
+    'classes_topnav' => 'navbar-pbs-primary navbar-dark',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -273,9 +267,7 @@ return [
     | For detailed instructions you can look the laravel mix section here:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Other-Configuration
     |
-    */
-
-    'enabled_laravel_mix' => false,
+    */    'enabled_laravel_mix' => false,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 

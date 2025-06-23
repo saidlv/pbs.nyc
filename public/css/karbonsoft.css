@@ -1,21 +1,25 @@
-/* Root Settings
+/* Root Settings - Updated for PBS Theme
 -----------------------------------------------------------------*/
 :root {
-    --themecolor: #343A40;
+    --themecolor: #38403e;
     background: url(metal/bg.jpg);
-    --themecolorrgb: 241, 90, 41;
+    --themecolorrgb: 56, 64, 62;
     --mainColor: #a2acaa;
+    --pbsPrimary: #38403e;
+    --pbsSecondary: #616c66;
+    --pbsLight: #a2acaa;
+    --pbsLighter: #dce2el;
 
     /* Header Height */
     --header-height: 70px;
     --sticky-header-height: 70px;
 }
 
-/* Header-button
+/* Header-button - Updated for PBS Theme
 -----------------------------------------------------------------*/
 #primary-menu ul li > a.header-button {
     border-top: 1px solid #EEE !important;
-    color: #f15a29;
+    color: #38403e;
     color: var(--themecolor);
 }
 
@@ -219,25 +223,24 @@
 
 
 #gotoTop {
-    background-color: #2C3E50;
+    background-color: #38403e;
     border-radius: 50%;
 }
 
 #gotoTop:hover {
-    background-color: #F0AD4E !important;
+    background-color: #616c66 !important;
 }
 
 
 .color-2 {
-    color: #F0AD4E !important;
+    color: #616c66 !important;
 }
 
 .bgcolor-2 {
-    background-color: #F0AD4E !important;
+    background-color: #616c66 !important;
 }
 
-/* ----------------------------------------------------------------
-	Siyah Background METAL PBS
+/* PBS Theme Background Colors
 -----------------------------------------------------------------*/
 
 .metalarkaplan {
@@ -271,15 +274,15 @@
 }
 
 .metalarkaplan7 {
-    background-color: #283747 !important;
+    background-color: #38403e !important;
 }
 
 .metalarkaplan8 {
-    background-color: #2B2B2B !important;
+    background-color: #2c3430 !important;
 }
 
 .metalarkaplan9 {
-    background-color: #38395A !important;
+    background-color: #505955 !important;
 }
 
 p.mobile {
