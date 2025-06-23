@@ -173,7 +173,93 @@ Route::get('/debug-csrf', function () {
         'session_same_site' => config('session.same_site'),
         'request_secure' => request()->isSecure(),
         'request_host' => request()->getHost(),
+        'request_scheme' => request()->getScheme(),
         'cookies_enabled' => !empty($_COOKIE),
         'session_started' => session()->isStarted(),
+        'all_headers' => request()->headers->all(),
+        'forwarded_proto' => request()->header('X-Forwarded-Proto'),
+        'forwarded_host' => request()->header('X-Forwarded-Host'),
+        'server_https' => $_SERVER['HTTPS'] ?? 'not set',
+        'session_cookie_name' => config('session.cookie'),
+        'cookies' => $_COOKIE,
     ]);
+});
+
+// Enhanced debug route with HTML output for better readability
+Route::get('/debug-session', function () {
+    echo "<h2>Railway Session & CSRF Debug</h2>";
+    echo "<style>pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }</style>";
+    
+    echo "<h3>🔒 CSRF & Session Status</h3>";
+    echo "<pre>";
+    echo "CSRF Token: " . csrf_token() . "\n";
+    echo "Session ID: " . session()->getId() . "\n";
+    echo "Session Started: " . (session()->isStarted() ? 'YES' : 'NO') . "\n";
+    echo "</pre>";
+    
+    echo "<h3>🌐 Request Information</h3>";
+    echo "<pre>";
+    echo "Is Secure (HTTPS): " . (request()->isSecure() ? 'YES' : 'NO') . "\n";
+    echo "Host: " . request()->getHost() . "\n";
+    echo "Scheme: " . request()->getScheme() . "\n";
+    echo "Full URL: " . request()->url() . "\n";
+    echo "</pre>";
+    
+    echo "<h3>📋 Headers (Proxy Detection)</h3>";
+    echo "<pre>";
+    echo "X-Forwarded-Proto: " . (request()->header('X-Forwarded-Proto') ?: 'NOT SET') . "\n";
+    echo "X-Forwarded-Host: " . (request()->header('X-Forwarded-Host') ?: 'NOT SET') . "\n";
+    echo "X-Forwarded-Port: " . (request()->header('X-Forwarded-Port') ?: 'NOT SET') . "\n";
+    echo "</pre>";
+    
+    echo "<h3>⚙️ Session Configuration</h3>";
+    echo "<pre>";
+    echo "Driver: " . config('session.driver') . "\n";
+    echo "Secure Cookie: " . (config('session.secure') ? 'true' : 'false') . "\n";
+    echo "Domain: " . (config('session.domain') ?: 'null') . "\n";
+    echo "Same Site: " . config('session.same_site') . "\n";
+    echo "Cookie Name: " . config('session.cookie') . "\n";
+    echo "</pre>";
+    
+    echo "<h3>🍪 Current Cookies</h3>";
+    echo "<pre>";
+    if (!empty($_COOKIE)) {
+        foreach ($_COOKIE as $name => $value) {
+            echo "$name: " . substr($value, 0, 50) . (strlen($value) > 50 ? '...' : '') . "\n";
+        }
+    } else {
+        echo "No cookies found\n";
+    }
+    echo "</pre>";
+    
+    echo "<h3>🔧 Troubleshooting</h3>";
+    $issues = [];
+    if (!request()->isSecure()) $issues[] = "❌ Request not detected as HTTPS";
+    if (!config('session.secure') && env('APP_ENV') === 'production') $issues[] = "❌ SESSION_SECURE_COOKIE should be true for production";
+    if (!session()->isStarted()) $issues[] = "❌ Session not started";
+    if (empty($_COOKIE)) $issues[] = "❌ No cookies found - session cookies may not be set";
+    
+    if (empty($issues)) {
+        echo "<pre style='background: #d4edda; color: #155724;'>✅ All checks passed!</pre>";
+    } else {
+        echo "<pre style='background: #f8d7da; color: #721c24;'>";
+        foreach ($issues as $issue) {
+            echo $issue . "\n";
+        }
+        echo "</pre>";
+    }
+    
+    echo "<h3>🧪 Test Login Form</h3>";
+    echo "<form method='POST' action='" . route('login') . "' style='background: #f8f9fa; padding: 20px; border-radius: 5px;'>";
+    echo csrf_field();
+    echo "<div style='margin-bottom: 10px;'>";
+    echo "<label>Email:</label><br>";
+    echo "<input type='email' name='email' value='test@example.com' style='width: 300px; padding: 5px;'>";
+    echo "</div>";
+    echo "<div style='margin-bottom: 10px;'>";
+    echo "<label>Password:</label><br>";
+    echo "<input type='password' name='password' value='password' style='width: 300px; padding: 5px;'>";
+    echo "</div>";
+    echo "<button type='submit' style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 3px;'>Test Login</button>";
+    echo "</form>";
 });
