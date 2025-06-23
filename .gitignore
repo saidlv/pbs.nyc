@@ -34,3 +34,4 @@ _ide_helper.php
 Thumbs.db
 pbspostgr-202502122312.sql
 dataflow.txt
+composer.lock
