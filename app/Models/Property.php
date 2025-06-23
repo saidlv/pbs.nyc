@@ -390,24 +390,20 @@ class Property extends Model
     public function otherInspections()
     {
         return $this->hasMany('App\Models\OtherInspections', 'property_id', 'id');
-    }
-
-    public function image()
+    }    public function image()
     {
-        if ($this->photo)
+        // Return the uploaded photo if it exists
+        if ($this->photo) {
             return $this->photo;
-        $photo = "https://maps.googleapis.com/maps/api/streetview?size=400x800&location=" . $this->lat . "," . $this->lng . "&fov=120&source=outdoor&key=GOOGLEAPIKEYWILLBEWRITTEN";
-        $file = file_get_contents($photo);
-        if ($file) {
-            $uploaded = Storage::put('public/propertyPhotos/' . $this->id . '.jfif', $file);
-            if ($uploaded) {
-                $path = Storage::url('public/propertyPhotos/' . $this->id . '.jfif');
-                $this->photo = $path;
-                $this->save();
-                return $path;
-            }
         }
-        return $photo;
+        
+        // Return a placeholder image with PBS branding
+        // This creates a consistent, professional look for properties without photos
+        $propertyAddress = urlencode($this->house_number . ' ' . $this->stname);
+        $placeholderText = urlencode('Property ' . $this->house_number);
+        
+        // Use a placeholder service with PBS colors
+        return "https://via.placeholder.com/400x300/38403e/ffffff?text=" . $placeholderText;
     }
 
     public function bisweb()

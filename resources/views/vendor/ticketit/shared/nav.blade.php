@@ -1,76 +1,93 @@
-<nav>
+@php
+    // Get current user safely
+    $u = $u ?? auth()->user();
+@endphp
+
+<nav style="background-color: #38403e; padding: 0.5rem; border-radius: 0.375rem; margin-bottom: 1rem;">
     <ul class="nav nav-pills">
         <li role="presentation" class="nav-item">
-            <a class="nav-link {!! $tools->fullUrlIs(route(Kordy\Ticketit\Models\Setting::grab('main_route') . '.index')) ? "active" : "" !!}"
-                href="{{ route(Kordy\Ticketit\Models\Setting::grab('main_route') . '.index') }}">{{ trans('ticketit::lang.nav-active-tickets') }}
-                <span class="badge badge-pill badge-secondary ">
+            <a class="nav-link {{ request()->routeIs('tickets.index') ? 'active' : '' }}"
+                href="{{ route('tickets.index') }}"
+                style="{{ request()->routeIs('tickets.index') ? 'background-color: #f8f9fa !important; color: #6ea665 !important;' : 'color: #dce2e1 !important;' }}">
+                <i class="fas fa-ticket-alt"></i> Active Tickets
+                <span class="badge badge-light ml-1" style="background-color: #6ea665; color: white;">
                      <?php 
-                        if ($u->isAdmin()) {
-                            echo Kordy\Ticketit\Models\Ticket::active()->count();
-                        } elseif ($u->isAgent()) {
-                            echo Kordy\Ticketit\Models\Ticket::active()->agentUserTickets($u->id)->count();
-                        } else {
-                            echo Kordy\Ticketit\Models\Ticket::userTickets($u->id)->active()->count();
+                        try {
+                            if ($u && method_exists($u, 'isAdmin') && $u->isAdmin()) {
+                                echo Kordy\Ticketit\Models\Ticket::active()->count();
+                            } elseif ($u && method_exists($u, 'isAgent') && $u->isAgent()) {
+                                echo Kordy\Ticketit\Models\Ticket::active()->agentUserTickets($u->id)->count();
+                            } elseif ($u) {
+                                echo Kordy\Ticketit\Models\Ticket::userTickets($u->id)->active()->count();
+                            } else {
+                                echo 0;
+                            }
+                        } catch (Exception $e) {
+                            echo 0;
                         }
                     ?>
                 </span>
             </a>
         </li>
-        <li role="presentation" class="nav-item">
-            <a class="nav-link {!! $tools->fullUrlIs(route(Kordy\Ticketit\Models\Setting::grab('main_route') . '-complete')) ? "active" : "" !!}"
-                 href="{{ route(Kordy\Ticketit\Models\Setting::grab('main_route') . '-complete') }}">{{ trans('ticketit::lang.nav-completed-tickets') }}
-                <span class="badge badge-pill badge-secondary">
+        <li role="presentation" class="nav-item ml-2">
+            <a class="nav-link {{ request()->routeIs('tickets-complete') ? 'active' : '' }}"
+                 href="{{ route('tickets-complete') }}"
+                 style="{{ request()->routeIs('tickets-complete') ? 'background-color: #f8f9fa !important; color: #6ea665 !important;' : 'color: #dce2e1 !important;' }}">
+                <i class="fas fa-check-circle"></i> Completed Tickets
+                <span class="badge badge-light ml-1" style="background-color: #6ea665; color: white;">
                     <?php 
-                        if ($u->isAdmin()) {
-                            echo Kordy\Ticketit\Models\Ticket::complete()->count();
-                        } elseif ($u->isAgent()) {
-                            echo Kordy\Ticketit\Models\Ticket::complete()->agentUserTickets($u->id)->count();
-                        } else {
-                            echo Kordy\Ticketit\Models\Ticket::userTickets($u->id)->complete()->count();
+                        try {
+                            if ($u && method_exists($u, 'isAdmin') && $u->isAdmin()) {
+                                echo Kordy\Ticketit\Models\Ticket::complete()->count();
+                            } elseif ($u && method_exists($u, 'isAgent') && $u->isAgent()) {
+                                echo Kordy\Ticketit\Models\Ticket::complete()->agentUserTickets($u->id)->count();
+                            } elseif ($u) {
+                                echo Kordy\Ticketit\Models\Ticket::userTickets($u->id)->complete()->count();
+                            } else {
+                                echo 0;
+                            }
+                        } catch (Exception $e) {
+                            echo 0;
                         }
                     ?>
                 </span>
             </a>
         </li>
 
-        @if($u->isAdmin())
-            <li role="presentation" class="nav-item">
-                <a class="nav-link {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\DashboardController@index')) || Request::is($setting->grab('admin_route').'/indicator*') ? "active" : "" !!}"
-                    href="{{ action('\Kordy\Ticketit\Controllers\DashboardController@index') }}">{{ trans('ticketit::admin.nav-dashboard') }}</a>
+        @if($u && method_exists($u, 'isAdmin') && $u->isAdmin())
+            <li role="presentation" class="nav-item ml-2">
+                <a class="nav-link"
+                    href="#"
+                    style="color: #dce2e1 !important;">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
             </li>
 
-            <li role="presentation" class="nav-item dropdown">
-
-                <a class="nav-link dropdown-toggle {!!
-                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\StatusesController@index').'*') ||
-                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\PrioritiesController@index').'*') ||
-                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\AgentsController@index').'*') ||
-                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\CategoriesController@index').'*') ||
-                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\ConfigurationsController@index').'*') ||
-                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\AdministratorsController@index').'*')
-                    ? "active" : "" !!}"
-                    data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    {{ trans('ticketit::admin.nav-settings') }}
+            <li role="presentation" class="nav-item dropdown ml-2">
+                <a class="nav-link dropdown-toggle"
+                    data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                    style="color: #dce2e1 !important;">
+                    <i class="fas fa-cog"></i> Settings
                 </a>
-                <div class="dropdown-menu">
-                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\StatusesController@index').'*') ? "active" : "" !!}"
-                        href="{{ action('\Kordy\Ticketit\Controllers\StatusesController@index') }}">{{ trans('ticketit::admin.nav-statuses') }}</a>
-                    
-                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\PrioritiesController@index').'*') ? "active" : "" !!}"
-                        href="{{ action('\Kordy\Ticketit\Controllers\PrioritiesController@index') }}">{{ trans('ticketit::admin.nav-priorities') }}</a>
-                    
-                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\AgentsController@index').'*') ? "active" : "" !!}"
-                        href="{{ action('\Kordy\Ticketit\Controllers\AgentsController@index') }}">{{ trans('ticketit::admin.nav-agents') }}</a>
-                    
-                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\CategoriesController@index').'*') ? "active" : "" !!}"
-                        href="{{ action('\Kordy\Ticketit\Controllers\CategoriesController@index') }}">{{ trans('ticketit::admin.nav-categories') }}</a>
-                   
-                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\ConfigurationsController@index').'*') ? "active" : "" !!}"
-                        href="{{ action('\Kordy\Ticketit\Controllers\ConfigurationsController@index') }}">{{ trans('ticketit::admin.nav-configuration') }}</a>
-                    
-                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\AdministratorsController@index').'*') ? "active" : "" !!}"
-                        href="{{ action('\Kordy\Ticketit\Controllers\AdministratorsController@index')}}">{{ trans('ticketit::admin.nav-administrator') }}</a>
-                    
+                <div class="dropdown-menu" style="background-color: #f8f9fa; border: 1px solid #dce2e1;">
+                    <a class="dropdown-item" href="#" style="color: #2c3430 !important;">
+                        Statuses
+                    </a>
+                    <a class="dropdown-item" href="#" style="color: #2c3430 !important;">
+                        Priorities
+                    </a>
+                    <a class="dropdown-item" href="#" style="color: #2c3430 !important;">
+                        Agents
+                    </a>
+                    <a class="dropdown-item" href="#" style="color: #2c3430 !important;">
+                        Categories
+                    </a>
+                    <a class="dropdown-item" href="#" style="color: #2c3430 !important;">
+                        Configuration
+                    </a>
+                    <a class="dropdown-item" href="#" style="color: #2c3430 !important;">
+                        Administrator
+                    </a>
                 </div>
             </li>
         @endif

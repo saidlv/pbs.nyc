@@ -1,3 +1,11 @@
+@php
+    // Set default values for ticketit configuration variables to prevent undefined variable errors
+    $editor_enabled = $editor_enabled ?? true;
+    $include_font_awesome = $include_font_awesome ?? true;
+    $codemirror_enabled = $codemirror_enabled ?? false;
+    $codemirror_theme = $codemirror_theme ?? 'default';
+@endphp
+
 {{-- Load the css file to the header --}}
 <script type="text/javascript">
     function loadCSS(filename) {

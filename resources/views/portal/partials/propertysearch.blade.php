@@ -1,5 +1,13 @@
 @extends('portal.master')
 
+{{-- Include Leaflet CSS and JS for OpenStreetMap --}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
 @section('content')
     <div class="dark tab-container">
         <div class="tab-content clearfix" id="tab-karbonsearch">
@@ -117,12 +125,40 @@
             fitToElement: true,
             displayText: function (item) {
                 return item.bin + " - " +item.stname;
-            },
-            afterSelect: function (item) {
+            },            afterSelect: function (item) {
                 if (item.pluto != null && item.pluto.lat != null && item.pluto.lng != null) {
+                    // Create a simple map view using OpenStreetMap instead of Google Street View
+                    var mapId = 'property-map-' + Math.random().toString(36).substr(2, 9);
                     $('#property-detail-body').html(
-                        '<div id="demo"><img src="https://maps.googleapis.com/maps/api/streetview?size=800x200&amp;location=' + item.pluto.lat + ',' + item.pluto.lng + '&amp;key=GOOGLEAPIKEYWILLBEWRITTEN" alt="Google Street View" class="img-responsive"></div>'
+                        '<div id="' + mapId + '" style="height: 200px; width: 100%; border-radius: 8px; border: 1px solid #dce2e1;"></div>' +
+                        '<p style="margin-top: 8px; font-size: 0.875rem; color: #616c66; text-align: center;">' +
+                        'Property Location: ' + item.stname + 
+                        '</p>'
                     );
+                    
+                    // Initialize Leaflet map for this property
+                    setTimeout(function() {
+                        var map = L.map(mapId).setView([item.pluto.lat, item.pluto.lng], 16);
+                        
+                        // Add OpenStreetMap tiles
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                            maxZoom: 19
+                        }).addTo(map);
+                        
+                        // Add marker for the property
+                        var propertyIcon = L.divIcon({
+                            className: 'custom-property-marker',
+                            html: '<div style="background-color:#38403e;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 4px rgba(0,0,0,0.3);"></div>',
+                            iconSize: [22, 22],
+                            iconAnchor: [11, 11]
+                        });
+                        
+                        L.marker([item.pluto.lat, item.pluto.lng], {icon: propertyIcon})
+                         .addTo(map)
+                         .bindPopup('<strong>' + item.stname + '</strong><br>BIN: ' + item.bin)
+                         .openPopup();
+                    }, 100);
                 } else {
                     $('#property-detail-body').html('');
                 }

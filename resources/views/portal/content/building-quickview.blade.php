@@ -50,6 +50,10 @@
 {{--@endsection--}}
 
 @section('css')
+    <!-- Leaflet CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
     <style>
         #map_wrapper {
             height: 400px;
@@ -62,6 +66,26 @@
 
         .info_content {
             text-align: center;
+        }
+
+        /* Custom marker popup styling */
+        .leaflet-popup-content {
+            margin: 8px 12px;
+            line-height: 1.4;
+        }
+        
+        .leaflet-popup-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: #38403e;
+        }
+        
+        .leaflet-popup-content img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 4px;
+            margin-top: 8px;
         }
     </style>
 @endsection
@@ -459,77 +483,64 @@
             //
             // });
         });
-    </script>
+    </script>    <!-- Leaflet JavaScript for OpenStreetMap -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
 
     <script>
         jQuery(function ($) {
-            // Asynchronously Load the map API
-            var script = document.createElement('script'); //todo: Apikey must be placed below
-            script.src = "//maps.googleapis.com/maps/api/js?key=GOOGLEAPIKEYWILLBEWRITTEN&callback=initialize";
-            document.body.appendChild(script);
+            // Initialize the map with Leaflet.js (OpenStreetMap)
+            initializeLeafletMap();
         });
 
-        function initialize() {
-            var map;
-            var bounds = new google.maps.LatLngBounds();
-            var mapOptions = {
-                mapTypeId: 'roadmap'
-            };
+        function initializeLeafletMap() {
+            // Initialize the map centered on New York City
+            var map = L.map('map_canvas').setView([40.7589, -73.9851], 10);
 
-            // Display a map on the page
-            map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-            map.setTilt(45);
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(map);
 
-            // Multiple Markers
+            // Custom icon for property markers
+            var propertyIcon = L.divIcon({
+                className: 'custom-div-icon',
+                html: '<div style="background-color:#38403e;width:12px;height:12px;border-radius:50%;border:2px solid white;"></div>',
+                iconSize: [16, 16],
+                iconAnchor: [8, 8]
+            });
+
+            // Array to hold all markers for bounds calculation
             var markers = [];
-
-            // Info Window Content
-            var infoWindowContent = [];
 
             @foreach($user->properties as $property)
             @if($property->lat && $property->lng)
-            markers.push(['{{$property->house_number . ", " . $property->stname . ", " . \App\Helpers\Helper::getBoroName($property->boro)}}', {{$property->lat}}, {{$property->lng}}]);
-            infoWindowContent.push(['<div class="info_content">' +
-            '<h3>{{$property->house_number}} , {{$property->stname}}, {{\App\Helpers\Helper::getBoroName($property->boro)}}</h3>' +
-            '<p><img src="{{$property->image()}}" height="100px"></img></p>' + '</div>']);
+            // Create marker for each property
+            var marker = L.marker([{{$property->lat}}, {{$property->lng}}], {icon: propertyIcon}).addTo(map);
+            
+            // Create popup content
+            var popupContent = '<div class="info_content">' +
+                '<h3>{{$property->house_number}} {{$property->stname}}, {{\App\Helpers\Helper::getBoroName($property->boro)}}</h3>' +
+                '<p><img src="{{$property->image()}}" style="max-width:100px;height:auto;"></p>' +
+                '</div>';
+            
+            marker.bindPopup(popupContent);
+            markers.push(marker);
             @endif
             @endforeach
 
-
-
-
-            // Display multiple markers on a map
-            var infoWindow = new google.maps.InfoWindow(), marker, i;
-
-            // Loop through our array of markers & place each one on the map
-            for (i = 0; i < markers.length; i++) {
-                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-                bounds.extend(position);
-                marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: markers[i][0]
-                });
-
-                // Allow each marker to have an info window
-                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                        return function () {
-                            infoWindow.setContent(infoWindowContent[i][0]);
-                            infoWindow.open(map, marker);
-                        }
-                    }
-                )(marker, i));
-
-                // Automatically center the map fitting all markers on the screen
-                map.fitBounds(bounds);
+            // Fit map to show all markers if we have any
+            if (markers.length > 0) {
+                var group = new L.featureGroup(markers);
+                map.fitBounds(group.getBounds().pad(0.1));
+                
+                // Set maximum zoom level after fitting bounds
+                if (map.getZoom() > 15) {
+                    map.setZoom(15);
+                }
             }
-
-            // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-            var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
-                this.setZoom(10);
-                google.maps.event.removeListener(boundsListener);
-            });
-
         }
     </script>
 @stop

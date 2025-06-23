@@ -1,30 +1,47 @@
-@extends($master)
+@extends('portal.master')
+
+@section('title', 'Support Tickets')
+
+@section('content_header')
+    <h1 class="m-0 text-dark">
+        <i class="fas fa-ticket-alt"></i> 
+        @if(View::hasSection('page_title'))
+            @yield('page_title')
+        @else
+            @yield('page')
+        @endif
+    </h1>
+@stop
 
 @section('content')
     @include('ticketit::shared.header')
 
-    <div class="container">
-        <div class="card mb-3">
-            <div class="card-body">
-                @include('ticketit::shared.nav')
-            </div>
-        </div>
-        @if(View::hasSection('ticketit_content'))
-            <div class="card">
-                <h5 class="card-header d-flex justify-content-between align-items-baseline flex-wrap">
-                    @if(View::hasSection('page_title'))
-                        <span>@yield('page_title')</span>
-                    @else
-                        <span>@yield('page')</span>
-                    @endif
-
-                    @yield('ticketit_header')
-                </h5>
-                <div class="card-body @yield('ticketit_content_parent_class')">
-                    @yield('ticketit_content')
+    <div class="row">
+        <div class="col-12">
+            {{-- Navigation is now handled by the shared nav file --}}
+            @include('ticketit::shared.nav')
+            
+            @if(View::hasSection('ticketit_content'))
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-baseline flex-wrap" style="background-color: #38403e; color: #ffffff;">
+                        <h5 class="mb-0" style="color: #ffffff;">
+                            @if(View::hasSection('page_title'))
+                                @yield('page_title')
+                            @else
+                                @yield('page')
+                            @endif
+                        </h5>
+                        <div>
+                            @yield('ticketit_header')
+                        </div>
+                    </div>
+                    <div class="card-body @yield('ticketit_content_parent_class')">
+                        @yield('ticketit_content')
+                    </div>
                 </div>
-            </div>
-        @endif
-        @yield('ticketit_extra_content')
+            @endif
+            
+            @yield('ticketit_extra_content')
+        </div>
     </div>
 @stop
