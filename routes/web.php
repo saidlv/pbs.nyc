@@ -160,3 +160,20 @@ Route::get('/debug-db', function () {
     }
     echo "</pre>";
 });
+
+// Temporary debug route for Railway CSRF/Session issues (Remove after fixing)
+Route::get('/debug-csrf', function () {
+    return response()->json([
+        'csrf_token' => csrf_token(),
+        'session_id' => session()->getId(),
+        'app_env' => env('APP_ENV'),
+        'app_url' => env('APP_URL'),
+        'session_secure' => config('session.secure'),
+        'session_domain' => config('session.domain'),
+        'session_same_site' => config('session.same_site'),
+        'request_secure' => request()->isSecure(),
+        'request_host' => request()->getHost(),
+        'cookies_enabled' => !empty($_COOKIE),
+        'session_started' => session()->isStarted(),
+    ]);
+});

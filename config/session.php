@@ -153,9 +153,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
-
-    /*
+    'domain' => env('SESSION_DOMAIN', null),    /*
     |--------------------------------------------------------------------------
     | HTTPS Only Cookies
     |--------------------------------------------------------------------------
@@ -165,8 +163,10 @@ return [
     | the cookie from being sent to you if it can not be done securely.
     |
     */
-    //'secure' => env('SESSION_SECURE_COOKIE', true),
-    'secure' => false,
+
+    'secure' => env('SESSION_SECURE_COOKIE', 
+        env('APP_ENV') === 'production' ? true : false
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -179,9 +179,7 @@ return [
     |
     */
 
-    'http_only' => true,
-
-    /*
+    'http_only' => true,    /*
     |--------------------------------------------------------------------------
     | Same-Site Cookies
     |--------------------------------------------------------------------------
@@ -194,7 +192,6 @@ return [
     |
     */
 
-    'same_site' => 'lax',
-    //'same_site' => null,
+    'same_site' => env('SESSION_SAME_SITE', 'lax'),
 
 ];
