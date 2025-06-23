@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RailwaySessionFix
 {
@@ -27,34 +28,21 @@ class RailwaySessionFix
             if (!$request->header('X-Forwarded-Proto')) {
                 $request->headers->set('X-Forwarded-Proto', 'https');
             }
+            
+            // Force Laravel to recognize this as a secure request
+            $request->server->set('HTTP_X_FORWARDED_PROTO', 'https');
+            $request->server->set('HTTP_X_FORWARDED_PORT', '443');
+            
+            // Debug logging for Railway
+            Log::info('Railway Session Fix - Request Info', [
+                'url' => $request->url(),
+                'is_secure' => $request->isSecure(),
+                'headers' => $request->headers->all(),
+                'session_id' => session()->getId(),
+                'auth_check' => auth()->check(),
+            ]);
         }
         
-        $response = $next($request);
-        
-        // Additional session cookie fixes for Railway
-        if (env('RAILWAY_ENVIRONMENT') || env('APP_ENV') === 'production') {
-            // Ensure session cookies work with Railway's setup
-            if ($response instanceof \Illuminate\Http\Response) {
-                $sessionCookieName = config('session.cookie');
-                
-                // Force session cookie settings for Railway
-                if (isset($_COOKIE[$sessionCookieName])) {
-                    setcookie(
-                        $sessionCookieName,
-                        $_COOKIE[$sessionCookieName],
-                        [
-                            'expires' => time() + (config('session.lifetime') * 60),
-                            'path' => '/',
-                            'domain' => '',
-                            'secure' => true,
-                            'httponly' => true,
-                            'samesite' => 'Lax'
-                        ]
-                    );
-                }
-            }
-        }
-        
-        return $response;
+        return $next($request);
     }
 }

@@ -149,7 +149,7 @@ return [
     | in your application. This will determine which domains the cookie is
     | available to in your application. A sensible default has been set.
     |
-    */    'domain' => env('SESSION_DOMAIN', null),/*
+    */    'domain' => env('SESSION_DOMAIN', null),    /*
     |--------------------------------------------------------------------------
     | HTTPS Only Cookies
     |--------------------------------------------------------------------------
@@ -161,7 +161,8 @@ return [
     */
 
     'secure' => env('SESSION_SECURE_COOKIE', 
-        env('APP_ENV') === 'production' ? true : false
+        // For Railway deployment, temporarily disable secure cookie to test
+        env('RAILWAY_ENVIRONMENT') ? false : (env('APP_ENV') === 'production' ? true : false)
     ),
 
     /*

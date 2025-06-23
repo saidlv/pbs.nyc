@@ -187,14 +187,26 @@ Route::get('/debug-csrf', function () {
 
 // Enhanced debug route with HTML output for better readability
 Route::get('/debug-session', function () {
-    echo "<h2>Railway Session & CSRF Debug</h2>";
+    echo "<h2>Railway Session & Authentication Debug</h2>";
     echo "<style>pre { background: #f5f5f5; padding: 10px; border-radius: 5px; }</style>";
+    
+    echo "<h3>🔒 Authentication Status</h3>";
+    echo "<pre>";
+    echo "User Logged In: " . (auth()->check() ? 'YES' : 'NO') . "\n";
+    if (auth()->check()) {
+        echo "User ID: " . auth()->id() . "\n";
+        echo "User Email: " . auth()->user()->email . "\n";
+        echo "User Level: " . (method_exists(auth()->user(), 'level') ? auth()->user()->level() : 'N/A') . "\n";
+    }
+    echo "Guard: " . auth()->getDefaultDriver() . "\n";
+    echo "</pre>";
     
     echo "<h3>🔒 CSRF & Session Status</h3>";
     echo "<pre>";
     echo "CSRF Token: " . csrf_token() . "\n";
     echo "Session ID: " . session()->getId() . "\n";
     echo "Session Started: " . (session()->isStarted() ? 'YES' : 'NO') . "\n";
+    echo "Session Data: " . json_encode(session()->all(), JSON_PRETTY_PRINT) . "\n";
     echo "</pre>";
     
     echo "<h3>🌐 Request Information</h3>";
@@ -219,6 +231,7 @@ Route::get('/debug-session', function () {
     echo "Domain: " . (config('session.domain') ?: 'null') . "\n";
     echo "Same Site: " . config('session.same_site') . "\n";
     echo "Cookie Name: " . config('session.cookie') . "\n";
+    echo "Lifetime: " . config('session.lifetime') . " minutes\n";
     echo "</pre>";
     
     echo "<h3>🍪 Current Cookies</h3>";
@@ -238,6 +251,7 @@ Route::get('/debug-session', function () {
     if (!config('session.secure') && env('APP_ENV') === 'production') $issues[] = "❌ SESSION_SECURE_COOKIE should be true for production";
     if (!session()->isStarted()) $issues[] = "❌ Session not started";
     if (empty($_COOKIE)) $issues[] = "❌ No cookies found - session cookies may not be set";
+    if (!auth()->check()) $issues[] = "❌ User not authenticated - session may not be persisting";
     
     if (empty($issues)) {
         echo "<pre style='background: #d4edda; color: #155724;'>✅ All checks passed!</pre>";
@@ -251,7 +265,8 @@ Route::get('/debug-session', function () {
     
     echo "<h3>🧪 Test Login Form</h3>";
     echo "<form method='POST' action='" . route('login') . "' style='background: #f8f9fa; padding: 20px; border-radius: 5px;'>";
-    echo csrf_field();
+    // echo csrf_field(); // CSRF disabled temporarily
+    echo "<input type='hidden' name='_token' value='" . csrf_token() . "'>";
     echo "<div style='margin-bottom: 10px;'>";
     echo "<label>Email:</label><br>";
     echo "<input type='email' name='email' value='test@example.com' style='width: 300px; padding: 5px;'>";
@@ -262,4 +277,45 @@ Route::get('/debug-session', function () {
     echo "</div>";
     echo "<button type='submit' style='background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 3px;'>Test Login</button>";
     echo "</form>";
+    
+    echo "<h3>🔗 Navigation Links</h3>";
+    echo "<p>";
+    echo "<a href='" . route('login') . "' style='margin-right: 10px;'>Login Page</a>";
+    echo "<a href='/portal' style='margin-right: 10px;'>Portal</a>";
+    echo "<a href='/portal/dashboard' style='margin-right: 10px;'>Dashboard</a>";
+    echo "</p>";
+});
+
+// Test authentication route (Remove after debugging)
+Route::get('/test-auth', function () {
+    echo "<h2>Authentication Test</h2>";
+    echo "<pre>";
+    
+    // Test if we can manually authenticate
+    $user = \App\User::where('email', 'like', '%@%')->first();
+    if ($user) {
+        echo "Test User Found: " . $user->email . "\n";
+        echo "User Level: " . (method_exists($user, 'level') ? $user->level() : 'N/A') . "\n";
+        
+        // Try to log in this user
+        auth()->login($user);
+        echo "Manual Login Attempted\n";
+        echo "Auth Check After Login: " . (auth()->check() ? 'YES' : 'NO') . "\n";
+        
+        if (auth()->check()) {
+            echo "Current User: " . auth()->user()->email . "\n";
+            echo "Session ID: " . session()->getId() . "\n";
+            
+            // Test session persistence
+            session(['test_data' => 'Railway session test']);
+            echo "Test data set in session\n";
+            echo "Test data from session: " . session('test_data') . "\n";
+        }
+    } else {
+        echo "No users found in database\n";
+    }
+    
+    echo "</pre>";
+    echo "<p><a href='/debug-session'>Check Session Debug</a></p>";
+    echo "<p><a href='/portal'>Try Portal Access</a></p>";
 });
