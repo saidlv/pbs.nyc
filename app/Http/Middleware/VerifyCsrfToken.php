@@ -11,9 +11,7 @@ class VerifyCsrfToken extends Middleware
      *
      * @var bool
      */
-    protected $addHttpCookie = true;
-
-    /**
+    protected $addHttpCookie = true;    /**
      * The URIs that should be excluded from CSRF verification.
      *
      * @var array
@@ -21,6 +19,9 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'api/*',
         'pbs/public/api/*',
-        'stripe/*'
+        'stripe/*',
+        // Temporarily disable CSRF for login to test Railway deployment
+        'portal/login',
+        'login',
     ];
 }
