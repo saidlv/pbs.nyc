@@ -158,12 +158,13 @@ return [
     | to the server if the browser has a HTTPS connection. This will keep
     | the cookie from being sent to you if it can not be done securely.
     |
-    */
-
-    'secure' => env('SESSION_SECURE_COOKIE', 
-        // For Railway deployment, temporarily disable secure cookie to test
-        env('RAILWAY_ENVIRONMENT') ? false : (env('APP_ENV') === 'production' ? true : false)
-    ),
+    */    'secure' => env('SESSION_SECURE_COOKIE', function() {
+        // Railway environment detection
+        if (env('RAILWAY_ENVIRONMENT_ID') || str_contains(env('APP_URL', ''), 'railway.app')) {
+            return true; // Always secure on Railway (HTTPS)
+        }
+        return env('APP_ENV') === 'production';
+    }),
 
     /*
     |--------------------------------------------------------------------------
@@ -189,6 +190,12 @@ return [
     |
     */
 
-    'same_site' => env('SESSION_SAME_SITE', 'lax'),
+    'same_site' => env('SESSION_SAME_SITE', function() {
+        // Railway environment detection
+        if (env('RAILWAY_ENVIRONMENT_ID') || str_contains(env('APP_URL', ''), 'railway.app')) {
+            return 'lax'; // Use 'lax' for Railway instead of 'none'
+        }
+        return 'lax';
+    }),
 
 ];

@@ -319,3 +319,69 @@ Route::get('/test-auth', function () {
     echo "<p><a href='/debug-session'>Check Session Debug</a></p>";
     echo "<p><a href='/portal'>Try Portal Access</a></p>";
 });
+
+// Railway Debug Route (Remove after fixing)
+Route::get('/railway-debug', function () {
+    // Only show on Railway environment
+    if (!env('RAILWAY_ENVIRONMENT_ID') && !str_contains(env('APP_URL', ''), 'railway.app')) {
+        abort(404);
+    }
+    
+    echo "<h1>🚂 Railway Environment Debug</h1>";
+    echo "<style>body{font-family:monospace;} .good{color:green;} .bad{color:red;} .warn{color:orange;}</style>";
+    
+    echo "<h2>🔍 Authentication Status</h2>";
+    echo "<pre>";
+    echo "Auth Check: " . (auth()->check() ? '<span class="good">✅ Authenticated</span>' : '<span class="bad">❌ Not authenticated</span>') . "\n";
+    if (auth()->check()) {
+        echo "User: " . auth()->user()->email . "\n";
+    }
+    echo "Session ID: " . session()->getId() . "\n";
+    echo "</pre>";
+    
+    echo "<h2>⚙️ Environment Configuration</h2>";
+    echo "<pre>";
+    echo "APP_URL: " . env('APP_URL') . "\n";
+    echo "APP_ENV: " . env('APP_ENV') . "\n";
+    echo "RAILWAY_ENVIRONMENT_ID: " . (env('RAILWAY_ENVIRONMENT_ID') ?: 'Not set') . "\n";
+    echo "Request URL: " . request()->url() . "\n";
+    echo "Request Host: " . request()->getHost() . "\n";
+    echo "Request Secure: " . (request()->isSecure() ? '<span class="good">✅ HTTPS</span>' : '<span class="bad">❌ HTTP</span>') . "\n";
+    echo "</pre>";
+    
+    echo "<h2>🍪 Session Configuration</h2>";
+    echo "<pre>";
+    echo "SESSION_DRIVER: " . env('SESSION_DRIVER') . "\n";
+    echo "SESSION_SECURE_COOKIE: " . env('SESSION_SECURE_COOKIE') . "\n";
+    echo "SESSION_SAME_SITE: " . env('SESSION_SAME_SITE') . "\n";
+    echo "SESSION_DOMAIN: " . (env('SESSION_DOMAIN') ?: 'null') . "\n";
+    echo "Config Secure: " . (config('session.secure') ? '<span class="good">true</span>' : '<span class="bad">false</span>') . "\n";
+    echo "Config SameSite: " . config('session.same_site') . "\n";
+    echo "Session Cookie Name: " . config('session.cookie') . "\n";
+    echo "</pre>";
+    
+    echo "<h2>🍪 Cookie Analysis</h2>";
+    echo "<pre>";
+    $sessionCookie = config('session.cookie');
+    echo "Expected Cookie: " . $sessionCookie . "\n";
+    echo "Cookie Exists: " . (isset($_COOKIE[$sessionCookie]) ? '<span class="good">✅ YES</span>' : '<span class="bad">❌ NO</span>') . "\n";
+    if (isset($_COOKIE[$sessionCookie])) {
+        echo "Cookie Value: " . substr($_COOKIE[$sessionCookie], 0, 20) . "...\n";
+    }
+    echo "Total Cookies: " . count($_COOKIE) . "\n";
+    echo "</pre>";
+    
+    echo "<h2>🔧 Test Actions</h2>";
+    echo "<p><a href='" . route('login') . "'>Go to Login</a></p>";
+    echo "<p><a href='/portal'>Go to Portal</a></p>";
+    
+    echo "<h2>📋 CSRF Token Test</h2>";
+    echo "<form method='POST' action='/railway-debug'>";
+    echo csrf_field();
+    echo "<button type='submit'>Test CSRF</button>";
+    echo "</form>";
+    
+    if (request()->isMethod('POST')) {
+        echo "<p><span class='good'>✅ CSRF Token Valid!</span></p>";
+    }
+});
