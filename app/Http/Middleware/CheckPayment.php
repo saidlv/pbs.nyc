@@ -7,8 +7,6 @@ use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
 
 class CheckPayment extends Middleware
 {
-
-
     /**
      * Handle an incoming request.
      *
@@ -18,8 +16,32 @@ class CheckPayment extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->level() < 5 && (!$request->user()->subscribed('default') || ($request->user()->subscription() == null ? true : $request->user()->subscription()->canceled()))) {
-            // This user is not a paying customer...
+        $user = $request->user();
+        
+        // Skip check for admin users (level 5 and above)
+        if (!$user || $user->level() >= 5) {
+            return $next($request);
+        }
+        
+        // Check if user has an active subscription
+        $hasActiveSubscription = false;
+        
+        try {
+            // Check if user is subscribed to 'default' plan
+            if ($user->subscribed('default')) {
+                $subscription = $user->subscription('default');
+                // Make sure subscription exists and is not canceled
+                if ($subscription && !$subscription->canceled()) {
+                    $hasActiveSubscription = true;
+                }
+            }
+        } catch (\Exception $e) {
+            // If there's any error checking subscription, treat as no subscription
+            $hasActiveSubscription = false;
+        }
+        
+        // Redirect to subscription page if no active subscription
+        if (!$hasActiveSubscription) {
             return redirect(route('payment.subscribe'));
         }
 

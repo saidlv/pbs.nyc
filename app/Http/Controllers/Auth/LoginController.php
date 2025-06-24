@@ -36,24 +36,53 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-//    protected $redirectTo = RouteServiceProvider::HOME;
-
+//    protected $redirectTo = RouteServiceProvider::HOME;    
     /**
      * Where to redirect users after login.
      *
-     * @return string
-     */
+     * @return string 
+     * */
     public function redirectTo()
     {
-        // Old redirection logic (commented)
-        // return '/portal';
-
-        // New redirection logic
         $user = Auth::user();
-        if ($user && $user->level() >= 4) { // Assuming level 4 and above can access portal
+        
+        // Admin users (level 5+) go directly to portal
+        if ($user && $user->level() >= 5) {
+            return '/portal';
+        }
+        
+        // For non-admin users, check subscription status
+        if ($user && $user->level() >= 4) {
             return '/portal/dashboard';
         }
-        return '/portal'; // This will trigger CheckPayment middleware which may redirect to /portal/subscribe
+        
+        // For regular users, check if they have an active subscription
+        if ($user) {
+            try {
+                $hasActiveSubscription = false;
+                
+                if ($user->subscribed('default')) {
+                    $subscription = $user->subscription('default');
+                    if ($subscription && !$subscription->canceled()) {
+                        $hasActiveSubscription = true;
+                    }
+                }
+                
+                // If user has active subscription, redirect to portal
+                if ($hasActiveSubscription) {
+                    return '/portal';
+                }
+                
+                // If no active subscription, redirect to subscribe page
+                return '/portal/subscribe';
+                
+            } catch (\Exception $e) {
+                // If there's any error checking subscription, redirect to subscribe page
+                return '/portal/subscribe';
+            }
+        }
+        
+        return '/portal/subscribe';
     }
 
     protected function authenticated(Request $request, $user)

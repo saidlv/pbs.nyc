@@ -152,13 +152,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Property Notes
         Route::post('buildingProfiles/{buildingid}/notes/add', 'PropertyNotesController@store')->name('property.notes.store')->middleware(['level:4']);
-        Route::post('buildingProfiles/{buildingid}/notes/delete', 'PropertyNotesController@destroy')->name('property.notes.destroy')->middleware(['level:4']);
-
-
-        Route::get('recordsQuickview', 'PortalController@recordsQuickview')->name('recordsQuickview')->middleware(['level:4']);
-        Route::get('properties', 'PortalController@properties')->name('properties')->middleware(['level:4']);
-        Route::get('profile', 'PortalController@profile')->name('profile')->middleware(['level:4']);
-        Route::post('profile/update', 'UserController@updatePortal')->name('profile.update')->middleware(['level:4']);
+        Route::post('buildingProfiles/{buildingid}/notes/delete', 'PropertyNotesController@destroy')->name('property.notes.destroy')->middleware(['level:4']);        Route::get('recordsQuickview', 'PortalController@recordsQuickview')->name('recordsQuickview')->middleware(['level:4', 'paid']);
+        Route::get('properties', 'PortalController@properties')->name('properties')->middleware(['level:4', 'paid']);
+        Route::get('profile', 'PortalController@profile')->name('profile')->middleware(['level:4', 'paid']);
+        Route::post('profile/update', 'UserController@updatePortal')->name('profile.update')->middleware(['level:4', 'paid']);
 
 
         //DOB LAR

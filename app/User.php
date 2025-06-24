@@ -66,11 +66,13 @@ class User extends Authenticatable implements JWTSubject
             return true;
         }
         return false;
-    }
-
-    public function getSubscriptionAttribute($value)
+    }    public function getSubscriptionAttribute($value)
     {
-        return $this->subscription();
+        try {
+            return $this->subscription('default');
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

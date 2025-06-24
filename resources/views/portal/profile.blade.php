@@ -637,11 +637,10 @@
                             @if(Auth::check() && Auth::user()->hasRole('admin'))
                                 <p class="text-center">
                                     <img width="50px" src="{{asset('images/others/PBSSTAFF.png')}}">
-                                </p>
-                            @else
-                                <p class="text-center">@if($user->subscription()->stripe_price==="price_1HAytXCHIQPIgwSn9ZKMI4NF")
+                                </p>                            @else
+                                <p class="text-center">@if($user->subscription() && $user->subscription()->stripe_price==="price_1HAytXCHIQPIgwSn9ZKMI4NF")
                                         <img width="50px" src="{{asset('images/others/gold.png')}}">
-                                    @elseif($user->subscription()->stripe_price==="price_1H6CrcCHIQPIgwSnOHJIVdUk") <img
+                                    @elseif($user->subscription() && $user->subscription()->stripe_price==="price_1H6CrcCHIQPIgwSnOHJIVdUk") <img
                                                 width="50px" src="{{asset('images/others/bronze.png')}}">
                                     @else Undefined @endif</p>
                             @endif
@@ -650,8 +649,7 @@
                             <p class="text-muted text-center">{{$user->company}}</p>
                             <p class="text-muted text-center">{{$user->address}}</p>
                             <p class="text-muted text-center">{{$user->contact_number}}</p>
-                            <hr>
-                            @if(Auth::check() && (!Auth::user()->hasRole('admin')))
+                            <hr>                            @if(Auth::check() && (!Auth::user()->hasRole('admin')))
                                 <h5> Subscription Info</h5>
                                 <table width="100%">
                                     <tbody>
@@ -660,7 +658,7 @@
                                             Status
                                         </td>
                                         <td>
-                                            <b>  {{Str::upper($user->subscription()->stripe_status)}} </b>
+                                            <b>{{ $user->subscription() ? Str::upper($user->subscription()->stripe_status) : 'NO SUBSCRIPTION' }}</b>
                                         </td>
 
                                     </tr>
@@ -670,11 +668,11 @@
                                             Plan
                                         </td>
                                         <td width="25%">
-                                            @if($user->subscription()->stripe_price==="price_1HAytXCHIQPIgwSn9ZKMI4NF")
+                                            @if($user->subscription() && $user->subscription()->stripe_price==="price_1HAytXCHIQPIgwSn9ZKMI4NF")
                                                 <b>Gold</b>
-                                            @elseif($user->subscription()->stripe_price==="price_1H6CrcCHIQPIgwSnOHJIVdUk")
+                                            @elseif($user->subscription() && $user->subscription()->stripe_price==="price_1H6CrcCHIQPIgwSnOHJIVdUk")
                                                 <b>Bronze</b>
-                                            @else <b>Undefined</b> @endif
+                                            @else <b>No Active Plan</b> @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -683,7 +681,7 @@
                                             Ends
                                         </td>
                                         <td width="25%">
-                                            <b>  {{$user->subscription()->trial_ends_at}}</b>
+                                            <b>{{ $user->subscription() ? $user->subscription()->trial_ends_at : 'N/A' }}</b>
                                         </td>
                                     </tr>
                                     <tr>
