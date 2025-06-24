@@ -109,8 +109,7 @@
                                                             information</h3>
                                                     </div>
                                                     <!-- /.card-header -->
-                                                    <div class="card-body">
-                                                        <div class="tab-container px-3">
+                                                    <div class="card-body">                                                        <div class="tab-container px-3">
                                                             <div class="form-widget" id="alert-subscribe-form">
 
                                                                 <form id="PaneldenPropertyEkleme"
@@ -120,35 +119,23 @@
                                                                         <div class="col-md-12 col-12">
                                                                             <label class="text-black-50 nobottommargin"
                                                                                    for="panel-boro">Borough</label>
-                                                                            <select class="selectpicker form-control bg-gri"
-                                                                                    data-style="bg-gri"
-                                                                                    data-live-search="false"
-                                                                                    data-size="6" name="panel-boro"
-                                                                                    id="panel-boro">
-                                                                                <option class="bg-gri" value>Select a
-                                                                                    Borough
-                                                                                </option>
-                                                                                <option class="bg-gri" value="1">
-                                                                                    Manhattan
-                                                                                </option>
-                                                                                <option class="bg-gri" value="2">Bronx
-                                                                                </option>
-                                                                                <option class="bg-gri" value="3">
-                                                                                    Brooklyn
-                                                                                </option>
-                                                                                <option class="bg-gri" value="4">
-                                                                                    Queens
-                                                                                </option>
-                                                                                <option class="bg-gri" value="5">Staten
-                                                                                    Islands
-                                                                                </option>
+                                                                            <select class="form-control property-form-input"
+                                                                                    name="panel-boro"
+                                                                                    id="panel-boro"
+                                                                                    style="width: 100%">
+                                                                                <option value>Select a Borough</option>
+                                                                                <option value="1">Manhattan</option>
+                                                                                <option value="2">Bronx</option>
+                                                                                <option value="3">Brooklyn</option>
+                                                                                <option value="4">Queens</option>
+                                                                                <option value="5">Staten Islands</option>
                                                                             </select>
                                                                         </div>
                                                                         <div class="col-md-12 col-12">
                                                                             <label class="text-black-50 nobottommargin"
                                                                                    for="panel-house-no">House
                                                                                 Number:</label>
-                                                                            <input class="form-control bg-gri"
+                                                                            <input class="form-control property-form-input"
                                                                                    id="panel-house-no"
                                                                                    name="panel-house-no" type="text"
                                                                                    value="">
@@ -158,8 +145,7 @@
                                                                                    for="panel-street-name2">Street
                                                                                 Name:</label> (NOTE: Please wait a few
                                                                             second to get list)
-                                                                            <select class="form-control bg-gri"
-                                                                                    data-style="bg-gri"
+                                                                            <select class="form-control property-form-input"
                                                                                     id="panel-street-name2"
                                                                                     name="panel-street-name2"
                                                                                     style="width: 100%"></select>
@@ -183,14 +169,12 @@
                                                     <div class="card-header">
                                                         <h3 class="card-title">Add with bin number</h3>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <div class="row">
+                                                    <div class="card-body">                                                        <div class="row">
                                                             <div class="col-md-12 col-12">
                                                                 <label class="text-black-50 nobottommargin"
                                                                        for="search-by-bin">BIN
                                                                     Number:</label>
-                                                                <select class="form-control bg-gri"
-                                                                        data-style="bg-gri"
+                                                                <select class="form-control property-form-input"
                                                                         id="search-by-bin"
                                                                         name="search-by-bin"
                                                                         style="width: 100%"></select>
@@ -1033,25 +1017,22 @@
                 });
                 return false;
             });
-        });
-
-
-        function PanelAddProperty() {
+        });        function PanelAddProperty() {
             var boroelm = $("#panel-boro");
-            var borobtnelm = $('[data-id="panel-boro"]');
+            var boroContainer = boroelm.next('.select2-container');
             var housenoelm = $('#panel-house-no');
             var streetnameelm = $('#panel-street-name');
             if (!boroelm.val()) {
-                borobtnelm.css('borderColor', "red").css('borderWidth', 2);
+                boroContainer.find('.select2-selection').css('borderColor', "red").css('borderWidth', '2px');
             } else {
-                borobtnelm.css('borderWidth', 0);
+                boroContainer.find('.select2-selection').css('borderColor', '#a2acaa').css('borderWidth', '1px');
             }
 
             if (!housenoelm.val()) {
-                housenoelm.css('borderColor', "red").css('borderWidth', 2);
+                housenoelm.css('borderColor', "red").css('borderWidth', '2px');
                 //return false;
             } else {
-                housenoelm.css('borderWidth', 0);
+                housenoelm.css('borderColor', '#a2acaa').css('borderWidth', '1px');
             }
 
             if (!streetnameelm.val()) {
@@ -1093,7 +1074,7 @@
                 elem.val(JSON.stringify(elem.tagsinput("items")));
                 housenoelm.val('');
                 streetnameelm.val('');
-                boroelm.selectpicker('val', '');
+                boroelm.val('').trigger('change');
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -1107,16 +1088,21 @@
 
     </script>
 
-
-
     <script>
         var route = "{{ route('property.search.ac') }}";
+
+        // Initialize Borough dropdown with Select2
+        $('#panel-boro').select2({
+            width: '100%',
+            containerCssClass: 'property-form-input',
+            dropdownCssClass: 'property-form-dropdown'
+        });
 
         $('#panel-street-name2').select2({
             width: 'resolve',
             minimumInputLength: 4,
-            containerCssClass: 'bg-gri',
-            dropdownCssClass: 'bg-gri',
+            containerCssClass: 'property-form-input',
+            dropdownCssClass: 'property-form-dropdown',
             ajax: {
                 type: 'POST',
                 url: route,
@@ -1155,31 +1141,30 @@
 
         $('#panel-street-name2').on('select2:select', function (e) {
             var data = e.params.data;
-            console.log(data);
-
-
-            var boroelm = $("#panel-boro");
-            var borobtnelm = $('[data-id="panel-boro"]');
+            console.log(data);            var boroelm = $("#panel-boro");
+            var boroContainer = boroelm.next('.select2-container');
             var housenoelm = $('#panel-house-no');
             var streetnameelm = $('#panel-street-name2');
+            var streetnameContainer = streetnameelm.next('.select2-container');
+            
             if (!boroelm.val()) {
-                borobtnelm.css('borderColor', "red").css('borderWidth', '2px');
+                boroContainer.find('.select2-selection').css('borderColor', "red").css('borderWidth', '2px');
             } else {
-                borobtnelm.css('borderWidth', '1px');
+                boroContainer.find('.select2-selection').css('borderColor', '#a2acaa').css('borderWidth', '1px');
             }
 
             if (!housenoelm.val()) {
                 housenoelm.css('borderColor', "red").css('borderWidth', '2px');
                 //return false;
             } else {
-                housenoelm.css('borderWidth', '1px');
+                housenoelm.css('borderColor', '#a2acaa').css('borderWidth', '1px');
             }
 
             if (!streetnameelm.val()) {
-                streetnameelm.css('borderColor', "red").css('borderWidth', '2px');
+                streetnameContainer.find('.select2-selection').css('borderColor', "red").css('borderWidth', '2px');
                 //    return false;
             } else {
-                streetnameelm.css('borderWidth', '1px');
+                streetnameContainer.find('.select2-selection').css('borderColor', '#a2acaa').css('borderWidth', '1px');
             }
 
             if (boroelm.val() && housenoelm.val() && streetnameelm.val()) {
@@ -1217,7 +1202,7 @@
 
                 // housenoelm.val('');
                 // streetnameelm.val('');
-                // boroelm.selectpicker('val', '');
+                // boroelm.val('').trigger('change');
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -1273,13 +1258,11 @@
         });
 
 
-        var routeByBin = "{{ route('property.searchbybin.ac') }}";
-
-        $('#search-by-bin').select2({
+        var routeByBin = "{{ route('property.searchbybin.ac') }}";        $('#search-by-bin').select2({
             width: 'resolve',
             minimumInputLength: 7,
-            containerCssClass: 'bg-gri',
-            dropdownCssClass: 'bg-gri',
+            containerCssClass: 'property-form-input',
+            dropdownCssClass: 'property-form-dropdown',
             ajax: {
                 type: 'POST',
                 url: routeByBin,
