@@ -397,24 +397,6 @@
     border-left: 4px solid #6c8a93 !important;
 }
 
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #dce2e1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #a2acaa;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #38403e;
-}
-
 /* Modern table enhancements */
 .table {
     border-collapse: separate !important;
@@ -883,4 +865,29 @@ label {
 
 .input-group-text:focus {
     border-color: #38403e !important;
+}
+
+/* Additional sidebar fixes for PBS theme */
+.main-sidebar {
+    box-shadow: 0 2px 4px rgba(56, 64, 62, 0.1) !important;
+}
+
+.sidebar-dark-primary {
+    background-color: #38403e !important;
+}
+
+/* DataTables pagination PBS theme integration */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: 1px solid #a2acaa !important;
+    color: #38403e !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    border-color: #38403e !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #38403e !important;
+    border-color: #38403e !important;
+    color: white !important;
 }

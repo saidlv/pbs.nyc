@@ -14,7 +14,7 @@ All authenticated routes require a JWT token in the Authorization header.
 | GET | `/api/user/properties` | Get user's properties |
 
 ## Property Search Endpoints (No Authentication Required)
-
+ 
 ### Search Property by Address
 **POST** `/api/search-property`
 
