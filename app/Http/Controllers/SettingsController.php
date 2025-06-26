@@ -186,6 +186,58 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
+    // Session-based notification settings update (for portal routes)
+    public function updateNotifySettingsPortal(Request $request)
+    {
+        $user = $request->user(); // Session-based authentication
+        $current = $user->notifySettings;
+        $data = $request->only(['sent_by', 'dob', 'ecb', 'fdny', 'hpd', 'inspections', 'permits']);
+        
+        // If no sent_by provided, keep existing or default to empty string
+        $sentBy = $data['sent_by'] ?? ($current->sent_by ?? '');
+        foreach (['dob','ecb','fdny','hpd','inspections','permits'] as $flag) {
+            $data[$flag] = isset($data[$flag]) ? (bool) $data[$flag] : false;
+        }
+        $data['sent_by'] = $sentBy;
+        
+        $user->notifySettings()->updateOrCreate(['user_id' => $user->id], $data);
+        
+        // Return JSON response or redirect based on request
+        if ($request->expectsJson()) {
+            $result = $user->notifySettings->toArray();
+            unset($result['id'], $result['user_id'], $result['created_at'], $result['updated_at']);
+            return response()->json(['success' => true, 'data' => $result]);
+        }
+        
+        return redirect()->back()->with('success', 'Notification settings updated successfully.');
+    }
+
+    // Session-based reminder settings update (for portal routes)
+    public function updateReminderSettingsPortal(Request $request)
+    {
+        $user = $request->user(); // Session-based authentication
+        $currentRem = $user->reminderSettings;
+        $data = $request->only(['sent_by', 'dob', 'ecb', 'fdny', 'hpd', 'inspections', 'permits']);
+        
+        // If no sent_by provided, keep existing or default to empty string
+        $sentBy = $data['sent_by'] ?? ($currentRem->sent_by ?? '');
+        foreach (['dob','ecb','fdny','hpd','inspections','permits'] as $flag) {
+            $data[$flag] = isset($data[$flag]) ? (bool) $data[$flag] : false;
+        }
+        $data['sent_by'] = $sentBy;
+        
+        $user->reminderSettings()->updateOrCreate(['user_id' => $user->id], $data);
+        
+        // Return JSON response or redirect based on request
+        if ($request->expectsJson()) {
+            $result = $user->reminderSettings->toArray();
+            unset($result['id'], $result['user_id'], $result['created_at'], $result['updated_at']);
+            return response()->json(['success' => true, 'data' => $result]);
+        }
+        
+        return redirect()->back()->with('success', 'Reminder settings updated successfully.');
+    }
+
     public function getSetting(Request $request)
     {
         $value = Settings::get($request->key);
@@ -213,6 +265,30 @@ class SettingsController extends Controller
     public function getReminderSettings(Request $request)
     {
         $user = $request->user();
+        $row = optional($user->reminderSettings)->toArray() ?? [];
+        $defaults = ['sent_by'=>'','dob'=>false,'ecb'=>false,'fdny'=>false,'hpd'=>false,'inspections'=>false,'permits'=>false];
+        $settings = array_merge($defaults, $row);
+        return response()->json(['success' => true, 'data' => $settings]);
+    }
+
+    /**
+     * Fetch notification settings for session-authenticated user (portal)
+     */
+    public function getNotifySettingsPortal(Request $request)
+    {
+        $user = $request->user(); // Session-based auth
+        $row = optional($user->notifySettings)->toArray() ?? [];
+        $defaults = ['sent_by'=>'','dob'=>false,'ecb'=>false,'fdny'=>false,'hpd'=>false,'inspections'=>false,'permits'=>false];
+        $settings = array_merge($defaults, $row);
+        return response()->json(['success' => true, 'data' => $settings]);
+    }
+
+    /**
+     * Fetch reminder settings for session-authenticated user (portal)
+     */
+    public function getReminderSettingsPortal(Request $request)
+    {
+        $user = $request->user(); // Session-based auth
         $row = optional($user->reminderSettings)->toArray() ?? [];
         $defaults = ['sent_by'=>'','dob'=>false,'ecb'=>false,'fdny'=>false,'hpd'=>false,'inspections'=>false,'permits'=>false];
         $settings = array_merge($defaults, $row);

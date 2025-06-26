@@ -68,8 +68,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     //settings
     Route::post('/user/summary-settings/update', 'SettingsController@updateSummarySettings')->name('settings.summary.update');
-    Route::post('/user/notify-settings/update', 'SettingsController@updateNotifySettings')->name('settings.notify.update');
-    Route::post('/user/reminder-settings/update', 'SettingsController@updateReminderSettings')->name('settings.reminder.update');
+    Route::post('/user/notify-settings/update', 'SettingsController@updateNotifySettingsPortal')->name('settings.notify.update');
+    Route::post('/user/reminder-settings/update', 'SettingsController@updateReminderSettingsPortal')->name('settings.reminder.update');
+    Route::get('/user/notify-settings', 'SettingsController@getNotifySettingsPortal')->name('settings.notify.get');
+    Route::get('/user/reminder-settings', 'SettingsController@getReminderSettingsPortal')->name('settings.reminder.get');
 
     //payments
     Route::get('/update-payment-method', 'PaymentController@updatePaymentMethod')->name('payment.method.update');

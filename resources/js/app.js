@@ -34,6 +34,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 navbar.style.right = '0';
                 navbar.style.borderLeft = 'none';
                 navbar.style.boxShadow = 'none';
+                
+                // Fix burger icon positioning in collapsed state
+                const burgerIcon = navbar.querySelector('[data-widget="pushmenu"]');
+                if (burgerIcon) {
+                    burgerIcon.style.position = 'relative';
+                    burgerIcon.style.left = '0';
+                    burgerIcon.style.transform = 'none';
+                    burgerIcon.style.margin = '0.2rem 0';
+                    burgerIcon.style.padding = '0.3rem 0.5rem';
+                    burgerIcon.style.fontSize = '0.9rem';
+                    burgerIcon.style.lineHeight = '1.2';
+                }
+                
+                // Ensure navbar nav container is properly positioned
+                const navbarNav = navbar.querySelector('.navbar-nav');
+                if (navbarNav) {
+                    navbarNav.style.marginLeft = '0';
+                    navbarNav.style.paddingLeft = '0.5rem';
+                }
             }
             
             // Adjust content wrapper

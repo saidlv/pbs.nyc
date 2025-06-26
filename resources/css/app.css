@@ -2191,73 +2191,73 @@ body.sidebar-mini.sidebar-collapse .main-sidebar {
     padding-top: 0 !important; /* No extra padding at top */
 }
 
-/* Fix burger icon (sidebar toggle) dimensions in collapsed mode */
+/* Fix burger icon (sidebar toggle) positioning and dimensions in collapsed mode */
 body.sidebar-collapse .navbar-nav [data-widget="pushmenu"],
 body.sidebar-mini.sidebar-collapse .navbar-nav [data-widget="pushmenu"] {
     padding: 0.3rem 0.5rem !important; /* Reduce padding */
     font-size: 0.9rem !important; /* Reduce icon size */
     margin: 0.2rem 0 !important; /* Reduce overall height */
     line-height: 1.2 !important; /* Tighter line height */
+    position: relative !important; /* Ensure proper positioning */
+    left: 0 !important; /* Reset any left positioning */
+    transform: none !important; /* Remove any transforms */
 }
 
-/* Reduce burger icon specifically */
-body.sidebar-collapse .navbar-nav [data-widget="pushmenu"] i,
-body.sidebar-mini.sidebar-collapse .navbar-nav [data-widget="pushmenu"] i {
-    font-size: 0.9rem !important; /* Make icon smaller */
+/* Ensure navbar content starts properly after collapsed sidebar */
+body.sidebar-collapse .main-header .navbar-nav .nav-link,
+body.sidebar-mini.sidebar-collapse .main-header .navbar-nav .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 40px !important;
+    height: 40px !important;
 }
 
-/* Remove any hover tooltips and text popups from collapsed sidebar */
-body.sidebar-collapse .main-sidebar .nav-link,
-body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link {
-    pointer-events: auto !important; /* Keep clickable but remove tooltip */
+/* Ensure burger icon is properly positioned from initial load in collapsed state */
+body.sidebar-collapse .main-header,
+body.sidebar-mini.sidebar-collapse .main-header {
+    margin-left: 4.6rem !important;
+    width: calc(100% - 4.6rem) !important;
 }
 
-/* Override AdminLTE tooltip behavior for collapsed sidebar */
-body.sidebar-collapse .main-sidebar [data-toggle="tooltip"],
-body.sidebar-mini.sidebar-collapse .main-sidebar [data-toggle="tooltip"] {
-    pointer-events: none !important;
+/* Force proper burger icon positioning at all times in collapsed state */
+body.sidebar-collapse [data-widget="pushmenu"],
+body.sidebar-mini.sidebar-collapse [data-widget="pushmenu"] {
+    position: relative !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0.2rem 0 !important;
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+    z-index: 1050 !important; /* Ensure it's visible */
 }
 
-/* Hide any tooltip content on hover */
-body.sidebar-collapse .main-sidebar .tooltip,
-body.sidebar-mini.sidebar-collapse .main-sidebar .tooltip,
-body.sidebar-collapse .main-sidebar [class*="tooltip"],
-body.sidebar-mini.sidebar-collapse .main-sidebar [class*="tooltip"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
+/* =============================================== */
+/* EXPANDED SIDEBAR - NAVIGATION MARGIN FIX */
+/* =============================================== */
+/* Add top margin for navigation content in expanded state to account for logo strip */
+
+/* Expanded sidebar - add top margin for navigation content to account for logo strip */
+body:not(.sidebar-collapse) .main-sidebar .nav-sidebar,
+body:not(.sidebar-mini.sidebar-collapse) .main-sidebar .nav-sidebar {
+    padding-top: 60px !important; /* Add top margin equal to logo strip height */
+    margin-top: 0 !important;
 }
 
-/* Remove text content that appears on hover */
-body.sidebar-collapse .main-sidebar .nav-link::after,
-body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link::after,
-body.sidebar-collapse .main-sidebar .nav-link::before,
-body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link::before {
-    content: none !important;
-    display: none !important;
-}
-
-/* Disable Bootstrap/AdminLTE tooltips globally for collapsed sidebar */
-body.sidebar-collapse .main-sidebar .tooltip,
-body.sidebar-mini.sidebar-collapse .main-sidebar .tooltip,
-body.sidebar-collapse .tooltip.show,
-body.sidebar-mini.sidebar-collapse .tooltip.show {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-/* Override any JS-generated tooltips */
-body.sidebar-collapse .main-sidebar .nav-link:hover + .tooltip,
-body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link:hover + .tooltip {
-    display: none !important;
-}
-
-/* Prevent tooltip initialization on collapsed sidebar elements */
-body.sidebar-collapse .main-sidebar [data-bs-toggle="tooltip"],
-body.sidebar-mini.sidebar-collapse .main-sidebar [data-bs-toggle="tooltip"],
-body.sidebar-collapse .main-sidebar [data-toggle="tooltip"],
-body.sidebar-mini.sidebar-collapse .main-sidebar [data-toggle="tooltip"] {
-    pointer-events: none !important;
+/* Ensure logo strip is visible and fixed at top in expanded state */
+body:not(.sidebar-collapse) .main-sidebar .brand-link,
+body:not(.sidebar-mini.sidebar-collapse) .main-sidebar .brand-link {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 240px !important; /* Use full sidebar width */
+    height: 60px !important;
+    z-index: 1040 !important;
+    background-color: #38403e !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
 }
