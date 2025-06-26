@@ -1501,3 +1501,87 @@ body:not(.sidebar-mini.sidebar-collapse) .main-sidebar .brand-link {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
 }
+
+/* =============================================== */
+/* FOOTER POSITIONING FIX */
+/* =============================================== */
+/* Make footer align with sidebar like navbar does */
+
+.main-footer {
+    background-color: #38403e !important;
+    border: 0 !important;
+    color: #dce2e1 !important;
+    margin-left: 240px !important; /* Start after sidebar like navbar */
+    width: calc(100% - 240px) !important; /* Adjust width accordingly */
+    position: relative !important;
+    padding: 1rem !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Footer positioning when sidebar is collapsed */
+body.sidebar-collapse .main-footer {
+    margin-left: 4.6rem !important; /* Start after collapsed sidebar */
+    width: calc(100% - 4.6rem) !important; /* Adjust width accordingly */
+}
+
+/* Remove any inner background or containers that create white space */
+.main-footer .container,
+.main-footer .container-fluid {
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Ensure footer content has no extra backgrounds */
+.main-footer .row,
+.main-footer .col-12,
+.main-footer .col-2,
+.main-footer div,
+.main-footer .navbar-dark {
+    background-color: transparent !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Footer links styling */
+.main-footer a.text-muted {
+    color: #a2acaa !important;
+    text-decoration: none !important;
+}
+
+.main-footer a.text-muted:hover {
+    color: white !important;
+}
+
+/* Ensure footer text is visible */
+.main-footer h6.text-light {
+    color: #dce2e1 !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Remove any padding/margin that creates gaps */
+.main-footer {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+/* Ensure footer doesn't overlap with content */
+.content-wrapper {
+    padding-bottom: 0 !important; /* Remove bottom padding to eliminate gap */
+}
+
+/* Make sure wrapper accommodates footer properly */
+.wrapper {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.content-wrapper {
+    flex: 1 !important; /* Take remaining space */
+}
