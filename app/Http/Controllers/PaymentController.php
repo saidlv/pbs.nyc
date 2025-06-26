@@ -54,7 +54,7 @@ class PaymentController extends Controller
         $planid = "";
 //        if ($payType === 'bronze') $planid = 'price_1H6CusCHIQPIgwSnYdiIFsvt'; // test mode
 //        else if ($payType === 'gold') $planid = 'price_1H6CrcCHIQPIgwSnOHJIVdUk'; // test mode
-        if ($payType === 'bronze') $planid = 'price_1HAytSCHIQPIgwSnOq5VQgXB'; // live mode
+        if ($payType === 'bronze') $planid = 'price_1H6CrcCHIQPIgwSnOHJIVdUk'; // live mode - consistent with profile view
         else if ($payType === 'gold') $planid = 'price_1HAytXCHIQPIgwSn9ZKMI4NF'; // live mode
         else return null;
         try {
