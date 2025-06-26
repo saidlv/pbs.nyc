@@ -290,9 +290,9 @@ return [
             'text' => 'search',
             'topnav_right' => true,
         ],
-        ['header' => 'PBS Member Portal',
-            'level' => '3',
-        ],
+        // ['header' => 'PBS Member Portal',
+        //     'level' => '3',
+        // ],
         //Hidden
         [
             'text' => 'Property Search',

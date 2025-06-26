@@ -2190,3 +2190,74 @@ body.sidebar-collapse .main-sidebar,
 body.sidebar-mini.sidebar-collapse .main-sidebar {
     padding-top: 0 !important; /* No extra padding at top */
 }
+
+/* Fix burger icon (sidebar toggle) dimensions in collapsed mode */
+body.sidebar-collapse .navbar-nav [data-widget="pushmenu"],
+body.sidebar-mini.sidebar-collapse .navbar-nav [data-widget="pushmenu"] {
+    padding: 0.3rem 0.5rem !important; /* Reduce padding */
+    font-size: 0.9rem !important; /* Reduce icon size */
+    margin: 0.2rem 0 !important; /* Reduce overall height */
+    line-height: 1.2 !important; /* Tighter line height */
+}
+
+/* Reduce burger icon specifically */
+body.sidebar-collapse .navbar-nav [data-widget="pushmenu"] i,
+body.sidebar-mini.sidebar-collapse .navbar-nav [data-widget="pushmenu"] i {
+    font-size: 0.9rem !important; /* Make icon smaller */
+}
+
+/* Remove any hover tooltips and text popups from collapsed sidebar */
+body.sidebar-collapse .main-sidebar .nav-link,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link {
+    pointer-events: auto !important; /* Keep clickable but remove tooltip */
+}
+
+/* Override AdminLTE tooltip behavior for collapsed sidebar */
+body.sidebar-collapse .main-sidebar [data-toggle="tooltip"],
+body.sidebar-mini.sidebar-collapse .main-sidebar [data-toggle="tooltip"] {
+    pointer-events: none !important;
+}
+
+/* Hide any tooltip content on hover */
+body.sidebar-collapse .main-sidebar .tooltip,
+body.sidebar-mini.sidebar-collapse .main-sidebar .tooltip,
+body.sidebar-collapse .main-sidebar [class*="tooltip"],
+body.sidebar-mini.sidebar-collapse .main-sidebar [class*="tooltip"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Remove text content that appears on hover */
+body.sidebar-collapse .main-sidebar .nav-link::after,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link::after,
+body.sidebar-collapse .main-sidebar .nav-link::before,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Disable Bootstrap/AdminLTE tooltips globally for collapsed sidebar */
+body.sidebar-collapse .main-sidebar .tooltip,
+body.sidebar-mini.sidebar-collapse .main-sidebar .tooltip,
+body.sidebar-collapse .tooltip.show,
+body.sidebar-mini.sidebar-collapse .tooltip.show {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Override any JS-generated tooltips */
+body.sidebar-collapse .main-sidebar .nav-link:hover + .tooltip,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-link:hover + .tooltip {
+    display: none !important;
+}
+
+/* Prevent tooltip initialization on collapsed sidebar elements */
+body.sidebar-collapse .main-sidebar [data-bs-toggle="tooltip"],
+body.sidebar-mini.sidebar-collapse .main-sidebar [data-bs-toggle="tooltip"],
+body.sidebar-collapse .main-sidebar [data-toggle="tooltip"],
+body.sidebar-mini.sidebar-collapse .main-sidebar [data-toggle="tooltip"] {
+    pointer-events: none !important;
+}

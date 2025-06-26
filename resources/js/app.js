@@ -49,6 +49,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.visibility = 'hidden';
                 element.style.opacity = '0';
             });
+            
+            // Remove tooltip attributes from navigation links in collapsed state
+            const navLinks = sidebar.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.hasAttribute('title')) {
+                    link.removeAttribute('title');
+                }
+                if (link.hasAttribute('data-original-title')) {
+                    link.removeAttribute('data-original-title');
+                }
+                if (link.hasAttribute('data-toggle') && link.getAttribute('data-toggle') === 'tooltip') {
+                    link.removeAttribute('data-toggle');
+                }
+            });
         }
     }
     
