@@ -948,6 +948,19 @@ h6[style*="color: #007bff"] {
     background-color: #ffffff !important;
     color: #2c3430 !important;
     border: 1px solid #a2acaa !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 0.375rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    min-width: 70px !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 16px 12px !important;
+    padding-right: 2.25rem !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
 }
 
 .dataTables_wrapper .dataTables_length select:focus,
@@ -956,6 +969,29 @@ h6[style*="color: #007bff"] {
 .dataTables_length input:focus {
     border-color: #38403e !important;
     box-shadow: 0 0 0 0.2rem rgba(56, 64, 62, 0.25) !important;
+    background-color: #ffffff !important;
+    color: #2c3430 !important;
+}
+
+/* Fix option elements visibility for DataTables select */
+.dataTables_wrapper .dataTables_length select option,
+.dataTables_length select option {
+    background-color: #ffffff !important;
+    color: #2c3430 !important;
+    font-weight: 500 !important;
+    padding: 0.375rem 0.75rem !important;
+}
+
+.dataTables_wrapper .dataTables_length select option:checked,
+.dataTables_length select option:checked {
+    background-color: #38403e !important;
+    color: #ffffff !important;
+}
+
+.dataTables_wrapper .dataTables_length select option:hover,
+.dataTables_length select option:hover {
+    background-color: #f8f9fa !important;
+    color: #2c3430 !important;
 }
 
 .dataTables_wrapper .dataTables_length,
@@ -963,6 +999,10 @@ h6[style*="color: #007bff"] {
 .dataTables_length,
 .dataTables_length label {
     color: #2c3430 !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
 }
 
 * {
