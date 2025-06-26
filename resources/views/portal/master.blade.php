@@ -17,7 +17,7 @@
 @endsection
 
 @section('css')
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app-optimized.css'])
     <style>
         .main-footer {
             background-color: #38403e !important;

@@ -1,20 +1,14 @@
-/* Import existing styles - these will be bundled by Vite */
 @import url('../../public/css/karbonsoft.css');
 @import url('../../public/css/pbs-theme.css');
 
-/* Additional Portal Theme Customizations */
-/* This file is processed by Vite */
-
-/* DASHBOARD LAYOUT FIX - Prevent content hiding behind navbar */
 .content-wrapper,
 .main-content,
 .dashboard-content,
 body.hold-transition .content-wrapper {
-    margin-top: 70px !important;  /* Add top margin to account for fixed navbar */
+    margin-top: 70px !important;
     padding-top: 1rem !important;
 }
 
-/* Ensure main header doesn't overlap content */
 .main-header {
     z-index: 1030 !important;
     position: fixed !important;
@@ -23,13 +17,11 @@ body.hold-transition .content-wrapper {
     right: 0 !important;
 }
 
-/* Dashboard specific adjustments */
 .dashboard-container,
 .portal-dashboard {
     padding-top: 2rem !important;
 }
 
-/* Portal-specific component styling */
 .portal-dashboard-card {
     background: linear-gradient(135deg, #dce2e1 0%, #f8f9fa 100%);
     border: 1px solid rgba(56, 64, 62, 0.1);
@@ -42,21 +34,19 @@ body.hold-transition .content-wrapper {
     transform: translateY(-2px);
 }
 
-/* DataTables customization for PBS theme */
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
     background: #38403e !important;
     color: white !important;
-    border: none !important; /* Remove border from current page button */
+    border: none !important;
     border-radius: 4px !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     background: #38403e !important;
     color: white !important;
-    border: none !important; /* Remove border on hover */
+    border: none !important;
 }
 
-/* Override hover for Previous/Next buttons to use our custom effect */
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.next:hover {
     background: transparent !important;
@@ -64,7 +54,6 @@ body.hold-transition .content-wrapper {
     border-color: #38403e !important;
 }
 
-/* DataTables Previous/Next button styling */
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous,
 .dataTables_wrapper .dataTables_paginate .paginate_button.next {
     width: 80px !important;
@@ -72,17 +61,11 @@ body.hold-transition .content-wrapper {
     padding: 4px !important;
     box-sizing: border-box !important;
     border-radius: 4px !important;
-    overflow: visible !important; /* Allow highlight effects to show properly */
+    overflow: visible !important;
     position: relative !important;
-    margin: 0 8px !important; /* Increased margin for better gap */
-}
-
-/* Add inner content styling for Previous/Next buttons */
-.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
-.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    margin: 0 8px !important;
     background: transparent !important;
     border: 1px solid #dee2e6 !important;
-    overflow: visible !important; /* Allow highlight to be visible */
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous::after,
@@ -111,11 +94,9 @@ body.hold-transition .content-wrapper {
     content: "Next" !important;
 }
 
-/* Hover effects for the inner white boxes */
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous:hover::after,
 .dataTables_wrapper .dataTables_paginate .paginate_button.next:hover::after {
     background: #f8f9fa !important;
-    transform: none !important; /* Remove scaling to prevent cutoff */
     box-shadow: 0 2px 4px rgba(56, 64, 62, 0.1) inset !important;
     top: 6px !important;
     left: 6px !important;
@@ -123,29 +104,21 @@ body.hold-transition .content-wrapper {
     bottom: 6px !important;
 }
 
-/* Ensure pagination container has proper spacing */
 .dataTables_wrapper .dataTables_paginate {
     padding: 10px 0 !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:not(.previous):not(.next) {
-    margin: 0 2px !important; /* Add spacing between numbered pagination buttons only */
-    border: none !important; /* Remove border from numbered buttons */
-    background: transparent !important; /* Transparent background for numbered buttons */
+    margin: 0 2px !important;
+    border: none !important;
+    background: transparent !important;
 }
 
-/* Ensure all pagination buttons have no borders by default */
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     border: none !important;
     background: transparent !important;
 }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.previous::before,
-.dataTables_wrapper .dataTables_paginate .paginate_button.next::before {
-    display: none !important;
-}
-
-/* Hide original text content */
 .dataTables_wrapper .dataTables_paginate .paginate_button.previous,
 .dataTables_wrapper .dataTables_paginate .paginate_button.next {
     color: transparent !important;
@@ -161,7 +134,6 @@ body.hold-transition .content-wrapper {
     box-shadow: 0 0 0 0.2rem rgba(56, 64, 62, 0.25) !important;
 }
 
-/* Custom PBS colored elements */
 .pbs-gradient-bg {
     background: linear-gradient(135deg, #38403e 0%, #616c66 100%) !important;
     color: #ffffff !important;
@@ -172,7 +144,6 @@ body.hold-transition .content-wrapper {
     color: #2c3430 !important;
 }
 
-/* Enhanced form styling */
 .form-control:focus {
     border-color: #38403e;
     box-shadow: 0 0 0 0.2rem rgba(56, 64, 62, 0.25);
@@ -183,7 +154,6 @@ body.hold-transition .content-wrapper {
     border-color: #38403e;
 }
 
-/* Alert customizations */
 .alert-info {
     background-color: rgba(108, 138, 147, 0.1);
     border-color: rgba(108, 138, 147, 0.2);
@@ -208,7 +178,6 @@ body.hold-transition .content-wrapper {
     color: #6b3c3c;
 }
 
-/* Portal section styling */
 .portal-section-header {
     background-color: #38403e;
     color: #ffffff;
@@ -225,7 +194,6 @@ body.hold-transition .content-wrapper {
     padding: 1.5rem;
 }
 
-/* Status indicators */
 .status-active {
     background-color: #5d8a5f;
     color: #ffffff;
@@ -253,15 +221,14 @@ body.hold-transition .content-wrapper {
     font-weight: 600;
 }
 
-/* Portal navigation enhancements */
 .nav-pills .nav-link {
     color: #616c66;
     font-weight: 500;
 }
 
 .nav-pills .nav-link.active {
-    background-color: #f8f9fa;  /* Light background */
-    color: #6ea665;  /* Light green text for selected state */
+    background-color: #f8f9fa;
+    color: #6ea665;
 }
 
 .nav-pills .nav-link:hover:not(.active) {
@@ -269,7 +236,6 @@ body.hold-transition .content-wrapper {
     color: #38403e;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px) {
     .portal-dashboard-card {
         margin-bottom: 1rem;
@@ -285,9 +251,6 @@ body.hold-transition .content-wrapper {
     }
 }
 
-/* ADDITIONAL CRITICAL FIXES FOR SPECIFIC COMPONENTS */
-
-/* DataTables specific overrides */
 table.dataTable {
     color: #2c3430 !important;
 }
@@ -311,7 +274,6 @@ table.dataTable tbody tr:hover {
     background-color: rgba(220, 226, 225, 0.1) !important;
 }
 
-/* Fix specific blue elements from screenshot */
 .btn[style*="background-color: rgb(0, 123, 255)"],
 .btn[style*="background-color: #007bff"],
 button[style*="background-color: rgb(0, 123, 255)"],
@@ -321,14 +283,12 @@ button[style*="background-color: #007bff"] {
     color: #ffffff !important;
 }
 
-/* Override inline blue styles */
 *[style*="color: rgb(0, 123, 255)"],
 *[style*="color: #007bff"],
 *[style*="color: blue"] {
     color: #38403e !important;
 }
 
-/* Property list specific styling */
 .property-table {
     background-color: #ffffff !important;
 }
@@ -342,7 +302,6 @@ button[style*="background-color: #007bff"] {
     color: #2c3430 !important;
 }
 
-/* Sync/refresh button specific fixes */
 .sync-button,
 .refresh-button,
 .btn-refresh,
@@ -360,7 +319,6 @@ button[style*="background-color: #007bff"] {
     border-color: #2c3430 !important;
 }
 
-/* Action column buttons */
 .action-buttons .btn {
     margin: 0 2px !important;
     padding: 0.25rem 0.5rem !important;
@@ -379,7 +337,6 @@ button[style*="background-color: #007bff"] {
     border-color: #5a737a !important;
 }
 
-/* Profile section styling */
 .profile-section {
     background-color: #ffffff !important;
     color: #2c3430 !important;
@@ -390,7 +347,6 @@ button[style*="background-color: #007bff"] {
     color: #ffffff !important;
 }
 
-/* Subscription status styling */
 .subscription-active {
     background-color: #5d8a5f !important;
     color: #ffffff !important;
@@ -401,13 +357,11 @@ button[style*="background-color: #007bff"] {
     font-size: 0.75rem !important;
 }
 
-/* Tab content styling */
 .tab-content {
     background-color: #ffffff !important;
     color: #2c3430 !important;
 }
 
-/* Ensure all input elements have proper styling */
 input, select, textarea {
     background-color: #ffffff !important;
     color: #2c3430 !important;
@@ -421,21 +375,16 @@ input:focus, select:focus, textarea:focus {
     color: #2c3430 !important;
 }
 
-/* Placeholder text */
 ::placeholder {
     color: #a2acaa !important;
     opacity: 1 !important;
 }
 
-:-ms-input-placeholder {
-    color: #a2acaa !important;
-}
-
+:-ms-input-placeholder,
 ::-ms-input-placeholder {
     color: #a2acaa !important;
 }
 
-/* Override any remaining Bootstrap blue classes */
 .bg-primary {
     background-color: #38403e !important;
 }
@@ -460,13 +409,11 @@ input:focus, select:focus, textarea:focus {
     border-color: #6c8a93 !important;
 }
 
-/* Link hover effects */
 a:not(.btn):hover {
     color: #2c3430 !important;
     text-decoration: underline !important;
 }
 
-/* Card link styling */
 .card a {
     color: #38403e !important;
 }
@@ -475,7 +422,6 @@ a:not(.btn):hover {
     color: #2c3430 !important;
 }
 
-/* Ensure proper text contrast in all scenarios */
 .table-dark {
     background-color: #2c3430 !important;
     color: #ffffff !important;
@@ -486,7 +432,6 @@ a:not(.btn):hover {
     color: #2c3430 !important;
 }
 
-/* Status column styling */
 .sync-status-active {
     color: #5d8a5f !important;
     font-weight: 600 !important;
@@ -502,9 +447,6 @@ a:not(.btn):hover {
     font-weight: 600 !important;
 }
 
-/* SPECIFIC FIXES FOR SCREENSHOT ISSUES */
-
-/* Fix green bar text visibility - Nav pills with light green text for active state */
 .nav-pills {
     background-color: #38403e !important;
     padding: 0.5rem !important;
@@ -512,23 +454,22 @@ a:not(.btn):hover {
 }
 
 .nav-pills .nav-link {
-    color: #dce2e1 !important;  /* Light text on dark green background */
+    color: #dce2e1 !important;
     font-weight: 500 !important;
     margin: 0 0.25rem !important;
 }
 
 .nav-pills .nav-link.active {
-    background-color: #f8f9fa !important;  /* Light background for active */
-    color: #6ea665 !important;  /* Light green text for active state */
+    background-color: #f8f9fa !important;
+    color: #6ea665 !important;
     font-weight: 600 !important;
 }
 
 .nav-pills .nav-link:hover:not(.active) {
     background-color: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;  /* White text on hover */
+    color: #ffffff !important;
 }
 
-/* Fix blue "Change Profile Photo" button */
 .btn-primary,
 button[style*="background-color: #007bff"],
 button[style*="background: rgb(13, 110, 253)"],
@@ -544,10 +485,8 @@ button[style*="background: rgb(13, 110, 253)"],
     color: #ffffff !important;
 }
 
-/* Specific fix for profile photo button */
 .profile-photo-btn,
 .btn[href*="profile"],
-button:contains("Change Profile Photo"),
 .btn-primary[href*="#"] {
     background-color: #38403e !important;
     border-color: #38403e !important;
@@ -556,7 +495,6 @@ button:contains("Change Profile Photo"),
     border-radius: 0.375rem !important;
 }
 
-/* Fix subscription info table padding */
 .subscription-info,
 .user-info-table,
 .profile-info-table {
@@ -581,7 +519,6 @@ button:contains("Change Profile Photo"),
     border-bottom: none !important;
 }
 
-/* Right sidebar table styling */
 .card-body table {
     margin: 0 !important;
 }
@@ -595,7 +532,6 @@ button:contains("Change Profile Photo"),
     border-bottom: none !important;
 }
 
-/* Subscription status table specific styling */
 .subscription-table {
     width: 100% !important;
     border-collapse: separate !important;
@@ -622,7 +558,6 @@ button:contains("Change Profile Photo"),
     border-bottom: none !important;
 }
 
-/* Profile card right side styling */
 .profile-card .card-body {
     padding: 1.5rem !important;
 }
@@ -645,7 +580,6 @@ button:contains("Change Profile Photo"),
     padding-bottom: 0.5rem !important;
 }
 
-/* NAVBAR PROFILE IMAGE FIX */
 .navbar-nav .nav-item .user-image,
 .navbar .user-image,
 .navbar-nav img,
@@ -662,7 +596,6 @@ button:contains("Change Profile Photo"),
     display: inline-block !important;
 }
 
-/* Navbar user menu specific styling */
 .navbar-nav .dropdown-toggle img,
 .navbar .dropdown-toggle img {
     width: 32px !important;
@@ -673,7 +606,6 @@ button:contains("Change Profile Photo"),
     margin-right: 0.5rem !important;
 }
 
-/* Navbar container height control */
 .main-header .navbar-nav .nav-link {
     padding: 0.5rem 1rem !important;
     display: flex !important;
@@ -681,7 +613,6 @@ button:contains("Change Profile Photo"),
     height: 56px !important;
 }
 
-/* Navbar profile dropdown styling */
 .navbar-nav .dropdown-menu {
     border: 1px solid #dce2e1 !important;
     box-shadow: 0 4px 8px rgba(56, 64, 62, 0.1) !important;
@@ -697,7 +628,6 @@ button:contains("Change Profile Photo"),
     color: #38403e !important;
 }
 
-/* PROFILE IMAGE CIRCLE FIX */
 .profile-user-img,
 .user-image,
 .profile-photo img,
@@ -715,9 +645,6 @@ img[alt*="profile"],
     margin: 0 auto 1rem auto !important;
 }
 
-/* TABLE PADDING FIXES - MORE SPECIFIC SELECTORS */
-
-/* General table padding for all portal tables */
 .card table,
 .card-body table,
 table.table,
@@ -751,7 +678,6 @@ table.dataTable th,
     font-weight: 600 !important;
 }
 
-/* Profile/subscription info table specific fixes */
 .subscription-info table,
 .user-info table,
 .profile-stats table,
@@ -776,7 +702,6 @@ table.dataTable th,
     border-bottom: none !important;
 }
 
-/* Right sidebar specific table styling */
 .col-md-3 table,
 .col-lg-3 table,
 .sidebar table {
@@ -807,7 +732,6 @@ table.dataTable th,
     text-align: right !important;
 }
 
-/* Numbers and values formatting */
 .numeric-value,
 .balance-value,
 .count-value {
@@ -817,7 +741,6 @@ table.dataTable th,
     font-size: 0.95em !important;
 }
 
-/* Subscription status badge in table */
 .subscription-status,
 .status-badge {
     background-color: #5d8a5f !important;
@@ -831,7 +754,6 @@ table.dataTable th,
     display: inline-block !important;
 }
 
-/* Profile card enhancements */
 .profile-card,
 .user-card,
 .user-panel {
@@ -848,7 +770,6 @@ table.dataTable th,
     text-align: center !important;
 }
 
-/* Profile button styling */
 .profile-photo-button,
 .change-photo-btn {
     background-color: #38403e !important;
@@ -872,16 +793,14 @@ table.dataTable th,
     box-shadow: 0 4px 8px rgba(56, 64, 62, 0.15) !important;
 }
 
-/* LIGHT GREEN TEXT FOR SELECTED STATE STYLING */
-/* Use light green text color for selected buttons and items */
 .btn.active,
 .btn:active,
 .btn.btn-active,
 .notification-btn.active,
 .settings-btn.active {
-    background-color: #f8f9fa !important;  /* Light background */
+    background-color: #f8f9fa !important;
     border-color: #a8c4a2 !important;
-    color: #6ea665 !important;  /* Light green text color */
+    color: #6ea665 !important;
     box-shadow: 0 2px 4px rgba(168, 196, 162, 0.3) !important;
 }
 
@@ -891,14 +810,13 @@ table.dataTable th,
 .settings-btn.active:hover {
     background-color: #e9ecef !important;
     border-color: #9bb896 !important;
-    color: #5e9555 !important;  /* Slightly darker green text on hover */
+    color: #5e9555 !important;
 }
 
-/* Notification preference buttons styling */
 .btn-group .btn.active {
     background-color: #f8f9fa !important;
     border-color: #a8c4a2 !important;
-    color: #6ea665 !important;  /* Light green text */
+    color: #6ea665 !important;
     font-weight: 600 !important;
 }
 
@@ -914,30 +832,21 @@ table.dataTable th,
     color: #38403e !important;
 }
 
-/* Selected nav items and tabs */
 .nav-tabs .nav-link.active {
     background-color: #f8f9fa !important;
     border-color: #a8c4a2 !important;
-    color: #6ea665 !important;  /* Light green text */
+    color: #6ea665 !important;
     font-weight: 600 !important;
 }
 
-.nav-pills .nav-link.active {
-    background-color: #f8f9fa !important;
-    color: #6ea665 !important;  /* Light green text */
-    font-weight: 600 !important;
-}
-
-/* Selected list items */
 .list-group-item.active {
     background-color: #f8f9fa !important;
     border-color: #a8c4a2 !important;
-    color: #6ea665 !important;  /* Light green text */
+    color: #6ea665 !important;
 }
 
-/* Selected radio buttons and checkboxes */
 .form-check-input:checked {
-    background-color: #6ea665 !important;  /* Light green for checkboxes */
+    background-color: #6ea665 !important;
     border-color: #6ea665 !important;
 }
 
@@ -945,15 +854,12 @@ table.dataTable th,
     box-shadow: 0 0 0 0.25rem rgba(110, 166, 101, 0.25) !important;
 }
 
-/* Selected dropdown items */
 .dropdown-item.active,
 .dropdown-item:active {
     background-color: #f8f9fa !important;
-    color: #6ea665 !important;  /* Light green text */
+    color: #6ea665 !important;
 }
 
-/* HEADING TEXT COLOR FIXES */
-/* Make all headings white on dark backgrounds */
 .card-header h1,
 .card-header h2,
 .card-header h3,
@@ -981,7 +887,6 @@ table.dataTable th,
     color: #ffffff !important;
 }
 
-/* Specific fix for page headers and section titles */
 .page-header,
 .section-header,
 .content-header,
@@ -994,7 +899,6 @@ table.dataTable th,
     color: #ffffff !important;
 }
 
-/* DataTables and table headers on dark backgrounds */
 .dataTables_wrapper .card-header,
 .table-container .card-header,
 .data-card .card-header {
@@ -1007,14 +911,12 @@ table.dataTable th,
     color: #ffffff !important;
 }
 
-/* Portal specific heading fixes */
 .portal-page-title,
 .portal-section-title,
 .portal-card-title {
     color: #ffffff !important;
 }
 
-/* Override any blue heading colors */
 h1[style*="color: blue"],
 h2[style*="color: blue"],
 h3[style*="color: blue"],
@@ -1030,7 +932,6 @@ h6[style*="color: #007bff"] {
     color: #ffffff !important;
 }
 
-/* Ensure headings are visible on PBS colored backgrounds */
 .pbs-gradient-bg h1,
 .pbs-gradient-bg h2,
 .pbs-gradient-bg h3,
@@ -1040,8 +941,6 @@ h6[style*="color: #007bff"] {
     color: #ffffff !important;
 }
 
-/* DATATABLES DROPDOWN AND INPUT VISIBILITY FIXES */
-/* Fix "Show entries" dropdown and other DataTables controls */
 .dataTables_wrapper .dataTables_length select,
 .dataTables_wrapper .dataTables_length input,
 .dataTables_length select,
@@ -1049,9 +948,6 @@ h6[style*="color: #007bff"] {
     background-color: #ffffff !important;
     color: #2c3430 !important;
     border: 1px solid #a2acaa !important;
-    padding: 0.375rem 0.75rem !important;
-    border-radius: 0.375rem !important;
-    font-size: 0.875rem !important;
 }
 
 .dataTables_wrapper .dataTables_length select:focus,
@@ -1060,595 +956,20 @@ h6[style*="color: #007bff"] {
 .dataTables_length input:focus {
     border-color: #38403e !important;
     box-shadow: 0 0 0 0.2rem rgba(56, 64, 62, 0.25) !important;
-    background-color: #ffffff !important;
-    color: #2c3430 !important;
 }
 
-/* Fix DataTables wrapper text and labels */
 .dataTables_wrapper .dataTables_length,
 .dataTables_wrapper .dataTables_length label,
 .dataTables_length,
 .dataTables_length label {
     color: #2c3430 !important;
-    font-weight: 500 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
 }
 
-/* Fix alignment of "Show entries" control */
-.dataTables_wrapper .dataTables_length label {
-    margin-bottom: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    white-space: nowrap !important;
-}
-
-.dataTables_wrapper .dataTables_length select {
-    display: inline-block !important;
-    width: auto !important;
-    min-width: 70px !important;
-    margin: 0 !important;
-    vertical-align: middle !important;
-}
-
-/* Fix DataTables info text */
-.dataTables_wrapper .dataTables_info,
-.dataTables_info {
-    color: #616c66 !important;
-    font-size: 0.875rem !important;
-}
-
-/* Fix pagination text */
-.dataTables_wrapper .dataTables_paginate,
-.dataTables_paginate {
-    color: #2c3430 !important;
-}
-
-/* Fix search input visibility */
-.dataTables_wrapper .dataTables_filter input,
-.dataTables_filter input {
-    background-color: #ffffff !important;
-    color: #2c3430 !important;
-    border: 1px solid #a2acaa !important;
-    padding: 0.375rem 0.75rem !important;
-    border-radius: 0.375rem !important;
-}
-
-.dataTables_wrapper .dataTables_filter label,
-.dataTables_filter label {
-    color: #2c3430 !important;
-    font-weight: 500 !important;
-}
-
-/* Fix any select elements that might be invisible */
-select.form-control,
-select.form-select,
-.form-control select,
-.form-select select {
-    background-color: #ffffff !important;
-    color: #2c3430 !important;
-    border: 1px solid #a2acaa !important;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
-}
-
-/* Fix option elements */
-select option {
-    background-color: #ffffff !important;
-    color: #2c3430 !important;
-}
-
-/* Additional fallback for any hidden text in DataTables */
-.dataTables_wrapper,
-.dataTables_wrapper * {
-    color: inherit !important;
-}
-
-.dataTables_wrapper .form-control,
-.dataTables_wrapper input,
-.dataTables_wrapper select,
-.dataTables_wrapper textarea {
-    background-color: #ffffff !important;
-    color: #2c3430 !important;
-    border: 1px solid #a2acaa !important;
-}
-
-/* PAGINATION ARROW FIXES */
-/* Fix pagination arrows display and styling */
-.pagination {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 0.125rem !important;
-    margin: 1rem 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    width: 100% !important;
-}
-
-.pagination .page-item {
-    margin: 0 !important;
-    flex-shrink: 0 !important;
-    display: inline-flex !important;
-}
-
-.pagination .page-link {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-    border: 1px solid #a2acaa !important;
-    padding: 0 !important;
-    margin: 0 1px !important;
-    border-radius: 0.375rem !important;
-    font-size: 0.75rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: 32px !important;
-    height: 32px !important;
-    text-decoration: none !important;
-    line-height: 1 !important;
-}
-
-.pagination .page-link:hover {
-    background-color: #f8f9fa !important;
-    color: #2c3430 !important;
-    border-color: #38403e !important;
-}
-
-.pagination .page-item.active .page-link {
-    background-color: #38403e !important;
-    color: #ffffff !important;
-    border-color: #38403e !important;
-}
-
-.pagination .page-item.disabled .page-link {
-    background-color: #f8f9fa !important;
-    color: #a2acaa !important;
-    border-color: #dce2e1 !important;
-    cursor: not-allowed !important;
-}
-
-/* Fix arrow symbols with proper content */
-.pagination .page-link[aria-label*="Previous"],
-.pagination .page-link[rel="prev"],
-.pagination .page-link:contains("Previous") {
-    min-width: 80px !important;
-    position: relative !important;
-}
-
-.pagination .page-link[aria-label*="Next"],
-.pagination .page-link[rel="next"],
-.pagination .page-link:contains("Next") {
-    min-width: 80px !important;
-    position: relative !important;
-}
-
-/* Ensure arrow content is visible and properly positioned */
-.pagination .page-link[aria-label*="Previous"]:before,
-.pagination .page-link[rel="prev"]:before {
-    content: "Previous" !important;
-    font-size: 0.75rem !important;
-    font-weight: 500 !important;
-    line-height: 1 !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    text-align: center !important;
-}
-
-.pagination .page-link[aria-label*="Next"]:before,
-.pagination .page-link[rel="next"]:before {
-    content: "Next" !important;
-    font-size: 0.75rem !important;
-    font-weight: 500 !important;
-    line-height: 1 !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    text-align: center !important;
-}
-
-/* Hide default text and icons in arrow links */
-.pagination .page-link[aria-label*="Previous"] *,
-.pagination .page-link[aria-label*="Next"] *,
-.pagination .page-link[rel="prev"] *,
-.pagination .page-link[rel="next"] * {
-    display: none !important;
-}
-
-/* Show our custom content */
-.pagination .page-link[aria-label*="Previous"]:before,
-.pagination .page-link[aria-label*="Next"]:before,
-.pagination .page-link[rel="prev"]:before,
-.pagination .page-link[rel="next"]:before {
-    display: flex !important;
-}
-
-/* Laravel pagination specific fixes */
-.pagination-wrapper {
-    width: 100% !important;
-    overflow: hidden !important;
-    padding: 0.5rem 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-}
-
-.pagination-wrapper .pagination {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    margin: 0 !important;
-    white-space: nowrap !important;
-    align-items: center !important;
-}
-
-/* Ensure pagination fits in container */
-.pagination {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow: hidden !important;
-    max-width: 100% !important;
-    justify-content: center !important;
-    margin: 0.5rem 0 !important;
-    white-space: nowrap !important;
-}
-
-.pagination .page-item {
-    flex-shrink: 0 !important;
-    margin: 0 !important;
-    display: inline-block !important;
-}
-
-.pagination .page-link {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: 32px !important;
-    height: 32px !important;
-    padding: 0 !important;
-    text-align: center !important;
-    font-size: 0.875rem !important;
-    position: relative !important;
-    white-space: nowrap !important;
-    margin: 0 1px !important;
-}
-
-/* Responsive pagination */
-@media (max-width: 768px) {
-    .pagination .page-link {
-        min-width: 28px !important;
-        height: 28px !important;
-        font-size: 0.75rem !important;
-    }
-    
-    .pagination .page-link[aria-label*="Previous"],
-    .pagination .page-link[aria-label*="Next"],
-    .pagination .page-link[rel="prev"],
-    .pagination .page-link[rel="next"] {
-        min-width: 32px !important;
-    }
-    
-    /* Hide middle page numbers on mobile to prevent overflow */
-    .pagination .page-item:not(.active):not(:first-child):not(:last-child):not(:nth-child(2)):not(:nth-last-child(2)) {
-        display: none !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .pagination .page-link {
-        min-width: 24px !important;
-        height: 24px !important;
-        font-size: 0.7rem !important;
-    }
-    
-    /* Show only prev, current, next on very small screens */
-    .pagination .page-item:not(.active):not(:first-child):not(:last-child) {
-        display: none !important;
-    }
-}
-
-/* Fix pagination container */
-.pagination-container {
-    margin-top: 1rem !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    overflow: visible !important;
-}
-
-/* DataTables pagination overrides */
-.dataTables_paginate {
-    margin-top: 1rem !important;
-    display: flex !important;
-    justify-content: flex-end !important;
-    align-items: center !important;
-    width: 100% !important;
-    overflow: hidden !important;
-}
-
-.dataTables_paginate .pagination {
-    justify-content: flex-end !important;
-    margin: 0 !important;
-    flex-wrap: nowrap !important;
-    overflow: hidden !important;
-}
-
-/* DataTables wrapper overflow fix */
-.dataTables_wrapper {
-    overflow-x: auto !important;
-    width: 100% !important;
-}
-
-.dataTables_wrapper .row {
-    margin: 0 !important;
-}
-
-.dataTables_wrapper .col-md-6 {
-    padding: 0.5rem !important;
-}
-
-/* DataTables length and info styling */
-.dataTables_length,
-.dataTables_info {
-    margin-bottom: 0.5rem !important;
-}
-
-.dataTables_length select {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-    border: 1px solid #dce2e1 !important;
-    border-radius: 0.25rem !important;
-    padding: 0.25rem 1.5rem 0.25rem 0.5rem !important;
-    min-width: 60px !important;
-}
-
-.dataTables_length select:focus {
-    border-color: #616c66 !important;
-    box-shadow: 0 0 0 0.2rem rgba(97, 108, 102, 0.25) !important;
-}
-
-/* DataTables search input */
-.dataTables_filter input {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-    border: 1px solid #dce2e1 !important;
-    border-radius: 0.25rem !important;
-    padding: 0.25rem 0.5rem !important;
-    margin-left: 0.5rem !important;
-}
-
-.dataTables_filter input:focus {
-    border-color: #616c66 !important;
-    box-shadow: 0 0 0 0.2rem rgba(97, 108, 102, 0.25) !important;
-    outline: none !important;
-}
-
-/* DataTables responsive adjustments */
-@media (max-width: 768px) {
-    .dataTables_wrapper .row {
-        flex-direction: column !important;
-    }
-    
-    .dataTables_wrapper .col-md-6 {
-        width: 100% !important;
-        text-align: center !important;
-    }
-    
-    .dataTables_paginate {
-        justify-content: center !important;
-    }
-    
-    .dataTables_length,
-    .dataTables_filter {
-        margin-bottom: 0.5rem !important;
-        text-align: center !important;
-    }
-}
-
-/* General pagination container fixes */
-div[class*="pagination"] {
-    overflow: hidden !important;
-    width: 100% !important;
-}
-
-/* Fix any pagination in card bodies or similar containers */
-.card-body .pagination,
-.content .pagination,
-.main-content .pagination {
-    margin: 1rem 0 !important;
-    justify-content: center !important;
-}
-
-/* Ensure all pagination arrows work consistently */
-.pagination .page-link:empty:before {
-    content: attr(aria-label) !important;
-    font-size: 0.875rem !important;
-}
-
-/* Fix for Laravel pagination links wrapper */
-nav[role="navigation"] {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-    margin: 1rem 0 !important;
-}
-
-nav[role="navigation"] .pagination {
-    margin: 0 !important;
-}
-
-/* Ensure pagination doesn't break layout */
-.table-responsive + nav,
-.table + nav,
-table + nav {
-    margin-top: 1rem !important;
-    width: 100% !important;
-}
-
-/* FORCE HORIZONTAL PAGINATION LAYOUT */
-/* Override any wrapping behavior for pagination */
-.pagination,
-ul.pagination,
-nav .pagination,
-.pagination-wrapper .pagination {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    justify-content: center !important;
-    overflow: visible !important;
-    white-space: nowrap !important;
-    width: auto !important;
-    margin: 1rem auto !important;
-}
-
-.pagination .page-item,
-ul.pagination .page-item,
-nav .pagination .page-item {
-    display: inline-block !important;
-    float: none !important;
-    clear: none !important;
-    flex-shrink: 0 !important;
-    margin: 0 1px !important;
-}
-
-.pagination .page-link,
-ul.pagination .page-link,
-nav .pagination .page-link {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    float: none !important;
-    clear: none !important;
-    width: 36px !important;
-    height: 36px !important;
-    line-height: 1 !important;
-    text-align: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Ensure containers don't break the horizontal layout */
-nav[role="navigation"],
-.pagination-container,
-.pagination-wrapper {
-    overflow: visible !important;
-    width: 100% !important;
-    text-align: center !important;
-}
-
-/* HIDE PAGINATION ARROWS ON BLOG ARTICLES PAGE */
-/* Hide only the previous/next arrow buttons, keep page numbers */
-.pagination .page-link[aria-label*="Previous"],
-.pagination .page-link[aria-label*="Next"],
-.pagination .page-link[rel="prev"],
-.pagination .page-link[rel="next"] {
-    display: none !important;
-}
-
-/* Property Management Form Styling */
-/* Consistent white background with dark green text for all form inputs */
-.property-form-input {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-    border: 1px solid #a2acaa !important;
-    font-weight: 500 !important;
-}
-
-.property-form-input:focus {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-    border-color: #38403e !important;
-    box-shadow: 0 0 0 0.2rem rgba(56, 64, 62, 0.25) !important;
-    font-weight: 700 !important;
-}
-
-/* Select2 dropdown customization for property forms */
-.select2-container--default.property-form-input .select2-selection--single {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-    border: 1px solid #a2acaa !important;
-    font-weight: 500 !important;
-   
-    line-height: 36px !important;
-}
-
-.select2-container--default.property-form-input .select2-selection--single .select2-selection__rendered {
-    color: #38403e !important;
-    font-weight: 500 !important;
-    padding-left: 12px !important;
-    padding-right: 20px !important;
-}
-
-.select2-container--default.property-form-input .select2-selection--single .select2-selection__arrow {
-    height: 36px !important;
-    right: 10px !important;
-}
-
-.select2-container--default.property-form-input .select2-selection--single .select2-selection__arrow b {
-    border-color: #38403e transparent transparent transparent !important;
-    border-width: 6px 4px 0 4px !important;
-}
-
-.select2-container--default.property-form-input.select2-container--open .select2-selection--single .select2-selection__arrow b {
-    border-color: transparent transparent #38403e transparent !important;
-    border-width: 0 4px 6px 4px !important;
-}
-
-.select2-container--default.property-form-input.select2-container--focus .select2-selection--single {
-    border-color: #38403e !important;
-    box-shadow: 0 0 0 0.2rem rgba(56, 64, 62, 0.25) !important;
-}
-
-/* Select2 dropdown options styling */
-.select2-dropdown.property-form-dropdown {
-    background-color: #ffffff !important;
-    border: 1px solid #38403e !important;
-}
-
-.select2-dropdown.property-form-dropdown .select2-results__option {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-    font-weight: 500 !important;
-}
-
-.select2-dropdown.property-form-dropdown .select2-results__option--highlighted {
-    background-color: #38403e !important;
-    color: #ffffff !important;
-}
-
-.select2-dropdown.property-form-dropdown .select2-results__option[aria-selected="true"] {
-    background-color: #a2acaa !important;
-    color: #38403e !important;
-}
-
-/* Remove inconsistent arrows and styling from other form elements */
-.property-form-input option {
-    background-color: #ffffff !important;
-    color: #38403e !important;
-}
-
-/* Thinner scrollbars for all tables and containers */
 * {
     scrollbar-width: thin !important;
     scrollbar-color: #a2acaa #dce2e1 !important;
 }
 
-/* Webkit scrollbar customization */
 ::-webkit-scrollbar {
     width: 4px !important;
     height: 4px !important;
@@ -1667,8 +988,6 @@ nav[role="navigation"],
     background: #38403e !important;
 }
 
-/* SIDEBAR CONTENT WIDTH AND HOVER FIXES */
-/* Reduce sidebar content width to prevent truncation */
 .sidebar .nav-sidebar .nav-link,
 .main-sidebar .nav-sidebar .nav-link,
 .sidebar-dark-primary .nav-sidebar .nav-link {
@@ -1677,33 +996,31 @@ nav[role="navigation"],
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: 200px !important; /* Reduced max-width */
-    margin-bottom: 4px !important; /* Add margin between menu items */
+    max-width: 200px !important;
+    margin-bottom: 4px !important;
 }
 
-/* Reduce hover highlight to prevent overlap */
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover {
     background-color: rgba(80, 89, 85, 0.7) !important;
-    margin-right: 10px !important; /* Increased margin to prevent cutoff */
+    margin-right: 10px !important;
     margin-bottom: 4px !important;
     border-radius: 4px !important;
 }
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
     background-color: rgba(97, 108, 102, 0.8) !important;
-    margin-right: 10px !important; /* Increased margin to prevent cutoff */
+    margin-right: 10px !important;
     margin-bottom: 4px !important;
     border-radius: 4px !important;
 }
 
-/* Remove horizontal scrollbar from sidebar completely */
 .sidebar,
 .main-sidebar,
 .sidebar-dark-primary {
     overflow-x: hidden !important;
     overflow-y: auto !important;
-    width: 260px !important; /* Fixed width */
-    background-color: #38403e !important; /* Ensure consistent background */
+    width: 260px !important;
+    background-color: #38403e !important;
 }
 
 .sidebar .sidebar-menu,
@@ -1713,12 +1030,11 @@ nav[role="navigation"],
 .main-sidebar .nav-sidebar,
 .sidebar-dark-primary .nav-sidebar {
     overflow-x: hidden !important;
-    width: 240px !important; /* Match sidebar width exactly */
-    padding-right: 8px !important; /* Add padding to prevent border cutoff */
-    background-color: #38403e !important; /* Consistent background */
+    width: 240px !important;
+    padding-right: 8px !important;
+    background-color: #38403e !important;
 }
 
-/* Ensure sidebar content doesn't cause horizontal scroll */
 .sidebar *,
 .main-sidebar *,
 .sidebar-dark-primary * {
@@ -1726,7 +1042,6 @@ nav[role="navigation"],
     box-sizing: border-box !important;
 }
 
-/* Additional sidebar link constraints */
 .sidebar .nav-link,
 .main-sidebar .nav-link,
 .sidebar-dark-primary .nav-link {
@@ -1734,34 +1049,31 @@ nav[role="navigation"],
     word-break: break-word !important;
 }
 
-/* Additional sidebar container fixes */
 .wrapper .main-sidebar {
-    width: 240px !important; /* Fixed width to match sidebar */
+    width: 240px !important;
     max-width: 240px !important;
     overflow-x: hidden !important;
-    background-color: #38403e !important; /* Consistent background */
+    background-color: #38403e !important;
 }
 
 .sidebar-dark-primary .nav-sidebar .nav-item {
     width: 100% !important;
     max-width: 100% !important;
-    margin-bottom: 2px !important; /* Add spacing between nav items */
+    margin-bottom: 2px !important;
 }
 
-/* Ensure sidebar brand and user sections don't overflow and match width */
 .main-sidebar .brand-link,
 .main-sidebar .user-panel {
-    width: 240px !important; /* Match sidebar width exactly */
+    width: 240px !important;
     max-width: 240px !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
-    padding-right: 10px !important; /* Add padding to prevent cutoff */
-    background-color: #38403e !important; /* Consistent background */
+    padding-right: 10px !important;
+    background-color: #38403e !important;
     box-sizing: border-box !important;
 }
 
-/* Fix brand link specifically to remove any gaps */
 .main-sidebar .brand-link {
     margin: 0 !important;
     padding: 0.8125rem 1rem !important;
@@ -1770,13 +1082,11 @@ nav[role="navigation"],
     border-bottom: none !important;
 }
 
-/* Remove any gaps between brand area and navigation */
 .main-sidebar .sidebar {
     padding-top: 0 !important;
     margin-top: 0 !important;
 }
 
-/* Ensure consistent background for all sidebar elements */
 .sidebar-dark-primary,
 .sidebar-dark-primary .brand-link,
 .sidebar-dark-primary .nav-sidebar,
@@ -1784,7 +1094,6 @@ nav[role="navigation"],
     background-color: #38403e !important;
 }
 
-/* Fix any potential wrapper gaps */
 .wrapper {
     overflow-x: hidden !important;
 }
@@ -1794,44 +1103,36 @@ nav[role="navigation"],
     z-index: 1000 !important;
 }
 
-/* CONTENT WRAPPER GAP FIX */
-/* Ensure content wrapper aligns perfectly with sidebar */
 .content-wrapper {
-    margin-left: 240px !important; /* Match sidebar width exactly */
-    padding-left: 0 !important; /* Remove any padding that creates gaps */
-    border-left: none !important; /* Remove any border that creates lines */
+    margin-left: 240px !important;
+    padding-left: 0 !important;
+    border-left: none !important;
 }
 
-/* Ensure no gaps in body layout */
 body:not(.sidebar-collapse) .content-wrapper {
     margin-left: 240px !important;
 }
 
-/* Handle collapsed sidebar state */
 body.sidebar-collapse .content-wrapper {
-    margin-left: 4.6rem !important; /* Standard AdminLTE collapsed width */
+    margin-left: 4.6rem !important;
 }
 
-/* Remove any potential gaps or borders */
 .main-sidebar,
 .content-wrapper {
     border: none !important;
     box-shadow: none !important;
 }
 
-/* Ensure wrapper has no gaps */
 .wrapper {
     padding: 0 !important;
     margin: 0 !important;
 }
 
-/* Remove any AdminLTE default borders/shadows that create visual gaps */
 .main-sidebar {
     border-right: none !important;
     box-shadow: none !important;
 }
 
-/* Override AdminLTE elevation classes completely */
 .main-sidebar.elevation-1,
 .main-sidebar.elevation-2,
 .main-sidebar.elevation-3,
@@ -1846,7 +1147,6 @@ body.sidebar-collapse .content-wrapper {
     background-color: #f8f9fa !important;
 }
 
-/* Ensure there's no gap between sidebar and main content on any screen size */
 @media (min-width: 768px) {
     .content-wrapper {
         margin-left: 240px !important;
@@ -1857,13 +1157,11 @@ body.sidebar-collapse .content-wrapper {
     }
 }
 
-/* Force remove any transitions that might create visual gaps */
 .main-sidebar,
 .content-wrapper {
     transition: none !important;
 }
 
-/* Ensure perfect alignment between sidebar and content */
 .main-sidebar {
     position: fixed !important;
     left: 0 !important;
@@ -1871,14 +1169,12 @@ body.sidebar-collapse .content-wrapper {
     z-index: 1000 !important;
 }
 
-/* Force content wrapper to start exactly where sidebar ends */
 .content-wrapper {
     position: relative !important;
     left: 0 !important;
     width: calc(100% - 240px) !important;
 }
 
-/* Remove any potential white space or gaps */
 body {
     margin: 0 !important;
     padding: 0 !important;
@@ -1890,7 +1186,6 @@ body {
     overflow-x: hidden !important;
 }
 
-/* Handle all AdminLTE body states for sidebar positioning */
 body.sidebar-mini-md:not(.sidebar-collapse) .content-wrapper,
 body.sidebar-mini-xs:not(.sidebar-collapse) .content-wrapper,
 body.sidebar-mini:not(.sidebar-collapse) .content-wrapper,
@@ -1902,7 +1197,6 @@ body.sidebar-collapse .content-wrapper {
     margin-left: 4.6rem !important;
 }
 
-/* Additional specificity for fixing the gap */
 html body .wrapper .main-sidebar {
     width: 240px !important;
     position: fixed !important;
@@ -1918,82 +1212,16 @@ html body .wrapper .content-wrapper {
     position: relative !important;
 }
 
-/* Ensure navbar stays aligned with content */
 .main-header.navbar {
     margin-left: 240px !important;
     width: calc(100% - 240px) !important;
 }
 
 body.sidebar-collapse .main-header.navbar {
-    margin-left: 4.6rem !important; /* Start after collapsed sidebar */
-    width: calc(100% - 4.6rem) !important; /* Adjust width accordingly */
+    margin-left: 4.6rem !important;
+    width: calc(100% - 4.6rem) !important;
 }
 
-/* Additional DataTables pagination spacing improvements */
-.dataTables_wrapper .dataTables_paginate .paginate_button.current {
-    margin: 0 2px !important;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    background-color: #38403e !important;
-    border-color: #38403e !important;
-}
-
-/* Ensure proper gap between pagination highlights */
-.dataTables_wrapper .dataTables_paginate .paginate_button:not(.previous):not(.next) {
-    margin: 0 1px !important;
-}
-
-/* PAGINATION BUTTON FIXES */
-/* Override DataTables pagination button hover to remove gray background */
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: #38403e !important;
-    color: white !important;
-    border-color: #38403e !important;
-}
-
-/* Make Previous/Next buttons consistent width and remove gray hover */
-.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
-.dataTables_wrapper .dataTables_paginate .paginate_button.next {
-    min-width: 80px !important;
-    max-width: 80px !important;
-    width: 80px !important;
-    text-align: center !important;
-    padding: 0.375rem 0.5rem !important;
-    box-sizing: border-box !important;
-}
-
-/* Override any Bootstrap pagination styles that might interfere */
-.pagination .page-link:hover {
-    background-color: #38403e !important;
-    color: white !important;
-    border-color: #38403e !important;
-}
-
-/* Make Previous/Next buttons consistent width and remove gray hover */
-.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
-.dataTables_wrapper .dataTables_paginate .paginate_button.next {
-    min-width: 80px !important;
-    max-width: 80px !important;
-    width: 80px !important;
-    text-align: center !important;
-    padding: 0.375rem 0.5rem !important;
-    box-sizing: border-box !important;
-}
-
-/* Override any Bootstrap pagination styles that might interfere */
-.pagination .page-link:hover {
-    background-color: #38403e !important;
-    color: white !important;
-    border-color: #38403e !important;
-}
-
-/* =============================================== */
-/* COLLAPSED SIDEBAR FUNCTIONALITY - SPECIFIC FIX */
-/* =============================================== */
-/* ONLY affects collapsed state - preserves expanded sidebar */
-
-/* Collapsed sidebar: thin green strip with icon only */
 body.sidebar-collapse .main-sidebar,
 body.sidebar-mini.sidebar-collapse .main-sidebar {
     width: 4.6rem !important;
@@ -2009,26 +1237,23 @@ body.sidebar-mini.sidebar-collapse .main-sidebar {
     overflow: hidden !important;
 }
 
-/* Navbar positioning when sidebar is collapsed - starts after logo strip */
 body.sidebar-collapse .main-header.navbar,
 body.sidebar-mini.sidebar-collapse .main-header.navbar {
-    margin-left: 4.6rem !important; /* Start after collapsed sidebar */
-    width: calc(100% - 4.6rem) !important; /* Adjust width accordingly */
+    margin-left: 4.6rem !important;
+    width: calc(100% - 4.6rem) !important;
     position: fixed !important;
     left: 0 !important;
     top: 0 !important;
     z-index: 1030 !important;
-    height: 60px !important; /* Same height as brand-link */
+    height: 60px !important;
     min-height: 60px !important;
 }
 
-/* Content wrapper positioning when sidebar is collapsed */
 body.sidebar-collapse .content-wrapper,
 body.sidebar-mini.sidebar-collapse .content-wrapper {
     margin-left: 4.6rem !important;
 }
 
-/* Navigation links in collapsed state - icons only */
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link,
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link {
     width: 100% !important;
@@ -2042,7 +1267,6 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link {
     overflow: hidden !important;
 }
 
-/* Hide all text content in collapsed state */
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link p,
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link p,
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link span:not(.nav-icon):not([class*="fa"]):not([class*="fas"]):not([class*="far"]):not([class*="fab"]),
@@ -2058,7 +1282,6 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link .brand-text {
     opacity: 0 !important;
 }
 
-/* Show only icons in collapsed state */
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-icon,
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-icon {
     margin: 0 !important;
@@ -2069,13 +1292,12 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-ico
     text-align: center !important;
 }
 
-/* Brand area in collapsed state - logo only */
 body.sidebar-collapse .main-sidebar .brand-link,
 body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link {
     width: 4.6rem !important;
     padding: 0.8rem 0 !important;
     text-align: center !important;
-    height: 60px !important; /* Same height as navbar */
+    height: 60px !important;
     min-height: 60px !important;
     display: flex !important;
     justify-content: center !important;
@@ -2084,22 +1306,21 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    z-index: 1040 !important; /* Above navbar */
-    visibility: visible !important; /* Ensure always visible */
-    opacity: 1 !important; /* Ensure not transparent */
-    background-color: #38403e !important; /* Match sidebar background */
+    z-index: 1040 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background-color: #38403e !important;
 }
 
 body.sidebar-collapse .main-sidebar .brand-link .brand-image,
 body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link .brand-image {
     width: 2rem !important;
     height: 2rem !important;
-    margin: 0 auto !important; /* Center the logo */
+    margin: 0 auto !important;
     display: block !important;
     flex-shrink: 0 !important;
 }
 
-/* Hide brand text in collapsed state */
 body.sidebar-collapse .main-sidebar .brand-link *:not(.brand-image):not(img),
 body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link *:not(.brand-image):not(img) {
     display: none !important;
@@ -2107,20 +1328,15 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link *:not(.brand-image)
     opacity: 0 !important;
 }
 
-/* No hover effects for collapsed icons */
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover,
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover {
     background-color: transparent !important;
     margin: 0 !important;
-    margin-right: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 0 !important;
     padding: 0rem 0 !important;
     transition: none !important;
     transform: none !important;
 }
 
-/* Completely disable all hover effects, margins, padding changes, and transitions for collapsed sidebar */
 body.sidebar-collapse .main-sidebar *,
 body.sidebar-mini.sidebar-collapse .main-sidebar *,
 body.sidebar-collapse .main-sidebar *:hover,
@@ -2135,7 +1351,6 @@ body.sidebar-mini.sidebar-collapse .main-sidebar *:focus {
     outline: none !important;
 }
 
-/* Specifically target nav-link hover states to remove all effects */
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link,
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover,
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:focus,
@@ -2154,7 +1369,6 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:active {
     outline: none !important;
 }
 
-/* Ensure nav-icons don't change on hover */
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-icon,
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover .nav-icon,
 body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:focus .nav-icon,
@@ -2163,7 +1377,7 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-ico
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover .nav-icon,
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:focus .nav-icon,
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:active .nav-icon {
-    color: #c2c7d0 !important; /* Keep consistent color */
+    color: #c2c7d0 !important;
     background-color: transparent !important;
     transition: none !important;
     transform: none !important;
@@ -2172,38 +1386,33 @@ body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:active .
     outline: none !important;
 }
 
-/* Push navigation content below brand-link in collapsed state */
 body.sidebar-collapse .main-sidebar .nav-sidebar,
 body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar {
-    padding-top: 60px !important; /* Same height as brand-link to push content below */
+    padding-top: 60px !important;
     margin-top: 0 !important;
 }
 
-/* Ensure brand-link is part of the collapsed sidebar layout */
 body.sidebar-collapse .main-sidebar .brand-link,
 body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; /* Subtle separator line */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Ensure the sidebar container accommodates the brand-link */
 body.sidebar-collapse .main-sidebar,
 body.sidebar-mini.sidebar-collapse .main-sidebar {
-    padding-top: 0 !important; /* No extra padding at top */
+    padding-top: 0 !important;
 }
 
-/* Fix burger icon (sidebar toggle) positioning and dimensions in collapsed mode */
 body.sidebar-collapse .navbar-nav [data-widget="pushmenu"],
 body.sidebar-mini.sidebar-collapse .navbar-nav [data-widget="pushmenu"] {
-    padding: 0.3rem 0.5rem !important; /* Reduce padding */
-    font-size: 0.9rem !important; /* Reduce icon size */
-    margin: 0.2rem 0 !important; /* Reduce overall height */
-    line-height: 1.2 !important; /* Tighter line height */
-    position: relative !important; /* Ensure proper positioning */
-    left: 0 !important; /* Reset any left positioning */
-    transform: none !important; /* Remove any transforms */
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.9rem !important;
+    margin: 0.2rem 0 !important;
+    line-height: 1.2 !important;
+    position: relative !important;
+    left: 0 !important;
+    transform: none !important;
 }
 
-/* Ensure navbar content starts properly after collapsed sidebar */
 body.sidebar-collapse .main-header .navbar-nav .nav-link,
 body.sidebar-mini.sidebar-collapse .main-header .navbar-nav .nav-link {
     display: flex !important;
@@ -2213,14 +1422,12 @@ body.sidebar-mini.sidebar-collapse .main-header .navbar-nav .nav-link {
     height: 40px !important;
 }
 
-/* Ensure burger icon is properly positioned from initial load in collapsed state */
 body.sidebar-collapse .main-header,
 body.sidebar-mini.sidebar-collapse .main-header {
     margin-left: 4.6rem !important;
     width: calc(100% - 4.6rem) !important;
 }
 
-/* Force proper burger icon positioning at all times in collapsed state */
 body.sidebar-collapse [data-widget="pushmenu"],
 body.sidebar-mini.sidebar-collapse [data-widget="pushmenu"] {
     position: relative !important;
@@ -2230,28 +1437,21 @@ body.sidebar-mini.sidebar-collapse [data-widget="pushmenu"] {
     padding: 0.3rem 0.5rem !important;
     font-size: 0.9rem !important;
     line-height: 1.2 !important;
-    z-index: 1050 !important; /* Ensure it's visible */
+    z-index: 1050 !important;
 }
 
-/* =============================================== */
-/* EXPANDED SIDEBAR - NAVIGATION MARGIN FIX */
-/* =============================================== */
-/* Add top margin for navigation content in expanded state to account for logo strip */
-
-/* Expanded sidebar - add top margin for navigation content to account for logo strip */
 body:not(.sidebar-collapse) .main-sidebar .nav-sidebar,
 body:not(.sidebar-mini.sidebar-collapse) .main-sidebar .nav-sidebar {
-    padding-top: 60px !important; /* Add top margin equal to logo strip height */
+    padding-top: 60px !important;
     margin-top: 0 !important;
 }
 
-/* Ensure logo strip is visible and fixed at top in expanded state */
 body:not(.sidebar-collapse) .main-sidebar .brand-link,
 body:not(.sidebar-mini.sidebar-collapse) .main-sidebar .brand-link {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 240px !important; /* Use full sidebar width */
+    width: 240px !important;
     height: 60px !important;
     z-index: 1040 !important;
     background-color: #38403e !important;
