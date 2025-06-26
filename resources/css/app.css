@@ -1925,8 +1925,8 @@ html body .wrapper .content-wrapper {
 }
 
 body.sidebar-collapse .main-header.navbar {
-    margin-left: 4.6rem !important;
-    width: calc(100% - 4.6rem) !important;
+    margin-left: 4.6rem !important; /* Start after collapsed sidebar */
+    width: calc(100% - 4.6rem) !important; /* Adjust width accordingly */
 }
 
 /* Additional DataTables pagination spacing improvements */
@@ -1970,15 +1970,223 @@ body.sidebar-collapse .main-header.navbar {
     border-color: #38403e !important;
 }
 
-.pagination .page-item .page-link {
-    background-color: white !important;
-    color: #38403e !important;
-    border: 1px solid #dee2e6 !important;
+/* Make Previous/Next buttons consistent width and remove gray hover */
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    min-width: 80px !important;
+    max-width: 80px !important;
+    width: 80px !important;
+    text-align: center !important;
+    padding: 0.375rem 0.5rem !important;
+    box-sizing: border-box !important;
 }
 
-.pagination .page-item.active .page-link {
+/* Override any Bootstrap pagination styles that might interfere */
+.pagination .page-link:hover {
     background-color: #38403e !important;
     color: white !important;
     border-color: #38403e !important;
 }
 
+/* =============================================== */
+/* COLLAPSED SIDEBAR FUNCTIONALITY - SPECIFIC FIX */
+/* =============================================== */
+/* ONLY affects collapsed state - preserves expanded sidebar */
+
+/* Collapsed sidebar: thin green strip with icon only */
+body.sidebar-collapse .main-sidebar,
+body.sidebar-mini.sidebar-collapse .main-sidebar {
+    width: 4.6rem !important;
+    background-color: #38403e !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+    overflow: hidden !important;
+}
+
+/* Navbar positioning when sidebar is collapsed - starts after logo strip */
+body.sidebar-collapse .main-header.navbar,
+body.sidebar-mini.sidebar-collapse .main-header.navbar {
+    margin-left: 4.6rem !important; /* Start after collapsed sidebar */
+    width: calc(100% - 4.6rem) !important; /* Adjust width accordingly */
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 1030 !important;
+    height: 60px !important; /* Same height as brand-link */
+    min-height: 60px !important;
+}
+
+/* Content wrapper positioning when sidebar is collapsed */
+body.sidebar-collapse .content-wrapper,
+body.sidebar-mini.sidebar-collapse .content-wrapper {
+    margin-left: 4.6rem !important;
+}
+
+/* Navigation links in collapsed state - icons only */
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link {
+    width: 100% !important;
+    padding: 0.8rem 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 50px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Hide all text content in collapsed state */
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link p,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link p,
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link span:not(.nav-icon):not([class*="fa"]):not([class*="fas"]):not([class*="far"]):not([class*="fab"]),
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link span:not(.nav-icon):not([class*="fa"]):not([class*="fas"]):not([class*="far"]):not([class*="fab"]),
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .right,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .right,
+body.sidebar-collapse .main-sidebar .user-panel .info,
+body.sidebar-mini.sidebar-collapse .main-sidebar .user-panel .info,
+body.sidebar-collapse .main-sidebar .brand-link .brand-text,
+body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link .brand-text {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Show only icons in collapsed state */
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-icon,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-icon {
+    margin: 0 !important;
+    font-size: 1.2rem !important;
+    color: #c2c7d0 !important;
+    display: block !important;
+    width: auto !important;
+    text-align: center !important;
+}
+
+/* Brand area in collapsed state - logo only */
+body.sidebar-collapse .main-sidebar .brand-link,
+body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link {
+    width: 4.6rem !important;
+    padding: 0.8rem 0 !important;
+    text-align: center !important;
+    height: 60px !important; /* Same height as navbar */
+    min-height: 60px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1040 !important; /* Above navbar */
+    visibility: visible !important; /* Ensure always visible */
+    opacity: 1 !important; /* Ensure not transparent */
+    background-color: #38403e !important; /* Match sidebar background */
+}
+
+body.sidebar-collapse .main-sidebar .brand-link .brand-image,
+body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link .brand-image {
+    width: 2rem !important;
+    height: 2rem !important;
+    margin: 0 auto !important; /* Center the logo */
+    display: block !important;
+    flex-shrink: 0 !important;
+}
+
+/* Hide brand text in collapsed state */
+body.sidebar-collapse .main-sidebar .brand-link *:not(.brand-image):not(img),
+body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link *:not(.brand-image):not(img) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* No hover effects for collapsed icons */
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover {
+    background-color: transparent !important;
+    margin: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    padding: 0rem 0 !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Completely disable all hover effects, margins, padding changes, and transitions for collapsed sidebar */
+body.sidebar-collapse .main-sidebar *,
+body.sidebar-mini.sidebar-collapse .main-sidebar *,
+body.sidebar-collapse .main-sidebar *:hover,
+body.sidebar-mini.sidebar-collapse .main-sidebar *:hover,
+body.sidebar-collapse .main-sidebar *:focus,
+body.sidebar-mini.sidebar-collapse .main-sidebar *:focus {
+    transition: none !important;
+    transform: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Specifically target nav-link hover states to remove all effects */
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link,
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover,
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:focus,
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:active,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:focus,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:active {
+    margin: 0 !important;
+    padding: 0rem 0 !important;
+    background-color: transparent !important;
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Ensure nav-icons don't change on hover */
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-icon,
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover .nav-icon,
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:focus .nav-icon,
+body.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:active .nav-icon,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link .nav-icon,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:hover .nav-icon,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:focus .nav-icon,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link:active .nav-icon {
+    color: #c2c7d0 !important; /* Keep consistent color */
+    background-color: transparent !important;
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Push navigation content below brand-link in collapsed state */
+body.sidebar-collapse .main-sidebar .nav-sidebar,
+body.sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar {
+    padding-top: 60px !important; /* Same height as brand-link to push content below */
+    margin-top: 0 !important;
+}
+
+/* Ensure brand-link is part of the collapsed sidebar layout */
+body.sidebar-collapse .main-sidebar .brand-link,
+body.sidebar-mini.sidebar-collapse .main-sidebar .brand-link {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; /* Subtle separator line */
+}
+
+/* Ensure the sidebar container accommodates the brand-link */
+body.sidebar-collapse .main-sidebar,
+body.sidebar-mini.sidebar-collapse .main-sidebar {
+    padding-top: 0 !important; /* No extra padding at top */
+}
