@@ -1218,12 +1218,18 @@ body.sidebar-collapse .content-wrapper {
 body {
     margin: 0 !important;
     padding: 0 !important;
+    background: white !important;
+    background-image: none !important;
+    background-color: white !important;
 }
 
 .wrapper {
     margin: 0 !important;
     padding: 0 !important;
     overflow-x: hidden !important;
+    background: white !important;
+    background-image: none !important;
+    background-color: white !important;
 }
 
 body.sidebar-mini-md:not(.sidebar-collapse) .content-wrapper,
@@ -1584,4 +1590,148 @@ body.sidebar-collapse .main-footer {
 
 .content-wrapper {
     flex: 1 !important; /* Take remaining space */
+}
+
+/* =============================================== */
+/* DATATABLES SEARCH ALIGNMENT & SCROLLBAR FIX */
+/* =============================================== */
+
+/* Fix search bar alignment with table right border */
+.dataTables_wrapper .dataTables_filter {
+    text-align: right !important;
+    margin-bottom: 1rem !important;
+    width: 100% !important;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    color: #2c3430 !important;
+    font-weight: 500 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #a2acaa !important;
+    background-color: #ffffff !important;
+    color: #2c3430 !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 0.375rem !important;
+    font-size: 0.875rem !important;
+    width: 250px !important; /* Fixed width for consistent alignment */
+    margin-left: 0.5rem !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: #38403e !important;
+    box-shadow: 0 0 0 0.2rem rgba(56, 64, 62, 0.25) !important;
+    background-color: #ffffff !important;
+    color: #2c3430 !important;
+    outline: none !important;
+}
+
+/* Force scrollbar to be available when content exceeds viewport */
+html {
+    height: 100% !important;
+}
+
+body {
+    height: 100% !important;
+    min-height: 100vh !important;
+}
+
+/* Ensure wrapper and content areas maintain proper scroll behavior */
+.wrapper {
+    min-height: 100vh !important;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 120px) !important; /* Account for navbar and footer */
+    height: auto !important;
+}
+
+/* Ensure table containers can scroll when needed */
+.dataTables_wrapper,
+.table-responsive {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+}
+
+/* Make sure main content area maintains scroll */
+.content {
+    overflow-y: auto !important;
+    min-height: calc(100vh - 140px) !important;
+}
+
+/* Sidebar scrollbar always visible when needed */
+.main-sidebar {
+    overflow-y: auto !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #a2acaa #38403e !important;
+}
+
+.main-sidebar::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.main-sidebar::-webkit-scrollbar-track {
+    background: #38403e !important;
+}
+
+.main-sidebar::-webkit-scrollbar-thumb {
+    background: #a2acaa !important;
+    border-radius: 3px !important;
+}
+
+.main-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #dce2e1 !important;
+}
+
+/* Force white background in collapsed sidebar state */
+body.sidebar-collapse {
+    background: white !important;
+    background-image: none !important;
+    background-color: white !important;
+}
+
+body.sidebar-collapse .wrapper {
+    background: white !important;
+    background-image: none !important;
+    background-color: white !important;
+}
+
+/* Ensure content wrapper has white background */
+body.sidebar-collapse .content-wrapper {
+    background: white !important;
+    background-image: none !important;
+    background-color: white !important;
+}
+
+/* Additional background override for AdminLTE */
+html, 
+html body {
+    background: white !important;
+    background-image: none !important;
+    background-color: white !important;
+}
+
+/* Override any potential AdminLTE background patterns */
+body.sidebar-collapse *:not(.main-sidebar):not(.main-sidebar *) {
+    background-image: none !important;
+}
+
+/* Specifically target the area below collapsed sidebar */
+body.sidebar-collapse .wrapper::after,
+body.sidebar-collapse .content-wrapper::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: white !important;
+    z-index: -1;
 }
