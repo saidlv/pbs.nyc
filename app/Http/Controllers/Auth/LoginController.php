@@ -51,9 +51,9 @@ class LoginController extends Controller
             return '/portal';
         }
         
-        // For non-admin users, check subscription status
+        // For Gold users (level 4), redirect to portal
         if ($user && $user->level() >= 4) {
-            return '/portal/dashboard';
+            return '/portal';
         }
         
         // For regular users, check if they have an active subscription
