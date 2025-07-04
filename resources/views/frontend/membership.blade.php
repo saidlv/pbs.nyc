@@ -3,8 +3,7 @@
 @php($pageTitle ='Filing Representation')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Join PBS NYC Membership for proactive property management, real-time alerts, and exclusive member benefits. Sign up to protect your property today.">
 @stop
 
 @section('css')

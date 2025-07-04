@@ -3,7 +3,7 @@
 @php($pageTitle ='Home Page')
 
 @section('meta')
-    {{--meta etiketleri--}}
+    <meta name="description" content="PBS NYC is your proactive property management and monitoring solution. Get real-time alerts, manage your property, and stay ahead with our all-in-one platform.">
 @stop
 
 

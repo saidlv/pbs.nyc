@@ -16,8 +16,8 @@ return [
     |
     */
 
-    'title' => 'PBS - Property Management Portal',
-    'title_prefix' => 'PBS - Property Management Portal | ',
+    'title' => 'PBS Portal',
+    'title_prefix' => '',
     'title_postfix' => '',
 
     /*

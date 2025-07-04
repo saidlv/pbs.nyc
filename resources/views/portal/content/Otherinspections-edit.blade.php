@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Other Inspections')
+@section('title', 'PBS Portal | Edit Other Inspection')
+@section('meta_description', 'Edit and update details for other property inspections in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', '331 - Service Requests')
+@section('title', 'PBS Portal | 311 Service Requests')
+@section('meta_description', 'Monitor and manage 311 service requests for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

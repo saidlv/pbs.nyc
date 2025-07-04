@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB Stop Work/Vacate Orders')
+@section('title', 'PBS Portal | DOB Stop Work/Vacate Orders')
+@section('meta_description', 'View and manage DOB Stop Work and Vacate Orders for your properties in the PBS Portal. Stay compliant and informed.')
 
 @section('plugins.Datatables', true)
 

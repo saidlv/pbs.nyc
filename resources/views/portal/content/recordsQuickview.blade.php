@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Records Quickview')
+@section('meta_description', 'Quickly access and review property records and compliance data in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

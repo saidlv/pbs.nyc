@@ -3,8 +3,7 @@
 @php($pageTitle ='Alerts')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="PBS NYC Alerts: Get real-time notifications for property violations, complaints, inspections, and compliance across all NYC departments. Stay informed and proactive.">
 @stop
 
 @section('css')

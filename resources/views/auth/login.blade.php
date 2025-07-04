@@ -29,6 +29,8 @@
     @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
 @endif
 
+@section('title', 'PBS Portal | Login')
+
 @section('body')
     <div class="login-box">
         <div class="login-logo">

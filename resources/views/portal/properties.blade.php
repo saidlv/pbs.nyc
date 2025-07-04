@@ -1,7 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Properties')
-
+@section('title', 'PBS Portal | Properties')
+@section('meta_description', 'Browse and manage your properties in the PBS Portal for efficient property management.')
 
 @section('content_header')
     <h1 class="m-0 text-dark">Properties</h1>

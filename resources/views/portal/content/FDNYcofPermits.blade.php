@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'FDNY COF PERMITS')
+@section('title', 'PBS Portal | FDNY COF Permits')
+@section('meta_description', 'Track and manage FDNY Certificate of Fitness (COF) permits for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -1,6 +1,8 @@
 @extends('adminlte::page')
 
 @section('meta_tags')
+    <title>@yield('title', 'PBS Portal')</title>
+    <meta name="description" content="@yield('meta_description', 'PBS Portal for property management, alerts, and more.')">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RW51TYX51S"></script>
     <script>

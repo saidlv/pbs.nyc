@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Calendar')
+@section('title', 'PBS Portal | Calendar')
+@section('meta_description', 'View and schedule important property management events and appointments in the PBS Portal calendar.')
 
 @section('plugins.Knob', true)
 

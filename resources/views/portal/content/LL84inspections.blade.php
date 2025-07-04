@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'LL84 Inspections')
+@section('title', 'PBS Portal | LL84 Inspections')
+@section('meta_description', 'Track and manage Local Law 84 (LL84) inspections for your properties in the PBS Portal.')
 
 @section('plugins.Knob', true)
 

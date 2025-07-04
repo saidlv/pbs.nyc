@@ -1,10 +1,9 @@
 @extends('frontend.master')
 
-@php($pageTitle ='Page Title')
+@php($pageTitle ='Page Template')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="PBS NYC page template. Customize this page for your property management needs and solutions.">
 @stop
 
 @section('css')

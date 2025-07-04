@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Settings')
+@section('title', 'PBS Portal | Settings')
+@section('meta_description', 'Manage your account, notification, and portal settings in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

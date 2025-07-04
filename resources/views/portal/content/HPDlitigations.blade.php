@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'HPD Housing Litigations')
+@section('title', 'PBS Portal | HPD Housing Litigations')
+@section('meta_description', 'Monitor and manage HPD housing litigations and legal cases for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

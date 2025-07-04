@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Facade Filings')
+@section('title', 'PBS Portal | Facade Filings')
+@section('meta_description', 'Track and manage facade inspection filings and compliance for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

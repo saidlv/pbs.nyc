@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'FDNY Inspections')
+@section('title', 'PBS Portal | FDNY Inspections')
+@section('meta_description', 'Monitor and manage FDNY inspections and fire safety compliance for your properties in the PBS Portal.')
 
 @section('plugins.Knob', true)
 

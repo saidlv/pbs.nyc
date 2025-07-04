@@ -3,8 +3,7 @@
 @php($pageTitle ='About Us')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Learn about Proactive Building Solutions (PBS NYC), our experienced team, and our mission to revolutionize property management in New York.">
 @stop
 
 @section('css')

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Settings')
+@section('title', 'PBS Portal | Edit Setting')
+@section('meta_description', 'Edit your account and portal settings in the PBS Portal.')
 
 @section('plugins.Summernote', true)
 

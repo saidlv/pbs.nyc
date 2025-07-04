@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB Violations')
+@section('title', 'PBS Portal | DOB Violations')
+@section('meta_description', 'Track, review, and manage Department of Buildings (DOB) violations for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -3,8 +3,7 @@
 @php($pageTitle ='Network')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Explore the PBS NYC network—connect with industry professionals, partners, and resources for comprehensive property management solutions.">
 @stop
 
 @section('css')
@@ -526,7 +525,7 @@
             {{--                                        <h4 class="text-white" style="font-size: 16px;">Bathroom Remodeling</h4>--}}
             {{--                                    </div>--}}
             {{--                                    <p class="" style="line-height: 26px;">Are you looking to renovate your bathroom but you--}}
-            {{--                                        don’t--}}
+            {{--                                        don't--}}
             {{--                                        know where to start? We are a fully licensed home builder that can make the bathroom of--}}
             {{--                                        your--}}
             {{--                                        dreams into reality.</p>--}}

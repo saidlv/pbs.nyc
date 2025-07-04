@@ -3,8 +3,7 @@
 @php($pageTitle ='Blog')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Read the latest articles and updates from PBS NYC. Stay informed about property management, compliance, and industry news in New York City.">
 @stop
 
 @section('css')

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Building Quickview')
+@section('title', 'PBS Portal | Building Quickview')
+@section('meta_description', 'Quickly view building details, compliance, and alerts for your properties in the PBS Portal.')
 @section('plugins.Datatables', true)
 
 {{--@section('css')--}}

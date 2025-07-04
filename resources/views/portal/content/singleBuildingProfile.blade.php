@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Building Profile')
+@section('meta_description', 'View detailed building profiles, compliance, and management information in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

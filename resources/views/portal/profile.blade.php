@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Profile')
+@section('meta_description', 'View and update your user profile, contact information, and preferences in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 
@@ -1215,96 +1216,6 @@
 
         $('#subscribealertbtn').on('click', function (e) {
             var route = "{{ route('add.property.to.user') }}";
-            var properties = [window.selecteddata];
-            var token = $('meta[name="csrf-token"]').attr('content');
-            $.post(route, {properties: properties, _token: token})
-                .done(function (data) {
-                    if (data === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            text: 'Successfully Added',
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                        location.reload();
-                    } else if (data === 'Email already in use.') {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: data,
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            text: 'An error occured.!',
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    }
-                })
-                .fail(function () {
-                    Swal.fire({
-                        icon: 'error',
-                        text: 'An error occured.!',
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
-                });
-            return false;
-        });
-
-
-        var routeByBin = "{{ route('property.searchbybin.ac') }}";        $('#search-by-bin').select2({
-            width: 'resolve',
-            minimumInputLength: 7,
-            containerCssClass: 'property-form-input',
-            dropdownCssClass: 'property-form-dropdown',
-            ajax: {
-                type: 'POST',
-                url: routeByBin,
-
-                dataType: 'json',
-                data: function (params) {
-
-
-                    var token = $('meta[name="csrf-token"]').attr('content');
-
-                    return {bin: params.term, _token: token};
-
-                },
-                processResults: function (data) {
-                    // Transforms the top-level key of the response object from 'items' to 'results'
-                    var data2 = $.map(data, function (obj) {
-                        obj.id = obj.bin; // replace pk with your identifier
-                        obj.house = obj.lhnd.trim();
-                        obj.zipcode = obj.zipcode;
-                        obj.text = obj.bin + " - " + obj.stname + " - House Number : " + obj.lhnd.trim() + " to " + obj.hhnd.trim(); // replace pk with your identifier
-
-                        return obj;
-                    });
-                    return {
-                        results: data2
-                    };
-                }
-                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-            }
-        });
-
-        $('#search-by-bin').on('select2:select', function (e) {
-            window.selecteddata = e.params.data;
-            $('#addbybin').removeAttr('disabled');
-        });
-
-        // $('#search-by-bin').on('select2:opening', function (e) {
-        //     $('#addbybin').attr('disabled', 'disabled');
-        // });
-
-        $('#addbybin').on('click', function (e) {
-            var route = "{{ route('add.property.to.user') }}";
-            window.selecteddata.street = window.selecteddata.stname;
-            window.selecteddata.house = window.selecteddata.lhnd.trim();
             var properties = [window.selecteddata];
             var token = $('meta[name="csrf-token"]').attr('content');
             $.post(route, {properties: properties, _token: token})

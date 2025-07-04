@@ -103,7 +103,6 @@ Route::get('/search', function () {
 Route::get('/blog/article/{slug}', 'FrontendController@showArticle')->name('frontend.blog.article.show');
 Route::get('/blog', 'FrontendController@showBlog')->name('frontend.blog.show');
 
-
 Route::post('/subscribe', 'FrontendController@subscribeNewsLetter')->name('subscribe')->middleware('throttle:10,1');
 Route::post('/sent-quick-email-to-us', 'FrontendController@sentQuickContactEmail')->name('contactwithquickemail')->middleware('throttle:10,1');
 Route::post('/sent-email-to-us', 'FrontendController@sentContactEmail')->name('contactwithemail')->middleware('throttle:10,1');

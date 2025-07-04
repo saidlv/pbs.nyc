@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'ECB Over Paid')
+@section('title', 'PBS Portal | ECB Overpaid')
+@section('meta_description', 'Review and manage overpaid ECB violations and balances for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -3,8 +3,7 @@
 @php($pageTitle ='Terms of Services')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Read the Terms of Service for PBS NYC. Understand your rights, responsibilities, and our legal policies for using our property management platform.">
 @stop
 
 @section('css')

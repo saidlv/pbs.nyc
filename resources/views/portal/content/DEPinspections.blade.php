@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DEP Boiler Inspections')
+@section('title', 'PBS Portal | DEP Boiler Inspections')
+@section('meta_description', 'Monitor and manage DEP boiler inspections and permits for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

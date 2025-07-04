@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB AHV Permits')
+@section('title', 'PBS Portal | DOB AHV Permits')
+@section('meta_description', 'Track and manage After Hours Variance (AHV) permits for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

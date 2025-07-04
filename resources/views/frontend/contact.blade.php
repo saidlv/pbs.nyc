@@ -3,8 +3,7 @@
 @php($pageTitle ='Contact Us')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Contact PBS NYC for property management inquiries, support, or to book a consultation. We're here to help you manage your property proactively.">
 @stop
 
 @section('css')

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB Now Job Filings')
+@section('title', 'PBS Portal | DOB Now Job Filings')
+@section('meta_description', 'Track and manage DOB Now job filings, applications, and statuses for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

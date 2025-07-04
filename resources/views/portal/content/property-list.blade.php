@@ -1,7 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Property List')
-
+@section('title', 'PBS Portal | Property List')
+@section('meta_description', 'View and manage your list of properties in the PBS Portal for streamlined property management.')
 
 @section('plugins.Datatables', true)
 

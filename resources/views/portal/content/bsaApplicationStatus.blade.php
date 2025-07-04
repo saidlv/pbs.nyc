@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'BSA Application Status')
+@section('title', 'PBS Portal | BSA Application Status')
+@section('meta_description', 'Track and review BSA application statuses for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

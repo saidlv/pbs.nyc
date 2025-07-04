@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Notification')
+@section('title', 'PBS Portal | Notifications')
+@section('meta_description', 'View and manage your property notifications and alerts in the PBS Portal.')
 
 @section('plugins.Knob', true)
 

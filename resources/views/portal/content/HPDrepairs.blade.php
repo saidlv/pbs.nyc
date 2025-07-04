@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'HPD Repairs')
+@section('title', 'PBS Portal | HPD Repairs')
+@section('meta_description', 'Monitor and manage HPD emergency repairs and compliance for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

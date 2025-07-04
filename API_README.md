@@ -1,3 +1,22 @@
+Technical Requirements:
+SEO & Digital Marketing
+On Page SEO
+Custom Meta Titles/Descriptions
+Header Tags
+Clear URl Structure
+Alt text
+Integrations
+Analytics (Google Analytics, Google Search Console, Google Tag Manager)
+For Email Marketing (Mailchimp)
+Marketing Requirements:
+Lead Generation Tools
+Contact Forms (List of Questions will be provided)
+Newsletter Signup
+Performance Tracking
+Tracking of Form Submissions, 
+Tracking of Resources Downloads
+Google Analytics
+
 # PBS NYC API Documentation
 
 ## Authentication

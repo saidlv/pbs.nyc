@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Building Profiles')
+@section('meta_description', 'Browse and manage all building profiles for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 
@@ -312,7 +313,7 @@
 {{--                                        <tr>--}}
 {{--                                            <td>Sanitation Subsection</td>--}}
 {{--                                            <td id="jssanitationsubsection"></td>--}}
-{{--                                        </tr>--}}
+{{--                                        </tr>
 
 {{--                                        </tbody>--}}
 {{--                                        <tfoot>--}}

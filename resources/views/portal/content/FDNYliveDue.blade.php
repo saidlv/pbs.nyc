@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'FDNY Due')
+@section('title', 'PBS Portal | FDNY Due')
+@section('meta_description', 'Track all due FDNY violations and balances for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

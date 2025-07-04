@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'FDNY Corrections')
+@section('title', 'PBS Portal | FDNY Corrections')
+@section('meta_description', 'Track and manage FDNY corrections, hearings, and compliance for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'HPD Complints')
+@section('title', 'PBS Portal | HPD Complaints')
+@section('meta_description', 'View and manage HPD complaints and resolution status for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

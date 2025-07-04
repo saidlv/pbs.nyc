@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'ECB All Dues')
+@section('title', 'PBS Portal | ECB All Dues')
+@section('meta_description', 'Track all due ECB violations and balances for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

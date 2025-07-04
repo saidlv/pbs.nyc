@@ -1,8 +1,7 @@
 @extends('portal.master')
 
-@section('title')
-    @yield('template_title')
-@stop
+@section('title', 'PBS Portal | Proactive Building Solutions')
+@section('meta_description', 'PBS Portal for property management, alerts, and more.')
 
 @section('css')
     @yield('template_linked_css')
