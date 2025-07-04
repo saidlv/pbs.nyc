@@ -123,6 +123,64 @@
             border-color: #dce2e1 #dce2e1 #dee2e6 !important;
         }
     </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Only apply mobile sidebar functionality on mobile screens
+            function handleMobileSidebar() {
+                if (window.innerWidth <= 768) {
+                    // Find the sidebar toggle button
+                    const sidebarToggle = document.querySelector('[data-widget="pushmenu"]');
+                    
+                    if (sidebarToggle) {
+                        // Remove any existing event listeners to prevent duplicates
+                        sidebarToggle.removeEventListener('click', handleSidebarToggle);
+                        sidebarToggle.addEventListener('click', handleSidebarToggle);
+                    }
+                    
+                    // Handle sidebar toggle
+                    function handleSidebarToggle(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Simple toggle without any animations or delays
+                        document.body.classList.toggle('sidebar-open');
+                        console.log('Sidebar toggled:', document.body.classList.contains('sidebar-open'));
+                    }
+                    
+                    // Close sidebar when clicking outside (overlay area)
+                    document.addEventListener('click', function(e) {
+                        if (document.body.classList.contains('sidebar-open')) {
+                            const sidebar = document.querySelector('.main-sidebar');
+                            const toggleButton = document.querySelector('[data-widget="pushmenu"]');
+                            
+                            // Check if click is outside sidebar and not on toggle button
+                            if (sidebar && !sidebar.contains(e.target) && 
+                                toggleButton && !toggleButton.contains(e.target) && 
+                                !e.target.closest('[data-widget="pushmenu"]')) {
+                                document.body.classList.remove('sidebar-open');
+                                console.log('Sidebar closed by clicking outside');
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Initialize
+            handleMobileSidebar();
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    // Remove mobile classes on larger screens
+                    document.body.classList.remove('sidebar-open');
+                } else {
+                    // Re-initialize mobile sidebar on resize to mobile
+                    handleMobileSidebar();
+                }
+            });
+        });
+    </script>
 @append
 
 
