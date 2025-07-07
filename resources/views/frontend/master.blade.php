@@ -83,6 +83,56 @@
     <link href="{{ asset('css/tagsinput.css') }}" rel="stylesheet"/>
 
     <link href="{{ asset('vendor/pace-progress/themes/silver/pace-theme-flash.css') }}" rel="stylesheet" type="text/css"/>
+    
+    <!-- Google Font: Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    
+    <style>
+        /* Theme colors */
+        :root {
+          --brand-gray1: #37403D;
+          --brand-dark: #1E2322;
+          --brand-dark-lighter: #1E1E1E;
+          --brand-green: #8AD5B7;
+          --brand-green-hover: #6CBF9A;
+          --text-light: #DCE2E2;
+          --text-muted: #b9c0bf;
+          --text-dark: #7A8E85;
+        }
+        
+        @font-face {
+            font-family: 'Conthrax';
+            src: url('{{ asset('fonts/conthrax.ttf') }}') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* Fix scrolling issues */
+        html, body {
+            height: auto !important;
+            overflow: auto !important;
+        }
+        
+        /* Override wooden background classes */
+        .metalarkaplan, .bg-wood, .bg-dark {
+            background-color: var(--brand-gray1) !important;
+            background-image: url('{{ asset('pics/Brand Patterns-01 1.png') }}') !important;
+            background-size: contain !important;
+            background-position: center !important;
+        }
+        
+        /* Ensure links use Poppins font */
+        a, .menu-link, .button {
+            font-family: 'Poppins', sans-serif !important;
+        }
+        
+        /* Header styling */
+        #header, #header-wrap {
+            background-color: var(--brand-dark) !important;
+            border-bottom: none !important;
+        }
+    </style>
 
     @stack('css')
     @yield('css')
@@ -90,16 +140,18 @@
 
 </head>
 
-<body class="stretched metalarkaplan dark sticky-responsive-menu side-push-panel">
+<body class="stretched dark sticky-responsive-menu side-push-panel" style="background-color: var(--brand-gray1) !important; background-image: url('{{ asset('pics/Brand Patterns-01 1.png') }}') !important; background-size: contain !important; background-position: center !important;">
 
 {{--@include('frontend.partials.sidepanel')--}}
 
 <!-- Document Wrapper
 ============================================= -->
-<div class="bg-transparent clearfix" id="wrapper">
+<div class="clearfix" id="wrapper" style="background-color: var(--brand-gray1) !important; background-image: url('{{ asset('pics/Brand Patterns-01 1.png') }}') !important; background-size: contain !important; background-position: center !important;">
 
 
+<div style="background-color: var(--brand-dark) !important; background-image: none !important;">
 @include('frontend.partials.header')
+</div>
 
 @yield('slider')
 
@@ -107,13 +159,13 @@
 @unless(Route::currentRouteName() == 'home')
     <!-- Page Title
 		============================================= -->
-        <section class="bg-section" id="page-title">
+        <section class="bg-section" id="page-title" style="background-color: var(--brand-dark) !important; background-image: none !important;">
 
             <div class="container clearfix">
-                <h1 class="text-white ">{{$pageTitle}}</h1>
+                <h1 class="text-white" style="font-family: 'Conthrax', sans-serif !important; color: #DCE2E2 !important;">{{$pageTitle}}</h1>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href={{route('home')}}>Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{$pageTitle}}</li>
+                    <li class="breadcrumb-item"><a href={{route('home')}} style="font-family: 'Poppins', sans-serif !important; color: #DCE2E2 !important;">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" style="font-family: 'Poppins', sans-serif !important; color: #8AD5B7 !important;">{{$pageTitle}}</li>
                 </ol>
             </div>
 
