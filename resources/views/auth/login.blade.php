@@ -1,109 +1,230 @@
-@extends('adminlte::master')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('adminlte_css_pre')
-    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/karbonsoft.css') }}">
-@stop
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>PBS Portal | Login</title>
+    
+    <!-- Google Font: Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="{{ asset('css/pbs-theme.css') }}">
+    <!-- Login Redesign CSS -->
+    <link rel="stylesheet" href="{{ asset('css/login-redesign.css') }}">
+    
+    <!-- Custom font for heading -->
+    <style>
+        @font-face {
+            font-family: 'Conthrax';
+            src: url('{{ asset('fonts/conthrax.ttf') }}') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* Apply to login heading for certainty */
+        .login-heading {
+            font-family: 'Conthrax', sans-serif !important;
+        }
+    </style>
+</head>
 
-@section('adminlte_css')
-    @stack('css')
-    @yield('css')
-@stop
+@php
+    $login_url = route('login');
+    $register_url = route('register');
+    $password_reset_url = route('password.request');
+@endphp
 
-@section('classes_body', 'login-page metalarkaplan')
-
-@php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
-@php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
-@php( $password_reset_url = View::getSection('password_reset_url') ?? config('adminlte.password_reset_url', 'password/reset') )
-@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
-
-@if (config('adminlte.use_route_url', false))
-    @php( $login_url = $login_url ? route($login_url) : '' )
-    @php( $register_url = $register_url ? route($register_url) : '' )
-    @php( $password_reset_url = $password_reset_url ? route($password_reset_url) : '' )
-    @php( $dashboard_url = $dashboard_url ? route($dashboard_url) : '' )
-@else
-    @php( $login_url = $login_url ? url($login_url) : '' )
-    @php( $register_url = $register_url ? url($register_url) : '' )
-    @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
-    @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
-@endif
-
-@section('title', 'PBS Portal | Login')
-
-@section('body')
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="{{ $dashboard_url }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
-        </div>
-        <div class="card bg-transparent">
-            <div class="card-body bg-dark-50">
-                <form action="{{ $login_url }}" method="post">
-                    {{ csrf_field() }}
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('email'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('email') }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="{{ __('adminlte::adminlte.password') }}">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('password'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('password') }}
-                            </div>
-                        @endif
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-secondary">
-                                <input type="checkbox" name="remember" id="remember">
-                                <label class="text-white" for="remember">{{ __('adminlte::adminlte.remember_me') }}</label>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-secondary btn-block btn-flat">
-                                {{ __('adminlte::adminlte.sign_in') }}
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <p class="mt-2 mb-1">
-                    <a class="link-muted text-white" href="{{ $password_reset_url }}">
-                        {{ __('adminlte::adminlte.i_forgot_my_password') }}
-                    </a>
-                </p>
-                @if ($register_url)
-                    <p class="mb-0">
-                        <a class="link-muted text-white" href="{{ $register_url }}">
-                            {{ __('adminlte::adminlte.register_a_new_membership') }}
-                        </a>
-                    </p>
-                @endif
-            </div>
-        </div>
-        <div class="card bg-transparent">
-            <div class="card-body bg-dark-50">
-                <span class="small text-white">New member?  <a href="{{route('alerts')}}#alert">Register here </a></span>
-            </div>
-        </div>
+<body>
+    <!-- Navigation bar with logo -->
+    <div class="nav-strip">
+        <a href="https://pbs-compliance-solutions-txdp.vercel.app/">
+            <img src="{{ asset('pics/LOGO.png') }}" alt="PBS NYC Logo" class="nav-logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.insertBefore(document.createTextNode('PBS NYC'), this);">
+        </a>
     </div>
-@stop
-
-@section('adminlte_js')
-    <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-    @stack('js')
-    @yield('js')
-@stop
+   <div class="login-wrapper">
+    <div class="login-container login-container-bg">
+        <img src="{{ asset('pics/LOGO.png') }}" alt="PBS NYC Logo" class="login-logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.insertBefore(document.createTextNode('PBS NYC'), this);">
+        <p class="login-heading">LOGIN</p>
+        
+        <form action="{{ $login_url }}" method="post" class="login-form">
+            {{ csrf_field() }}
+            
+            @if ($errors->any())
+                <div class="error-message">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+            
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-input" value="{{ old('email') }}" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" class="form-input" required>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" name="remember" id="remember" class="form-checkbox">
+                <label for="remember" class="form-label checkbox-label">Remember Me</label>
+            </div>
+            
+            <button type="submit" class="login-button">
+                Sign In
+            </button>
+            
+            <div class="links-section">
+                <a href="{{ $password_reset_url }}" class="login-link">
+                    Forgot Password?
+                </a>
+                <a href="{{ $register_url }}" class="login-link">
+                    Register
+                </a>
+            </div>
+            
+            <div class="register-link-container">
+                <a href="{{route('alerts')}}#alert" class="register-link">
+                    <span class="white">New Member?</span>&nbsp;
+                    <span class="green">Register Here</span>
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Menu Columns -->
+                <div class="footer-menu">
+                    <div class="footer-menu-section">
+                        <h3>Useful Links</h3>
+                        <ul class="footer-menu-list">
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/about-us" class="footer-menu-link">About Us</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/contacts" class="footer-menu-link">Contact Us</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/faqs" class="footer-menu-link">FAQs</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/terms-of-service" class="footer-menu-link">Terms of Service</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/privacy-policy" class="footer-menu-link">Privacy Policy</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-menu-section">
+                        <h3>Resources</h3>
+                        <ul class="footer-menu-list">
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/press" class="footer-menu-link">Press</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/blog" class="footer-menu-link">Blog</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/law/local-law" class="footer-menu-link">Local Law guide</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/alert" class="footer-menu-link">Alert System guide</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-menu-section">
+                        <h3>Services & Solutions</h3>
+                        <ul class="footer-menu-list">
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/property-management" class="footer-menu-link">Property Management</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/owner-representative" class="footer-menu-link">Owner Representative</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/inspection-services" class="footer-menu-link">Inspection Services</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/expediting-services" class="footer-menu-link">Expediting Services</a>
+                            </li>
+                            <li class="footer-menu-item">
+                                <span class="footer-dot-icon"></span>
+                                <a href="https://pbs-frontend-three.vercel.app/alert" class="footer-menu-link">Alert Service</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Subscribe Section -->
+                <div class="footer-subscribe">
+                    <h3>Subscribe</h3>
+                    <p>Join our community to receive updates</p>
+                    
+                    <!-- Email Subscription Form -->
+                    <form class="footer-form">
+                        <input type="email" placeholder="Enter your email" aria-label="Email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    
+                    <p class="footer-form-disclaimer">By subscribing, you agree to our Privacy Policy</p>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <div class="footer-divider"></div>
+            
+            <!-- Bottom Section -->
+            <div class="footer-bottom">
+                <!-- Logo -->
+                <div class="footer-logo">
+                    <img src="{{ asset('pics/LOGO.png') }}" alt="PBS NYC Logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.insertBefore(document.createTextNode('PBS NYC'), this);">
+                </div>
+                
+                <!-- Copyright Notice -->
+                <p class="footer-copyright">
+                    © {{ date('Y') }} PBS NYC. All rights reserved
+                </p>
+                
+                <!-- Privacy Links -->
+                <div class="footer-links">
+                    <a href="https://pbs-frontend-three.vercel.app/privacy-policy" class="footer-link" aria-label="View Privacy Policy">
+                        Privacy Policy
+                    </a>
+                    <a href="https://pbs-frontend-three.vercel.app/terms-of-service" class="footer-link" aria-label="View Terms of Service">
+                        Terms of Service
+                    </a>
+                    <a href="https://pbs-frontend-three.vercel.app/cookie-policy" class="footer-link" aria-label="View Cookie Policy">
+                        Cookie Policy
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div> 
+    <!-- Scripts -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+</body>
+</html>
