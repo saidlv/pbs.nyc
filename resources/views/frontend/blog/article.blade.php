@@ -3,8 +3,7 @@
 @php($pageTitle =$article->title)
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="{{ $article->meta_description ?? Str::limit(strip_tags($article->content), 155) }}">
 @stop
 
 @section('css')

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Articles')
+@section('title', 'PBS Portal | Blog Articles')
+@section('meta_description', 'Browse and manage blog articles in the PBS Portal.')
 
 @section('content_header')
     @if (Session::has('success'))
@@ -42,7 +43,13 @@
                     <tr>
                         <td>{{$article->id}}</td>
                         <td>{{$article->title}}</td>
-                        <td><img height="50px;" src="{{Storage::url($article->featured)}}"></td>
+                        <td>
+                            @if($article->featured)
+                                <img height="50px" src="{{Storage::url($article->featured)}}" alt="{{$article->title}}" class="img-thumbnail" onerror="this.src='{{asset('images/placeholder-article.svg')}}';">
+                            @else
+                                <img height="50px" src="{{asset('images/placeholder-article.svg')}}" alt="No Image" class="img-thumbnail">
+                            @endif
+                        </td>
                         <td>@if($article->category) {{$article->category->name}} @else N/A @endif</td>
                         <td>{{$article->created_at->format('Y/m/d H:s')}}</td>
                         <td>{{$article->updated_at->format('Y/m/d H:s')}}</td>

@@ -3,8 +3,7 @@
 @php($pageTitle ='PBS Universal Accountholder Agreement')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Review the PBS Universal Accountholder Agreement terms and conditions for property management and monitoring services in NYC.">
 @stop
 
 @section('css')

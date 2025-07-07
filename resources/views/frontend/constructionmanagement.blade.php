@@ -3,8 +3,7 @@
 @php($pageTitle ='Construction Management')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Professional construction management services from PBS.NYC. We handle project oversight, compliance, and coordination for your NYC construction projects.">
 @stop
 
 @section('css')

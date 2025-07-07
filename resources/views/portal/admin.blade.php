@@ -1,7 +1,8 @@
 @extends('portal.master')
 @section('page', trans('ticketit::admin.index-title'))
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Admin Dashboard')
+@section('meta_description', 'Access administrative features and management tools in the PBS Portal admin dashboard.')
 
 @section('plugins.Knob', true)
 

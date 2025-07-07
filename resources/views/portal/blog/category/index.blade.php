@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Categories')
+@section('title', 'PBS Portal | Blog Categories')
+@section('meta_description', 'Manage blog categories and organization in the PBS Portal.')
 
 @section('content_header')
     @if (Session::has('success'))

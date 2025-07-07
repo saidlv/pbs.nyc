@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'View Article')
+@section('title', 'PBS Portal | View Blog Category')
+@section('meta_description', 'View blog category and related articles in the PBS Portal.')
 
 @section('content_header')
     @if (Session::has('success'))

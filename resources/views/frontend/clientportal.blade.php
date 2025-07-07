@@ -3,8 +3,7 @@
 @php($pageTitle ='Client Portal')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Access your PBS.NYC client portal to manage your property accounts, view reports, and monitor compliance status in real-time.">
 @stop
 
 @section('css')

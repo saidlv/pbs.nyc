@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Client Login')
+@section('meta_description', 'Login as a client to access property management features in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

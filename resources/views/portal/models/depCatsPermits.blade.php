@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DEP Cats Permits')
+@section('title', 'PBS Portal | DEP CATS Permits')
+@section('meta_description', 'Track and manage DEP CATS permits for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

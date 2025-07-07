@@ -3,7 +3,7 @@
 @php($pageTitle ='Monthly Report')
 
 @section('meta')
-    {{--meta etiketleri--}}
+    <meta name="description" content="View comprehensive monthly property reports including violations, permits, and compliance data for your properties in PBS.NYC.">
 @stop
 
 @section('css')

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Edit Category')
+@section('title', 'PBS Portal | Edit Blog Category')
+@section('meta_description', 'Edit blog category settings and information in the PBS Portal.')
 
 @section('plugins.Summernote', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Campaigns')
+@section('title', 'PBS Portal | Edit Newsletter List')
+@section('meta_description', 'Edit newsletter distribution lists for property management communications in the PBS Portal.')
 
 @section('plugins.Summernote', true)
 

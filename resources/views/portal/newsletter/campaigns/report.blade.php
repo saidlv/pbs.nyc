@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'View Campaign')
+@section('title', 'PBS Portal | Newsletter Campaign Report')
+@section('meta_description', 'View detailed reports and analytics for newsletter campaigns in the PBS Portal.')
 @section('plugins.Datatables', true)
 @section('css')
     <style>

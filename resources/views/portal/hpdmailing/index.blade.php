@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Hpd Annual Mailing')
+@section('title', 'PBS Portal | HPD Annual Mailing')
+@section('meta_description', 'Manage HPD annual mailing requirements and compliance for your properties in the PBS Portal.')
 
 @section('content_header')
 	@if (Session::has('success'))

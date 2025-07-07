@@ -3,8 +3,7 @@
 @php($pageTitle ='Calender')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Schedule appointments and consultations with PBS.NYC property management experts. Book your time using our convenient calendar system.">
 @stop
 
 @section('css')

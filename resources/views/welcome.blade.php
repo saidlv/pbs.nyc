@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>PBS | Welcome</title>
+        <meta name="description" content="Welcome to Proactive Building Solutions - Your comprehensive property management and monitoring platform for New York City properties.">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">

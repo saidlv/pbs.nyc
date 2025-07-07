@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Landmark Permits')
+@section('title', 'PBS Portal | Landmark Permits')
+@section('meta_description', 'Track and manage landmark permit applications for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

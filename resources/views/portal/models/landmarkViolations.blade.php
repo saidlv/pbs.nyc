@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Landmark Violations')
+@section('title', 'PBS Portal | Landmark Violations')
+@section('meta_description', 'View and manage landmark preservation violations for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

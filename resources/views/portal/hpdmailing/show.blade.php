@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'View Mailing')
+@section('title', 'PBS Portal | View HPD Annual Mailing')
+@section('meta_description', 'View HPD annual mailing details and compliance information for your properties in the PBS Portal.')
 @section('plugins.Datatables', true)
 
 @section('content_header')

@@ -3,8 +3,7 @@
 @php($pageTitle ='Filing Representation')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Professional filing representation services from PBS.NYC. We handle DOB, DOT, FDNY, and other NYC agency filings for your property compliance needs.">
 @stop
 
 @section('css')

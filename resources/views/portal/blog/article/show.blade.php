@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'View Article')
+@section('title', 'PBS Portal | View Blog Article')
+@section('meta_description', 'View blog article details and content in the PBS Portal.')
 
 @section('content_header')
     @if (Session::has('success'))
@@ -15,7 +16,9 @@
     <div class="row">
         <div class="col-md-8">
             @if($article->featured)
-                <img height="300px" src="{{Storage::url($article->featured)}}">
+                <img height="300px" src="{{Storage::url($article->featured)}}" alt="{{$article->title}}" class="img-fluid mb-3" onerror="this.src='{{asset('images/placeholder-article.svg')}}';">
+            @else
+                <img height="300px" src="{{asset('images/placeholder-article.svg')}}" alt="No Image Available" class="img-fluid mb-3">
             @endif
 
             <h1>{{ $article->title }}</h1>

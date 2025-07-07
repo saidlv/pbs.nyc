@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Payment Required')
+@section('meta_description', 'Complete your PBS Portal subscription payment to access all property management features.')
 
 @section('content_header')
     <h1 class="m-0 text-dark">Update Payment Method</h1>

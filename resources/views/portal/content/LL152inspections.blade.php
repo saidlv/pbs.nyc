@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'LL152 Inspections')
+@section('title', 'PBS Portal | LL152 Inspections')
+@section('meta_description', 'Monitor and manage Local Law 152 inspections and compliance for your properties in the PBS Portal.')
 
 @section('plugins.Knob', true)
 

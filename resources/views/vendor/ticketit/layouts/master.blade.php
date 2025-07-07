@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Support Tickets')
+@section('title', 'PBS Portal | Support Tickets')
+@section('meta_description', 'Manage and track support tickets and customer service requests in the PBS Portal.')
 
 @section('content_header')
     <h1 class="m-0 text-dark">

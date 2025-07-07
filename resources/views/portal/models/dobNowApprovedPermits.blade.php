@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB Now Approved Permits')
+@section('title', 'PBS Portal | DOB Now Approved Permits')
+@section('meta_description', 'Track and manage approved DOB Now permits for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

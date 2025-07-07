@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Newsletter Subscribers')
+@section('title', 'PBS Portal | Newsletter Subscribers')
+@section('meta_description', 'Manage newsletter subscribers and distribution lists for property management communications in the PBS Portal.')
 @section('plugins.Datatables', true)
 
 @section('content_header')

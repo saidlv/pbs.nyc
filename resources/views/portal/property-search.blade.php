@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Dashboard')
+@section('title', 'PBS Portal | Property Search')
+@section('meta_description', 'Search and find properties in the PBS Portal database for monitoring and management.')
 
 @section('plugins.Sweetalert2', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'HPD Dwelling Registrations')
+@section('title', 'PBS Portal | HPD Dwelling Registrations')
+@section('meta_description', 'Manage HPD dwelling registration requirements and compliance for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'ECB Complints')
+@section('title', 'PBS Portal | ECB Complaints')
+@section('meta_description', 'View and manage ECB complaints for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

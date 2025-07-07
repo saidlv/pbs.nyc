@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Lists')
+@section('title', 'PBS Portal | Newsletter Lists')
+@section('meta_description', 'Manage newsletter distribution lists for property management communications in the PBS Portal.')
 
 @section('content_header')
     @if (Session::has('success'))

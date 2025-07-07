@@ -3,7 +3,7 @@
 @php($pageTitle ='Subscribe')
 
 @section('meta')
-
+    <meta name="description" content="Subscribe to PBS.NYC Portal for comprehensive property management and monitoring services. Get alerts and manage everything related to your property.">
 @stop
 
 @section('css')

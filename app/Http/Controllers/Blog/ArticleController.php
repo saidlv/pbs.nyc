@@ -52,7 +52,7 @@ class ArticleController extends Controller
         $data['slug'] = Str::slug($data['title']);
 
         if ($request->file('featured')) {
-            $data['featured'] = $request->file('featured')->store('public/articleimages');
+            $data['featured'] = $request->file('featured')->store('articleimages', 'public');
         }
 
         $article = new Article($data);
@@ -106,7 +106,7 @@ class ArticleController extends Controller
         $data['isActive'] = $request->has('isActive');
 
         if ($request->file('featured')) {
-            $data['featured'] = $request->file('featured')->store('public/articleimages');
+            $data['featured'] = $request->file('featured')->store('articleimages', 'public');
             Storage::delete($article->featured);
         }
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Create a New Campaign')
+@section('title', 'PBS Portal | Create Newsletter Campaign')
+@section('meta_description', 'Create new newsletter campaigns for property management communications in the PBS Portal.')
 
 @section('plugins.Summernote', true)
 

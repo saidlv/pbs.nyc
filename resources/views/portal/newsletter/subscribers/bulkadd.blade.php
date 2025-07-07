@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Bulk Add Subscribers')
+@section('title', 'PBS Portal | Bulk Add Newsletter Subscribers')
+@section('meta_description', 'Bulk import and add multiple subscribers to newsletter distribution lists in the PBS Portal.')
 
 @section('plugins.Summernote', true)
 

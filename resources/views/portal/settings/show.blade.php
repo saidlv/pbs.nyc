@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'View Setting')
+@section('title', 'PBS Portal | View Setting')
+@section('meta_description', 'View detailed setting information and configuration in the PBS Portal.')
 
 @section('content_header')
     @if (Session::has('success'))

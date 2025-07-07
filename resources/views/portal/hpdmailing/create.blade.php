@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'Hpd Annual Mailings')
+@section('title', 'PBS Portal | Create HPD Annual Mailing')
+@section('meta_description', 'Create new HPD annual mailing documents and compliance reports for your properties in the PBS Portal.')
 
 @section('plugins.Summernote', true)
 @section('plugins.Datatables', true)

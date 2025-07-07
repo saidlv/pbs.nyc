@@ -1,6 +1,6 @@
 @extends('portal.master')
 
-@section('title', 'PBS Portal | Profile')
+@section('title', 'PBS Portal | Dashboard')
 @section('meta_description', 'View and update your user profile, contact information, and preferences in the PBS Portal.')
 
 @section('plugins.Datatables', true)

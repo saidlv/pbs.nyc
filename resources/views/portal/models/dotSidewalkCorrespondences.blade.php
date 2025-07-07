@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOT Sidewalk Correspondences')
+@section('title', 'PBS Portal | DOT Sidewalk Correspondences')
+@section('meta_description', 'View and manage DOT sidewalk correspondence and communications for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

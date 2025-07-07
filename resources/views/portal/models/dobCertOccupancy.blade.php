@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB Certificate of Occupancy')
+@section('title', 'PBS Portal | DOB Certificate of Occupancy')
+@section('meta_description', 'Track and manage DOB Certificate of Occupancy documents for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'View Campaign')
+@section('title', 'PBS Portal | View Newsletter Campaign')
+@section('meta_description', 'View newsletter campaign details and performance in the PBS Portal.')
 
 @section('content_header')
     @if (Session::has('success'))

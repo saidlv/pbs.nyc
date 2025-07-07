@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'ECB Corrections')
+@section('title', 'PBS Portal | ECB Corrections')
+@section('meta_description', 'View and manage ECB corrections for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

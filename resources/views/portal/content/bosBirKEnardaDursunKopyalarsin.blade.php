@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'PBS Member Portal')
+@section('title', 'PBS Portal | Dashboard')
+@section('meta_description', 'Access your property management dashboard in the PBS Portal for comprehensive monitoring and alerts.')
 
 @section('plugins.Knob', true)
 

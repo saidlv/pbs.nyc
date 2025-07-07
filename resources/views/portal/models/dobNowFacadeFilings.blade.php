@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB Now Facade Filings')
+@section('title', 'PBS Portal | DOB Now Facade Filings')
+@section('meta_description', 'Track and manage DOB Now facade filings and inspections for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

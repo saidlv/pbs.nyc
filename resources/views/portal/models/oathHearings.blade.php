@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'OATH Hearings')
+@section('title', 'PBS Portal | OATH Hearings')
+@section('meta_description', 'Monitor and manage OATH hearing schedules and outcomes for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOT Sidewalk Inspections')
+@section('title', 'PBS Portal | DOT Sidewalk Inspections')
+@section('meta_description', 'Track and manage DOT sidewalk inspection reports for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

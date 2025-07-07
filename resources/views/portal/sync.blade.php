@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'AdminLTE')
+@section('title', 'PBS Portal | Data Sync')
+@section('meta_description', 'Synchronize your property data and manage data updates in the PBS Portal.')
 
 @section('plugins.Knob', true)
 

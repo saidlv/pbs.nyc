@@ -3,8 +3,7 @@
 @php($pageTitle ='Property Alert Request')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Request property alerts for your NYC property. Stay informed about violations, permits, and compliance issues with PBS.NYC monitoring services.">
 @stop
 
 @section('css')

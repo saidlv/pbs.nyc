@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'ECB Hearings')
+@section('title', 'PBS Portal | ECB Hearings')
+@section('meta_description', 'View and track upcoming ECB hearings for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'HPD Repair Vacate Orders')
+@section('title', 'PBS Portal | HPD Repair Vacate Orders')
+@section('meta_description', 'Track and manage HPD repair and vacate orders for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 

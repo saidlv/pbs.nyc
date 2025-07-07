@@ -1,6 +1,7 @@
 @extends('portal.master')
 
-@section('title', 'DOB Now Safety Boiler')
+@section('title', 'PBS Portal | DOB Now Safety Boiler')
+@section('meta_description', 'Track and manage DOB Now Safety Boiler inspections and compliance for your properties in the PBS Portal.')
 
 @section('plugins.Datatables', true)
 
