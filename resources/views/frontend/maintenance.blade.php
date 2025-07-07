@@ -3,8 +3,7 @@
 @php($pageTitle ='Maintenance')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Professional building maintenance services from PBS.NYC. We provide comprehensive property maintenance and repair solutions for NYC buildings.">
 @stop
 
 @section('css')

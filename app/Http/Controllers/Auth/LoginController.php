@@ -138,4 +138,25 @@ class LoginController extends Controller
                 $this->username() => trans('auth.failed'),
             ]);
     }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return redirect('https://pbs-compliance-solutions-txdp.vercel.app/');
+    }
 }

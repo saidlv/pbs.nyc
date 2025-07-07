@@ -3,8 +3,7 @@
 @php($pageTitle ='General Contracting')
 
 @section('meta')
-    {{--meta etiketleri--}}
-
+    <meta name="description" content="Professional general contracting services from PBS.NYC. We provide comprehensive construction solutions and project management for your NYC building projects.">
 @stop
 
 @section('css')
