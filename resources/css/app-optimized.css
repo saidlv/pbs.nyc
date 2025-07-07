@@ -244,7 +244,7 @@
         padding: 1rem;
     }
     
-    /* FORCE sidebar to be absolutely positioned and HIDDEN by default */
+    /* Sidebar styling for mobile and desktop */
     .main-sidebar,
     .sidebar,
     .sidebar-dark-primary,
@@ -254,15 +254,15 @@
     body.sidebar-mini:not(.sidebar-collapse) .main-sidebar,
     html body .wrapper .main-sidebar {
         position: fixed !important;
-        left: -240px !important;
+        left: -280px !important; /* Wider sidebar */
         top: 0 !important;
         height: 100vh !important;
         max-height: 100vh !important;
         z-index: 1060 !important;
-        width: 240px !important;
+        width: 280px !important; /* Wider sidebar */
         transform: none !important;
-        transition: none !important;
-        background-color: #38403e !important;
+        transition: left 0.3s ease !important;
+        background-color: #38403e !important; /* Match desktop sidebar color */
         display: block !important;
         visibility: visible !important;
         overflow-y: auto !important;
@@ -276,17 +276,17 @@
     body.sidebar-open .sidebar-dark-primary {
         left: 0 !important;
         transform: none !important;
-        transition: none !important;
-        animation: none !important;
+        transition: left 0.3s ease !important;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
     }
     
+    /* Keep sidebar hidden when not open */
     body:not(.sidebar-open) .main-sidebar,
     body:not(.sidebar-open) .sidebar,
     body:not(.sidebar-open) .sidebar-dark-primary {
-        left: -240px !important;
+        left: -280px !important; /* Match wider sidebar */
         transform: none !important;
-        transition: none !important;
-        animation: none !important;
+        transition: left 0.3s ease !important;
     }
     
     /* FORCE content wrapper to FULL WIDTH - remove ALL margins */
@@ -1220,12 +1220,12 @@ h6[style*="color: #007bff"] {
 }
 
 ::-webkit-scrollbar-track {
-    background: #dce2e1 !important;
+    background: rgba(0, 0, 0, 0.1) !important;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #a2acaa !important;
-    border-radius: 2px !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 3px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -2088,3 +2088,96 @@ body.sidebar-mini-xs:not(.sidebar-collapse) .main-sidebar {
         background: rgba(56, 64, 62, 0.3) !important;
         border-radius: 3px !important;
     }
+
+/* Sidebar overlay for mobile view */
+#sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body.sidebar-open #sidebar-overlay {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile sidebar improvements */
+@media (max-width: 768px) {
+    /* Fix sidebar menu items on mobile */
+    .sidebar .nav-sidebar .nav-item,
+    .main-sidebar .nav-sidebar .nav-item,
+    .sidebar-dark-primary .nav-sidebar .nav-item {
+        margin-bottom: 6px !important;
+        width: 100% !important;
+    }
+    
+    .sidebar .nav-sidebar .nav-link,
+    .main-sidebar .nav-sidebar .nav-link,
+    .sidebar-dark-primary .nav-sidebar .nav-link {
+        padding: 0.9rem 1.2rem !important; /* Larger padding for touch */
+        display: flex !important;
+        align-items: center !important;
+        height: auto !important;
+        min-height: 44px !important; /* Good size for mobile touch targets */
+        width: 260px !important; /* Fixed width to prevent weird layouts */
+        margin: 0 auto !important;
+    }
+    
+    /* Ensure icons are aligned properly */
+    .sidebar-dark-primary .nav-sidebar .nav-link i,
+    .sidebar-dark-primary .nav-sidebar .nav-link .fa,
+    .sidebar-dark-primary .nav-sidebar .nav-link .fas,
+    .sidebar-dark-primary .nav-sidebar .nav-link .fab,
+    .sidebar-dark-primary .nav-sidebar .nav-link .far,
+    .sidebar-dark-primary .nav-sidebar .nav-link .nav-icon {
+        margin-right: 15px !important;
+        width: 25px !important;
+        text-align: center !important;
+        font-size: 16px !important;
+    }
+    
+    /* Ensure text is properly aligned and doesn't wrap */
+    .sidebar-dark-primary .nav-sidebar .nav-link p,
+    .sidebar-dark-primary .nav-sidebar .nav-link span:not(.badge):not(.right) {
+        display: inline !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* CRITICAL SIDEBAR FIXES */
+@media (max-width: 768px) {
+    /* Force full width for sidebar */
+    body.sidebar-open .main-sidebar,
+    body.sidebar-open .sidebar,
+    body.sidebar-open .sidebar-dark-primary {
+        width: 280px !important;
+    }
+    
+    /* Fix menu padding */
+    .nav-sidebar {
+        padding: 0 !important;
+        width: 280px !important;
+    }
+    
+    /* Fix menu items layout */
+    .nav-sidebar > .nav-item > .nav-link {
+        display: flex !important;
+        align-items: center !important;
+        padding: 12px 20px !important;
+    }
+    
+    /* Fix brand link */
+    .main-sidebar .brand-link {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        height: 70px !important;
+    }
+}

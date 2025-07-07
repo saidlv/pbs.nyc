@@ -4,6 +4,7 @@
 @section('meta_description', 'Browse and manage blog articles in the PBS Portal.')
 
 @section('content_header')
+    <h1 class="m-0 text-dark">Blog Articles</h1>
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert">
             <strong>Success:</strong> {!! Session::get('success') !!}
@@ -15,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <h1>All Articles</h1>
+            <h2>All Articles</h2>
         </div>
         <div class="col-md-2 text-right">
             <a href="{{route('article.create')}}" class="btn btn-lg btn-block btn-secondary">Create New Article</a>

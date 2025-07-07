@@ -34,58 +34,158 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Only apply mobile sidebar functionality on mobile screens
-            function handleMobileSidebar() {
-                if (window.innerWidth <= 768) {
-                    // Find the sidebar toggle button
-                    const sidebarToggle = document.querySelector('[data-widget="pushmenu"]');
+            // Setup sidebar functionality for both mobile and desktop
+            function setupSidebar() {
+                const sidebarToggle = document.querySelector('[data-widget="pushmenu"]');
+                const body = document.body;
+                const isMobile = window.innerWidth <= 768;
+                const sidebar = document.querySelector('.main-sidebar');
+                
+                if (!sidebar || !sidebarToggle) return;
+                
+                // Make sure sidebar is visible
+                sidebar.style.display = 'block';
+                sidebar.style.visibility = 'visible';
+                
+                // Remove existing event listeners
+                const newToggle = sidebarToggle.cloneNode(true);
+                sidebarToggle.parentNode.replaceChild(newToggle, sidebarToggle);
+                
+                newToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     
-                    if (sidebarToggle) {
-                        // Remove any existing event listeners to prevent duplicates
-                        sidebarToggle.removeEventListener('click', handleSidebarToggle);
-                        sidebarToggle.addEventListener('click', handleSidebarToggle);
-                    }
-                    
-                    // Handle sidebar toggle
-                    function handleSidebarToggle(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        // Simple toggle without any animations or delays
-                        document.body.classList.toggle('sidebar-open');
-                        console.log('Sidebar toggled:', document.body.classList.contains('sidebar-open'));
-                    }
-                    
-                    // Close sidebar when clicking outside (overlay area)
-                    document.addEventListener('click', function(e) {
-                        if (document.body.classList.contains('sidebar-open')) {
-                            const sidebar = document.querySelector('.main-sidebar');
-                            const toggleButton = document.querySelector('[data-widget="pushmenu"]');
+                    if (isMobile) {
+                        // Mobile view: toggle sidebar with overlay
+                        body.classList.toggle('sidebar-open');
+                        if (body.classList.contains('sidebar-open')) {
+                            sidebar.style.width = '280px'; // Set explicit width
+                            sidebar.style.left = '0';
+                            sidebar.style.backgroundColor = '#38403e'; // Match desktop background
                             
-                            // Check if click is outside sidebar and not on toggle button
-                            if (sidebar && !sidebar.contains(e.target) && 
-                                toggleButton && !toggleButton.contains(e.target) && 
-                                !e.target.closest('[data-widget="pushmenu"]')) {
-                                document.body.classList.remove('sidebar-open');
-                                console.log('Sidebar closed by clicking outside');
+                            // Also set the brand link bg color
+                            const brandLink = sidebar.querySelector('.brand-link');
+                            if (brandLink) {
+                                brandLink.style.backgroundColor = '#38403e';
                             }
+                            
+                            fixSidebarMenuItems(); // Fix menu items when opening
+                            addSidebarOverlay();
+                    } else {
+                        sidebar.style.left = '-280px';
+                        removeSidebarOverlay();
                         }
-                    });
+                    } else {
+                        // Desktop view: toggle collapse
+                        body.classList.toggle('sidebar-collapse');
+                    }
+                });
+                
+                // Reset sidebar based on current state
+                if (isMobile) {
+                    if (!body.classList.contains('sidebar-open')) {
+                        sidebar.style.left = '-280px';
+                        removeSidebarOverlay();
+                    } else {
+                        sidebar.style.width = '280px'; // Set explicit width
+                        sidebar.style.left = '0';
+                        sidebar.style.backgroundColor = '#38403e'; // Match desktop background
+                        
+                        // Also set the brand link bg color
+                        const brandLink = sidebar.querySelector('.brand-link');
+                        if (brandLink) {
+                            brandLink.style.backgroundColor = '#38403e';
+                        }
+                        
+                        addSidebarOverlay();
+                    }
                 }
             }
             
+            // Add overlay for mobile sidebar
+            function addSidebarOverlay() {
+                removeSidebarOverlay(); // Remove any existing overlay
+                
+                const overlay = document.createElement('div');
+                overlay.id = 'sidebar-overlay';
+                
+                overlay.addEventListener('click', function() {
+                    const sidebar = document.querySelector('.main-sidebar');
+                    document.body.classList.remove('sidebar-open');
+                    if (sidebar) {
+                        sidebar.style.left = '-280px';
+                    }
+                    this.remove();
+                });
+                
+                document.body.appendChild(overlay);
+            }
+            
+            // Remove overlay
+            function removeSidebarOverlay() {
+                const overlay = document.getElementById('sidebar-overlay');
+                if (overlay) overlay.remove();
+            }
+            
+            // Fix sidebar menu items styling
+            function fixSidebarMenuItems() {
+                // Get all menu items
+                const menuItems = document.querySelectorAll('.nav-sidebar .nav-item .nav-link');
+                const sidebar = document.querySelector('.main-sidebar');
+                
+                // Set the background color for the entire sidebar
+                if (sidebar) {
+                    sidebar.style.backgroundColor = '#38403e';
+                    
+                    // Set background for child elements
+                    const navItems = sidebar.querySelectorAll('.nav-sidebar, .nav-item');
+                    navItems.forEach(item => {
+                        item.style.backgroundColor = 'transparent';
+                    });
+                }
+                
+                menuItems.forEach(item => {
+                    // Find icon and text elements
+                    const icon = item.querySelector('i, .fa, .fas, .far, .fab, .nav-icon');
+                    const text = item.querySelector('p, span:not(.badge):not(.right)');
+                    
+                    if (icon) {
+                        // Style the icon
+                        icon.style.width = '25px';
+                        icon.style.textAlign = 'center';
+                        icon.style.float = 'left';
+                        icon.style.fontSize = '16px';
+                    }
+                    
+                    if (text) {
+                        // Style the text
+                        text.style.display = 'block';
+                        text.style.overflow = 'hidden';
+                        text.style.textOverflow = 'ellipsis';
+                        text.style.whiteSpace = 'nowrap';
+                    }
+                    
+                    // Style the link itself
+                    item.style.display = 'flex';
+                    item.style.alignItems = 'center';
+                    item.style.padding = '12px 20px';
+                    item.style.overflow = 'hidden';
+                    item.style.backgroundColor = 'transparent';
+                });
+            }
+            
             // Initialize
-            handleMobileSidebar();
+            setupSidebar();
             
             // Handle window resize
             window.addEventListener('resize', function() {
                 if (window.innerWidth > 768) {
                     // Remove mobile classes on larger screens
                     document.body.classList.remove('sidebar-open');
-                } else {
-                    // Re-initialize mobile sidebar on resize to mobile
-                    handleMobileSidebar();
+                    removeSidebarOverlay();
                 }
+                
+                setupSidebar();
             });
         });
     </script>

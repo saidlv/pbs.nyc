@@ -14,6 +14,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <h2 class="sr-only">Portal Overview</h2>
                     <p class="mb-0">You are logged in!</p>
                 </div>
             </div>

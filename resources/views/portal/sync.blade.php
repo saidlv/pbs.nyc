@@ -6,7 +6,7 @@
 @section('plugins.Knob', true)
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Dashboard</h1>
+    <h1 class="m-0 text-dark"><i class="fas fa-fw fa-sync"></i> Data Sync</h1>
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data Sync Status</h3>
+                        <h2 class="card-title">Data Sync Status</h2>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

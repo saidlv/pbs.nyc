@@ -40,6 +40,7 @@
                             <div class="tab-content">
                                 {{--                        PROPERTY LİST--}}
                                 <div class="active tab-pane" id="propertyList">
+                                    <h2 class="sr-only">Property List</h2>
                                     <!-- The timeline -->
                                     <div style="display: inline; float:right; width: 100%;">
                                         <table id="resultstable" data-order='[[ 0, "desc" ]]'
@@ -78,6 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="manageproperty">
+                                    <h2 class="sr-only">Manage Properties</h2>
                                     <div class="card-header p-2">
                                         <ul class="nav nav-pills">
                                             <li class="nav-item"><a class="nav-link active" href="#addwithaddress"
@@ -194,6 +196,7 @@
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="deleteproperty">
+                                                <h3 class="sr-only">Delete Property</h3>
                                                 <div style="display: inline; float:right; width: 100%;">
                                                     <table id="resultstable3" data-order='[[ 1, "desc" ]]'
                                                            class="table table-bordered table-striped" autosize="1"
@@ -244,6 +247,7 @@
                                 </div>
                                 {{--                        PROPERTY SUMARY--}}
                                 <div class="tab-pane" id="propertySummary">
+                                    <h2 class="sr-only">Property Summary</h2>
                                     <!-- The timeline -->
                                     <div style="width: 100%;display: inline;">
                                         <div style="display: inline; float:right; width: 100%;">
@@ -328,6 +332,7 @@
                                 </div>
                                 {{--                        SETTİNGS--}}
                                 <div class="tab-pane" id="settings">
+                                    <h2 class="sr-only">Settings</h2>
                                     <div class="card-header p-2">
                                         <ul class="nav nav-pills">
                                             <li class="nav-item"><a class="nav-link active" href="#notifications"
@@ -342,6 +347,7 @@
                                     <div class="card-body">
                                         <div class="tab-content">
                                             <div class="active tab-pane" id="notifications">
+                                                <h3 class="sr-only">Notification Settings</h3>
                                                 <div class="card card-secondary">
                                                     <div class="card-header">
                                                         <h3 class="card-title"><i class="fas fa-mail-bulk"></i>Notifications
@@ -450,6 +456,7 @@
                                                 </div>
                                             </div>
                                             <div class="tab-pane" id="reminders">
+                                                <h3 class="sr-only">Reminder Settings</h3>
                                                 <div class="card card-secondary">
                                                     <div class="card-header">
                                                         <h3 class="card-title"><i class="fas fa-clock"></i>Reminders

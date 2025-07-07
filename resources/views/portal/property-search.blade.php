@@ -7,16 +7,16 @@
 
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1 class="m-0 text-dark"><i class="fas fa-fw fa-search"></i> Property Search</h1>
 @stop
 
 @section('content')
-
 
     <div class="page-content container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div id="custom-search-input" class="panel">
+                    <h2 class="sr-only">Property Search Form</h2>
                     <div class="panel-body">
                         <div class="form-group">
                             <label for="name">Borough</label>
@@ -49,6 +49,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="property-detail" class="panel" style="display: none">
+                    <h2 class="sr-only">Property Details</h2>
                     <div id="property-detail-body" class="panel-body">
 
                     </div>
