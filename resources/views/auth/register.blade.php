@@ -1,146 +1,112 @@
-@extends('adminlte::master')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('adminlte_css')
-    @stack('css')
-    @yield('css')
-    <link rel="stylesheet" href="{{ asset('css/karbonsoft.css') }}">
-@stop
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>PBS Portal | Register</title>
+    
+    <!-- Google Font: Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="{{ asset('css/pbs-theme.css') }}">
+    <!-- Login Redesign CSS -->
+    <link rel="stylesheet" href="{{ asset('css/login-redesign.css') }}">
+    
+    <!-- Custom font for heading -->
+    <style>
+        @font-face {
+            font-family: 'Conthrax';
+            src: url('{{ asset('fonts/conthrax.ttf') }}') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* Apply to login heading for certainty */
+        .login-heading {
+            font-family: 'Conthrax', sans-serif !important;
+        }
+    </style>
+</head>
 
-@section('classes_body', 'register-page metalarkaplan')
+@php
+    $login_url = route('login');
+    $register_url = route('register');
+    $password_reset_url = route('password.request');
+@endphp
 
-@php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
-@php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
-@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
+<body>
+    <!-- Navigation bar with logo -->
+    <div class="nav-strip">
+        <a href="https://pbs-frontend-three.vercel.app/">
+            <img src="{{ asset('pics/LOGO.png') }}" alt="PBS NYC Logo" class="nav-logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.insertBefore(document.createTextNode('PBS NYC'), this);">
+        </a>
+    </div>
+    <div class="login-wrapper">
+        <div class="login-container login-container-bg">
+            <img src="{{ asset('pics/LOGO.png') }}" alt="PBS NYC Logo" class="login-logo" onerror="this.onerror=null; this.style.display='none'; this.parentNode.insertBefore(document.createTextNode('PBS NYC'), this);">
+            <p class="login-heading">REGISTER</p>
+            
+            <form action="{{ $register_url }}" method="post" class="login-form">
+                {{ csrf_field() }}
 
-@if (config('adminlte.use_route_url', false))
-    @php( $login_url = $login_url ? route($login_url) : '' )
-    @php( $register_url = $register_url ? route($register_url) : '' )
-    @php( $dashboard_url = $dashboard_url ? route($dashboard_url) : '' )
-@else
-    @php( $login_url = $login_url ? url($login_url) : '' )
-    @php( $register_url = $register_url ? url($register_url) : '' )
-    @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
-@endif
-
-@section('body')
-    <div class="register-box">
-        <div class="register-logo">
-            <a href="{{ $dashboard_url }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
-        </div>
-        <div class="card bg-transparent">
-            <div class="card-body bg-dark-50">
-                <p class="login-box-msg text-white">{{ __('adminlte::adminlte.register_message') }}</p>
-                <form action="{{ $register_url }}" method="post">
-                    {{ csrf_field() }}
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name') }}"
-                               placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-
-                        @if ($errors->has('name'))
-                            <div class="invalid-feedback">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </div>
-                        @endif
+                @if ($errors->any())
+                    <div class="error-message">
+                        {{ $errors->first() }}
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}"
-                               placeholder="{{ __('adminlte::adminlte.email') }}">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('email'))
-                            <div class="invalid-feedback">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" name="company" class="form-control {{ $errors->has('company') ? 'is-invalid' : '' }}" value="{{ old('company') }}"
-                               placeholder="{{ 'Company Name' }}">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-industry"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('company'))
-                            <div class="invalid-feedback">
-                                <strong>{{ $errors->first('company') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" name="address" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}" value="{{ old('address') }}"
-                               placeholder="{{ 'Address' }}">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-address-book"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('address'))
-                            <div class="invalid-feedback">
-                                <strong>{{ $errors->first('address') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="phone" name="phone" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}" value="{{ old('phone') }}"
-                               placeholder="{{ 'Phone Number' }}">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-phone"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('phone'))
-                            <div class="invalid-feedback">
-                                <strong>{{ $errors->first('phone') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-                               placeholder="{{ __('adminlte::adminlte.password') }}">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('password'))
-                            <div class="invalid-feedback">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" name="password_confirmation" class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"
-                               placeholder="{{ __('adminlte::adminlte.retype_password') }}">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('password_confirmation'))
-                            <div class="invalid-feedback">
-                                <strong>{{ $errors->first('password_confirmation') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                    <button type="submit" class="btn btn-secondary btn-block btn-flat">
-                        {{ __('adminlte::adminlte.register') }}
-                    </button>
-                </form>
-                <p class="mt-2 mb-1">
-                    <a class="link-muted text-white" href="{{ $login_url }}">
-                        {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+                @endif
+                
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" class="form-input {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name') }}" required autofocus>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-input {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company" class="form-label">Company Name</label>
+                    <input type="text" name="company" id="company" class="form-input {{ $errors->has('company') ? 'is-invalid' : '' }}" value="{{ old('company') }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" name="address" id="address" class="form-input {{ $errors->has('address') ? 'is-invalid' : '' }}" value="{{ old('address') }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" class="form-input {{ $errors->has('phone') ? 'is-invalid' : '' }}" value="{{ old('phone') }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-input {{ $errors->has('password') ? 'is-invalid' : '' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-input {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}" required>
+                </div>
+                
+                <button type="submit" class="login-button">
+                    Register
+                </button>
+                
+                <div class="register-link-container">
+                    <a href="{{ $login_url }}" class="register-link">
+                        <span class="white">Already registered?</span>&nbsp;
+                        <span class="green">Login Here</span>
                     </a>
-                </p>
+                </div>
+            </form>
+        </div>
             </div>
             <!-- /.form-box -->
         </div><!-- /.register-box -->
